@@ -26,14 +26,11 @@
     "webpack": "^2.2.1"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
   },
   "babel": {
     "presets": [
       "es2015"
     ]
-  },
-  "engines": {
-    "node": "7.6.0"
   }
 }
