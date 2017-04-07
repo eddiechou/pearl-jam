@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "babel-node mainServer/mainServer.js",
-    "build": "node_modules/.bin/webpack -p --watch"
+    "build": "node_modules/.bin/webpack -p --watch",
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "dependencies": {
     "babel-cli": "^6.7.5",

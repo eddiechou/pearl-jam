@@ -2,8 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
-
   entry: `${path.join(__dirname, '/client/src')}/index.jsx`,
   output: {
     filename: 'bundle.js',
