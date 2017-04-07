@@ -1,13 +1,13 @@
-# Project Name
+# Pearl Jam
 
-> Pithy project description
+> Pearl Jam is a real-time multiplayer game. Control your marble to smash your enemies and dodge destruction. There are holes located throughout the map, your objective is to collide with your opposition and knock them into the holes all the while avoiding them yourself. Spectator mode lets you watch ongoing games, and bet on their outcomes. Have a favorite player? Go in, watch their game, and bet some Pearls (in game currency). Then hate them when you lose it all.
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - Eddie Chou
+  - Jeff Briner
+  - Mike Liao
+  - Mycah Anast
 
 ## Table of Contents
 
@@ -26,10 +26,6 @@
 ## Requirements
 
 - Node 6.4.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
 
 ## Development
 
@@ -38,14 +34,12 @@
 From within the root directory:
 
 ```sh
-npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
+View the project roadmap [here](https://docs.google.com/spreadsheets/d/1K6SgifghO9YU1ZFDZCrbLhsD2Cz2aclzMWTM2eAZZyA/edit#gid=0)
 
 
 ## Contributing
