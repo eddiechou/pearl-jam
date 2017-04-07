@@ -8,7 +8,7 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "start": "node mainServer/mainServer.js",
+    "start": "babel-node mainServer/mainServer.js --presets react,es2015",
     "build": "node_modules/.bin/webpack -p --watch"
   },
   "dependencies": {
