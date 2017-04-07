@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "babel-node mainServer/mainServer.js --presets react,es2015",
-    "build": "node_modules/.bin/webpack -p --watch"
+    "build": "node_modules/.bin/webpack -p --watch",
+    "postinstall": "webpack"
   },
   "dependencies": {
     "express": "^4.15.2",
