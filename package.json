@@ -8,7 +8,7 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "start": "node mainServer/mainServer.js --presets react,es2015",
+    "start": "node mainServer/mainServer.js",
     "build": "node_modules/.bin/webpack -p --watch",
     "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },

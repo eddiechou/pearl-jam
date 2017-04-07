@@ -1,16 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
+var SRC_DIR = path.join(__dirname, '/client/src');
+var DIST_DIR = path.join(__dirname, '/client/dist');
+
 
 module.exports = {
   devtool: 'source-map',
 
-  entry: [
-    './src/index'
-  ],
-
+  entry: `${SRC_DIR}/index.jsx`,
   output: {
-    path: path.join(__dirname, 'client/dist'),
     filename: 'bundle.js',
+    path: DIST_DIR
   },
 
   plugins: [
