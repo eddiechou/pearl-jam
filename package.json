@@ -8,7 +8,7 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "start": "node mainServer/server.js",
+    "start": "node mainServer/mainServer.js",
     "build": "node_modules/.bin/webpack -p --watch"
   },
   "dependencies": {
