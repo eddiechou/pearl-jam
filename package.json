@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node mainServer/mainServer.js --presets react,es2015",
     "build": "node_modules/.bin/webpack -p --watch",
-    "postinstall": "node_modules/.bin/webpack -p"
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "dependencies": {
     "babel-cli": "^6.7.5",
