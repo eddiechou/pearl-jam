@@ -1,5 +1,5 @@
 import React from 'react';
-var Iframe = require('react-iframe');
+import Iframe from 'react-iframe';
 
 export default class PlayerView extends React.Component {
 
