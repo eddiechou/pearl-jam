@@ -16,8 +16,11 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          
-          <TopNavBar/>
+          <ul>
+            <li><Link to="/login">Login Page</Link></li>
+            <li><Link to="/playerView">Player View</Link></li>
+            <li><Link to="/spectatorView">Spectator View</Link></li>
+          </ul>
 
           <Route path="/login" component={Login}/>
           <Route path="/playerView" component={PlayerView}/>
