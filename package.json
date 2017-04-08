@@ -27,7 +27,8 @@
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "socket.io": "^1.7.3"
   },
   "devDependencies": {
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
