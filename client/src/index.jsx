@@ -17,11 +17,7 @@ class App extends React.Component {
       <Router>
         <div>
           
-          <ul>
-            <li><a href="/login">Login Page</a></li>
-            <li><Link to="/playerView">Player View</Link></li>
-            <li><Link to="/spectatorView">Spectator View</Link></li>
-          </ul> 
+          <TopNavBar/>
 
           <Route path="/login" component={Login}/>
           <Route path="/playerView" component={PlayerView}/>
