@@ -38,7 +38,6 @@ class App extends React.Component {
             <li><Link to='/playerView'>Player View</Link></li>
             <li><Link to='/spectatorView'>Spectator View</Link></li>
           </ul>
-
           <Route path='/login' component={Login} />
           <Route path='/playerView' component={PlayerView} />
           <Route path='/spectatorView' component={SpectatorView} />
