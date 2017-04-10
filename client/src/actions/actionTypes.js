@@ -1,0 +1,1 @@
+export const UPDATE_SCREEN_SIZE = 'UPDATE_SCREEN_SIZE'

@@ -1,8 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
-  entry: `${path.join(__dirname, '/client/src')}/index.jsx`,
+  entry: `${path.join(__dirname, '/client/src')}/index.js`,
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/client/dist')
@@ -11,13 +11,13 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?/,
+        test: /\.(jsx|js)?$/,
         include: path.join(__dirname, '/client/src'),
-        loader: 'babel-loader',      
+        loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015']
         }
       }
     ]
   }
-};
+}

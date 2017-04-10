@@ -1,20 +1,27 @@
-var path = require('path');
-var SRC_DIR = path.join(__dirname, '/client/src');
-var DIST_DIR = path.join(__dirname, '/client/dist');
-var webpack = require('webpack');
+var path = require('path')
+var SRC_DIR = path.join(__dirname, '/client/src')
+var DIST_DIR = path.join(__dirname, '/client/dist')
+var webpack = require('webpack')
+
+/**
+ * devtool: 'eval' shows absolute path for errors, rather than bundle.js / invariant, etc.
+ */
+
 module.exports = {
-  devtool: 'source-map',
-  entry: `${SRC_DIR}/index.jsx`,
+  devtool: 'eval',
+  entry: `${SRC_DIR}/index.js`,
   output: {
     filename: 'bundle.js',
-    path: DIST_DIR
+    publicPath: '/',
+    path: DIST_DIR,
+    devtoolModuleFilenameTemplate: SRC_DIR
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?/,
+        test: /\.(jsx|js)?$/,
         include: SRC_DIR,
-        loader: 'babel-loader',      
+        loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015']
         }
