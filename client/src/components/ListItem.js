@@ -7,9 +7,7 @@ class ListItem extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      itemStyle: styles.itemStyleNonClicked 
-    }
+    
   }
   render() {
     console.log('styles', styles);
@@ -22,8 +20,8 @@ class ListItem extends Component {
     }
 
     return (
-        <div style={this.state.itemStyle} onClick={() => {this.setState({itemStyle: styles.itemStyleClicked})}} >
-           <h1 style={{textAlign: 'center'}} > Game Server 1 </h1>
+        <div style={this.props.itemStyle} onClick={() => {this.setState({itemStyle: styles.itemStyleClicked})}} >
+           <h1 style={{textAlign: 'center'}} > {this.props.name} </h1>
         </div>    
     );
   }

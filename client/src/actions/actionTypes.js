@@ -1,3 +1,7 @@
 export const UPDATE_SCREEN_SIZE = 'UPDATE_SCREEN_SIZE'
 export const ADD_PLAYER_TO_GAME = 'ADD_PLAYER_TO_GAME'
 export const UPDATE_PLAYER_POSITION = 'UPDATE_PLAYER_POSITION'
+
+
+//Actions for clicked room
+export const CLICKED_ROOM = 'CLICKED_ROOM'

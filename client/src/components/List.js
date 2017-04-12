@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 //Other components
 import ListItem from './ListItem'
 
+//Redux stuff
+import {connect} from 'react-redux'
+
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      classes: ''
+      servers: [
+        {name: 'Game Server 1', link: ''},
+        {name: 'Game Server 2', link: ''},
+        {name: 'Game Server 3', link: ''},
+        {name: 'Game Server 4', link: ''},
+      ]
     }
   } 
 
@@ -31,20 +39,23 @@ class List extends Component {
       'overflow-y' : 'scroll',
       display: 'fixed'
     }
-    
-    
-
-
-    return (
+   return (
       <div style={listStyle} >
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
+        {
+          this.state.servers.map((server) => {
+            return <ListItem key={server.name} name={server.name}  />
+          })
+        }
       </div>
     );
   }
 }
 
-export default List;
+const mapStateToProps = (state) => {
+  return {
+    servers: state.rooms
+  }
+}
+
+
+export default connect(mapStateToProps)(List);
