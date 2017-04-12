@@ -38,13 +38,13 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <ul>
+          {/*<ul>
             <li><Link to='/login'>Login Page</Link></li>
             <li><Link to='/playerView'>Player View</Link></li>
             <li><Link to='/spectatorView'>Spectator View</Link></li>
             <li><Link to='/arena'>lamborghini mercy</Link></li>
 
-          </ul>
+          </ul>*/}
           <Route path='/login' component={Login} />
           <Route path='/arena' component={Arena} />
 

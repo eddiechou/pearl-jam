@@ -8,6 +8,9 @@ import RedBox from 'redbox-react'
 import reduxStore from './reduxStore'
 
 import App from './components/App'
+
+
+
 const history = createHistory()
 const root = document.getElementById('root')
 
