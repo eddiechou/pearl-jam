@@ -10,7 +10,6 @@ class ListItem extends Component {
     
   }
   render() {
-    console.log('styles', styles);
     const itemStyle = {
       width:  '1100px',
       height: '150px',
@@ -20,7 +19,7 @@ class ListItem extends Component {
     }
 
     return (
-        <div style={this.props.itemStyle} onClick={() => {this.setState({itemStyle: styles.itemStyleClicked})}} >
+        <div style={this.props.style} onClick={this.props.changeRoom} >
            <h1 style={{textAlign: 'center'}} > {this.props.name} </h1>
         </div>    
     );

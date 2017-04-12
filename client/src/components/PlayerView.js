@@ -27,22 +27,38 @@ export default class PlayerView extends React.Component {
     var modalStyle = {
       width: '1500px',
       height: '850px',
-    };  
+    }; 
+
+    var buttonStyle = {
+      width: '400px',
+      height: '100px',
+      marginTop: '40px',
+
+      //For text
+      fontSize: '30px',
+      borderRadius: '20px'
+    } 
+
+    var flexParent = {
+      'display': 'flex',
+      'justifyContent': 'center',
+      'flexDirection': 'column',
+      'alignItems': 'center',
+    }
     return (
       
       <div className="containerBuilt">
           <h1 className="navBar"> Nav Bar </h1> 
           <div id='gameView'>
-            <div>
+            <div style={flexParent} >
                 <List />
-                <button onClick={this.showModal.bind(this)}>Open</button>
 
-                
+                <button style={buttonStyle} onClick={this.showModal.bind(this)}>Join Server!</button>
                 <Modal ref="modal" modalStyle={modalStyle}>
                     <button onClick={this.hideModal.bind(this)}>Close</button>
                     <div style={{backgroundColor: 'red', height: '850px', width: '1500px'}} />
                     {/*<iframe src="https://www.w3schools.com" height="700px" width="1700px"></iframe>*/}
-                </Modal>8
+                </Modal>
             </div>
 
 

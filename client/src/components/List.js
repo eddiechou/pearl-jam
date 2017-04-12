@@ -4,17 +4,14 @@ import ListItem from './ListItem'
 
 //Redux stuff
 import {connect} from 'react-redux'
+import {CLICKED_ROOM } from '../actions/actionTypes'
+//import styles
+var styles = require('./componentCSS').listItemStyle;
 
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      servers: [
-        {name: 'Game Server 1', link: ''},
-        {name: 'Game Server 2', link: ''},
-        {name: 'Game Server 3', link: ''},
-        {name: 'Game Server 4', link: ''},
-      ]
     }
   } 
 
@@ -24,6 +21,9 @@ class List extends Component {
    }) 
   }
 
+  changeRoom(serverName) {
+    console.log('trying to change rooms');
+  }
   render() {
     const itemStyle = {
       width:  '1100px',
@@ -35,19 +35,29 @@ class List extends Component {
     }
     const listStyle = {
       width: '1100px',
-      height: '550px',
-      'overflow-y' : 'scroll',
+      height: '700px',
+      overflowY : 'scroll',
       display: 'fixed'
     }
    return (
       <div style={listStyle} >
         {
-          this.state.servers.map((server) => {
-            return <ListItem key={server.name} name={server.name}  />
+          this.props.servers.map((server) => {
+            return <ListItem style={server.clicked ? styles.itemStyleClicked : styles.itemStyleNonClicked}
+             key={server.name} name={server.name}  
+             changeRoom={() => this.props.onRoomSelect(server.name)}  />
           })
         }
       </div>
     );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onRoomSelect: (serverName) => {
+      dispatch({type: CLICKED_ROOM, name: serverName});
+    }
   }
 }
 
@@ -58,4 +68,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(List);
