@@ -95,3 +95,8 @@ var games = [
   }
 ]
 
+module.exports.sampleData = {
+  users: users,
+  bets: bets,
+  games: games
+}
