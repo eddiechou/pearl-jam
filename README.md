@@ -15,11 +15,11 @@ From within the root directory:
 ```sh
 npm install
 ```
-
 ### Firebase
 
 **email**: team.pearljam@gmail.com
-**pass**:  Pearljam
+**pass**:  ask mycah
+
 
 ### Roadmap
 
