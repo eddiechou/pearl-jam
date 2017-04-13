@@ -10,12 +10,41 @@ import firebaseApp from '../base'
  */
 import TopNavBar from './TopNavBar'
 
-const database = firebaseApp.database()
+const base = firebaseApp.database()
+const auth = firebaseApp.auth()
 
 class App extends React.Component {
+  constructor () {
+    super()
+    auth.onAuthStateChanged(firebaseUser => {
+      // if (firebaseUser) {
+      //   this.setState({loggedIn: true})
+      //   console.log(firebaseUser)
+      // } else {
+      //   this.setState({loggedIn: false})
+      //   console.log('not logged in')
+      // }
+    })
+  }
   componentDidMount () {
     window.addEventListener('resize', this.handleWindowResize.bind(this))
     this.handleWindowResize()
+  }
+
+  componentDidUpdate () {
+        /**
+     * maintain authentication of user for duration of session
+     * make this write to redux state
+     */
+    auth.onAuthStateChanged(firebaseUser => {
+      // if (firebaseUser) {
+      //   this.setState({loggedIn: true})
+      //   console.log(firebaseUser)
+      // } else {
+      //   this.setState({loggedIn: false})
+      //   console.log('not logged in')
+      // }
+    })
   }
 
   componentWillUnmount () {
@@ -34,9 +63,8 @@ class App extends React.Component {
     return (
       <div>
         <ul>
-          <li><Link to='/login'>Login Page</Link></li>
           <li><Link to='/game'>Game Page</Link></li>
-          <li><Link to='/signup'>Sign Up Page</Link></li>
+          <li><Link to='/join'>Join</Link></li>
           <li><Link to='/spectate'>Spectator Page</Link></li>
           <li><Link to='/arena'>lamborghini mercy</Link></li>
         </ul>

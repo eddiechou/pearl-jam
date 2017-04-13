@@ -4,7 +4,6 @@ import renderPearl from '../renderPearl/renderPearl'
 import style from './arena-css'
 
 import { addPlayerToGame, updatePlayerPosition } from '../../actions/actions'
-import { ADD_PLAYER_TO_GAME, UPDATE_PLAYER_POSITION } from '../../actions/actionTypes'
 
 const { main, instructions, canvas } = style
 const KEY_CODE = {
@@ -101,7 +100,6 @@ class Arena extends Component {
 }
 
 const mapStateToProps = ({ screenSize, players }) => {
-  console.log('mapping state to props')
   /* * attaching redux state to our props * */
   return { screenSize, players }
 }

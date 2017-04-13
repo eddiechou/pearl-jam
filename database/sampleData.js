@@ -31,7 +31,7 @@ module.exports.Users = [
     losses: 3,
     pearls: 5848
   }
-];
+]
 
 module.exports.Bets = [
   {
@@ -48,7 +48,7 @@ module.exports.Bets = [
     amount: 500,
     odds: 0.5742
   }
-];
+]
 
 module.exports.Games = [
   {
@@ -72,4 +72,4 @@ module.exports.Games = [
     players: ['eddie', 'mycah'],
     winner: null
   }
-];
+]
