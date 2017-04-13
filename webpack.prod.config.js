@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
+  devtool: 'eval-source-map',
   entry: `${path.join(__dirname, '/client/src')}/index.js`,
   output: {
     filename: 'bundle.js',
@@ -17,6 +18,10 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.css$/,
+        loader: [ 'style-loader', 'css-loader' ]
       }
     ]
   }

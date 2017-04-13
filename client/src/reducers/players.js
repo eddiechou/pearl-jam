@@ -14,8 +14,6 @@ const players = (state = {}, action) => {
     case UPDATE_PLAYER_POSITION: {
       const { playerID, direction, value } = action.payload
       const newState = Object.assign({}, state)
-      console.log('update player position')
-      console.log(newState[playerID])
       // must also update firebase
       newState[playerID][direction] += value * newState[playerID].speed
       return newState

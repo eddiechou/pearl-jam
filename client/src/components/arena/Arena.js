@@ -16,6 +16,14 @@ const KEY_CODE = {
 }
 
 class Arena extends Component {
+  constructor () {
+    super()
+    this.state = {
+      /* * playerID will probably change to userID with Firebase * */
+      playerID: null,
+      UID: null
+    }
+  }
   componentDidMount () {
     window.addEventListener('keydown', this.update.bind(this))
     window.addEventListener('keyup', this.update.bind(this))
@@ -35,25 +43,28 @@ class Arena extends Component {
     const x = window.innerWidth / 2
     const y = window.innerHeight / 2
     const speed = 50
+    /** set redux state and add to firebase **/
+    this.setState({ playerID })
     addPlayerToGame({ playerID, x, y, speed })
   }
 
   update (e) {
-    console.log('updating player')
+    const { playerID } = this.state
+
     if (e.keyCode === KEY_CODE.LEFT) {
-      this.updatePlayer({ playerID: 7, direction: 'x', value: -1 })
+      this.updatePlayer({ playerID: playerID, direction: 'x', value: -1 })
     }
     if (e.keyCode === KEY_CODE.RIGHT) {
       console.log('right')
-      this.updatePlayer({ playerID: 7, direction: 'x', value: 1 })
+      this.updatePlayer({ playerID: playerID, direction: 'x', value: 1 })
     }
     if (e.keyCode === KEY_CODE.UP) {
       console.log('up')
-      this.updatePlayer({ playerID: 7, direction: 'y', value: -1 })
+      this.updatePlayer({ playerID: playerID, direction: 'y', value: -1 })
     }
     if (e.keyCode === KEY_CODE.DOWN) {
       console.log('down')
-      this.updatePlayer({ playerID: 7, direction: 'y', value: 1 })
+      this.updatePlayer({ playerID: playerID, direction: 'y', value: 1 })
     }
     // if (e.keyCode === KEY_CODE.SPACE)
   }

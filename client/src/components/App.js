@@ -8,10 +8,6 @@ import firebaseApp from '../base'
 /**
  * Components
  */
-import Login from './Login'
-import PlayerView from './PlayerView'
-import SpectatorView from './SpectatorView'
-import Arena from './arena/Arena'
 import TopNavBar from './TopNavBar'
 
 const database = firebaseApp.database()
@@ -36,23 +32,15 @@ class App extends React.Component {
 
   render () {
     return (
-      <Router>
-        <div>
-          <ul>
-            <li><Link to='/login'>Login Page</Link></li>
-            <li><Link to='/playerView'>Player View</Link></li>
-            <li><Link to='/spectatorView'>Spectator View</Link></li>
-            <li><Link to='/arena'>lamborghini mercy</Link></li>
-
-          </ul>
-          <Route path='/login' component={Login} />
-          <Route path='/arena' component={Arena} />
-
-          <Route path='/playerView' component={PlayerView} />
-          <Route path='/spectatorView' component={SpectatorView} />
-
-        </div>
-      </Router>
+      <div>
+        <ul>
+          <li><Link to='/login'>Login Page</Link></li>
+          <li><Link to='/game'>Game Page</Link></li>
+          <li><Link to='/signup'>Sign Up Page</Link></li>
+          <li><Link to='/spectate'>Spectator Page</Link></li>
+          <li><Link to='/arena'>lamborghini mercy</Link></li>
+        </ul>
+      </div>
     )
   }
 }
@@ -61,5 +49,10 @@ class App extends React.Component {
  * updateScreenSize is an action creator
  * passing in null because we have no need for mapStateToProps .... yet
  */
+const mapStateToProps = (state) => {
+  return {
+    user: state.authentication
+  }
+}
 
-export default connect(null, { updateScreenSize })(App)
+export default connect(mapStateToProps, { updateScreenSize })(App)
