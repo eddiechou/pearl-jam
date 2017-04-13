@@ -9,6 +9,8 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import style from './setUsernamePage-css'
 
+import RoomSelector from '../roomSelector/RoomSelector'
+
 const { title } = style
 const base = firebaseApp.database()
 
@@ -16,7 +18,8 @@ class SetUsernamePage extends Component {
   constructor () {
     super()
     this.state = {
-      username: ''
+      username: '',
+      room: null
     }
   }
 
@@ -62,13 +65,14 @@ class SetUsernamePage extends Component {
     return (
       <div>
         <div style={title}>
-          one more thing ... pick a badass username!
+          one more thing ... pick a badass username and choose your room!
         </div>
         <TextField
           hintText='badass username'
           underlineShow
           fullWidth
           onChange={(event) => this.handleInputChange(event)} />
+        <RoomSelector />
         <FlatButton
           label='submit'
           secondary
