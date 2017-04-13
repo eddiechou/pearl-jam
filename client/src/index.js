@@ -13,8 +13,7 @@ import RedBox from 'redbox-react'
  * Components
  */
 import App from './components/App'
-import LoginPage from './components/LoginPage'
-import SignUpPage from './components/signUpPage/SignUpPage'
+import AuthenticationPage from './components/authenticationPage/AuthenticationPage'
 import SpectatorPage from './components/SpectatorPage'
 import GamePage from './components/GamePage'
 import Arena from './components/arena/Arena'
@@ -29,9 +28,8 @@ try {
       <ConnectedRouter history={history}>
         <div>
           <Route path='/' component={App} />
-          <Route exact path='/' component={SignUpPage} />
-          <Route path='/login' component={LoginPage} />
-          <Route path='/signup' component={SignUpPage} />
+          <Route exact path='/' component={AuthenticationPage} />
+          <Route path='/signup' component={AuthenticationPage} />
           <Route path='/spectate' component={SpectatorPage} />
           <Route path='/game' component={GamePage} />
           <Route path='/arena' component={Arena} />
