@@ -31,7 +31,7 @@ var users = [
     losses: 3,
     pearls: 5848
   }
-];
+]
 
 var bets = [
   {
@@ -55,7 +55,7 @@ var bets = [
     amount: 500,
     odds: 0.4259
   }
-];
+]
 
 var games = [
   {
@@ -93,10 +93,5 @@ var games = [
     players: ['mycah', 'jeff'],
     winner: null
   }
-];
+]
 
-module.exports.sampleData = {
-  users: users,
-  bets: bets,
-  games: games
-};
