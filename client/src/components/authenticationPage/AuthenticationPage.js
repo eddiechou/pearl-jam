@@ -3,32 +3,45 @@ import { connect } from 'react-redux'
 import firebaseApp from '../../base'
 import firebaseui from 'firebaseui'
 import baseUIConfig from './baseUIConfig'
-import authProviders from '../../authProviders'
 
 import { authenticateUser } from '../../actions/authenticationActions'
 import { AUTHENTICATE_USER } from '../../actions/actionTypes'
 
-import style from './signUpPage-css'
+import style from './authenticationPage-css'
 const { button } = style
-const { google, twitter, facebook, github } = authProviders
 const database = firebaseApp.database()
 const auth = firebaseApp.auth()
+const ui = new firebaseui.auth.AuthUI(auth)
 
-class SignUpPage extends Component {
+class authenticationPage extends Component {
   constructor () {
     super()
     this.state = {
       email: null,
       password: null,
       user: null,
-      authenticating: false
+      authenticating: false,
+      loggedIn: true
     }
-    // this.authenticate = this.authenticate.bind(this)
-    this.handleLogout = this.handleLogout.bind(this)
-    this.authenticateWithEmail = this.authenticateWithEmail.bind(this)
+    /**
+     * authentication handlers
+     */
     this.createUserWithEmail = this.createUserWithEmail.bind(this)
-    const ui = new firebaseui.auth.AuthUI(auth)
+    this.authenticateWithEmail = this.authenticateWithEmail.bind(this)
     ui.start('#firebaseui-auth-container', baseUIConfig)
+    /**
+     * maintain authentication of user for duration of session
+     * make this write to redux state
+     */
+    auth.onAuthStateChanged(firebaseUser => {
+      if (firebaseUser) {
+        this.setState({loggedIn: true})
+        console.log(firebaseUser)
+      } else {
+        this.setState({loggedIn: false})
+        console.log('not logged in')
+      }
+    })
   }
 
   authenticateWithProvider (provider) {
@@ -54,27 +67,26 @@ class SignUpPage extends Component {
     })
   }
 
+  /* * saving input to access on submit * */
   handleChange ({ target }, key) {
     const { value } = target
     this.setState({ [key]: value })
   }
 
+  /**
+   * Creating new user or authenticating existing user
+   */
   createUserWithEmail () {
+    /* * check for real email * */
     const { email, password } = this.state
-    auth.createUserWithEmailAndPassword(email, password)
+    const promise = auth.createUserWithEmailAndPassword(email, password)
+    promise.catch(error => console.log(error.message))
   }
+
   authenticateWithEmail () {
     const { email, password } = this.state
     const promise = auth.signInWithEmailAndPassword(email, password)
     promise.catch(error => console.log(error.message))
-  }
-
-  handleLogout () {
-    console.log('handling logout')
-  }
-
-  auth () {
-    auth.onStateChanged(firebaseUser => {})
   }
 
   render () {
@@ -95,9 +107,6 @@ class SignUpPage extends Component {
             <button id='btnSignUp' style={button} onClick={this.createUserWithEmail}>
             sign up
             </button>
-            <button id='btnLogout' style={button} onClick={this.handleLogout}>
-            log out
-            </button>
           </div>
         </div>
       )
@@ -111,4 +120,4 @@ class SignUpPage extends Component {
 
 // export default connect(null, { authenticateUser })
 
-export default SignUpPage
+export default authenticationPage
