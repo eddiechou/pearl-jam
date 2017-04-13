@@ -8,7 +8,7 @@ var webpack = require('webpack')
  */
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'eval-source-map',
   entry: `${SRC_DIR}/index.js`,
   output: {
     filename: 'bundle.js',
@@ -25,6 +25,10 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.css$/,
+        loader: [ 'style-loader', 'css-loader' ]
       }
     ]
   },
