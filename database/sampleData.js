@@ -1,4 +1,4 @@
-module.exports.Users = [
+var users = [
   {
     userName: 'eddie',
     password: 'eddie',
@@ -33,7 +33,7 @@ module.exports.Users = [
   }
 ];
 
-module.exports.Bets = [
+var bets = [
   {
     gameID: 1,
     bettorName: 'mycah',
@@ -47,10 +47,17 @@ module.exports.Bets = [
     predictedWinner: 'jeff',
     amount: 500,
     odds: 0.5742
+  },
+  {
+    gameID: 4,
+    bettorName: 'eddie',
+    predictedWinner: 'mike',
+    amount: 500,
+    odds: 0.4259
   }
 ];
 
-module.exports.Games = [
+var games = [
   {
     gameID: 1,
     roomName: 'Pearl',
@@ -69,7 +76,27 @@ module.exports.Games = [
     gameID: 3,
     roomName: 'Jam',
     status: 'lobby',
-    players: ['eddie', 'mycah'],
+    players: ['eddie'],
+    winner: null
+  },
+  {
+    gameID: 4,
+    roomName: 'A',
+    status: 'in-progress',
+    players: ['mike', 'jeff'],
+    winner: null
+  },
+  {
+    gameID: 5,
+    roomName: 'B',
+    status: 'in-progress',
+    players: ['mycah', 'jeff'],
     winner: null
   }
 ];
+
+module.exports.sampleData = {
+  users: users,
+  bets: bets,
+  games: games
+};
