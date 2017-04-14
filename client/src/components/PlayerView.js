@@ -12,15 +12,30 @@ export default class PlayerView extends React.Component {
     super(props);
 
     this.state = {
-
+      username: 'jeff is eating a burrito'
     }
+    
   }
+
+  componentDidMount() {
+  }
+
   showModal(){
       this.refs.modal.show();
+
+      setTimeout(this.fireMessage.bind(this), 1000);
   }
 
   hideModal(){
       this.refs.modal.hide();
+  }
+
+
+  fireMessage() {
+    var iframeElement = document.getElementById('playerView').contentWindow;
+    console.log('iframe', iframeElement);
+    iframeElement.postMessage(this.state.username, 'http://10.6.64.169:3005')
+    console.log('finished posting message');
   }
 
   render () {
@@ -50,14 +65,15 @@ export default class PlayerView extends React.Component {
       <div className="containerBuilt">
           <h1 className="navBar"> Nav Bar </h1> 
           <div id='gameView'>
+            <button style={buttonStyle} onClick={this.fireMessage.bind(this)}> post message to iframe </button>
+
             <div style={flexParent} >
                 <List />
 
                 <button style={buttonStyle} onClick={this.showModal.bind(this)}>Join Server!</button>
                 <Modal ref="modal" modalStyle={modalStyle}>
+                    <iframe id='playerView' src="http://10.6.64.169:3005" height="700px" width="1700px"></iframe>
                     <button onClick={this.hideModal.bind(this)}>Close</button>
-                    <div style={{backgroundColor: 'red', height: '850px', width: '1500px'}} />
-                    {/*<iframe src="https://www.w3schools.com" height="700px" width="1700px"></iframe>*/}
                 </Modal>
             </div>
 
