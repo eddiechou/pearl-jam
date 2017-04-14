@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { setRoom } from '../../actions/userActions'
+import { setGame } from '../../actions/userActions'
 
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
@@ -14,14 +14,15 @@ class RoomSelector extends Component {
   constructor () {
     super()
     this.state = {
-      value: ''
+      gameID: ''
     }
   }
 
   handleChange (event, index, value) {
-    const { setRoom } = this.props
-    this.setState({ value })
-    setRoom({ room: value })
+    const { user, setGame, addUserToGame } = this.props
+    const { gameID } = this.state
+    this.setState({ gameID: value })
+    setGame({ gameID: value })
   }
 
   render () {
@@ -29,7 +30,7 @@ class RoomSelector extends Component {
       <SelectField
         fullWidth
         hintText='rooms'
-        value={this.state.value}
+        value={this.state.gameID}
         onChange={this.handleChange.bind(this)}
       >
         <MenuItem value={1} primaryText='main' />
@@ -40,4 +41,8 @@ class RoomSelector extends Component {
   }
 }
 
-export default connect(null, { setRoom })(RoomSelector)
+const mapStateToProps = ({ user }) => {
+  return { user }
+}
+
+export default connect(mapStateToProps, { setGame })(RoomSelector)

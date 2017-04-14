@@ -6,5 +6,9 @@ export const UPDATE_PLAYER_POSITION = 'UPDATE_PLAYER_POSITION'
  * User Actions
  */
 export const CREATE_NEW_USER = 'CREATE_NEW_USER'
-export const SET_USERNAME = 'SET_USERNAME'
-export const SET_ROOM = 'SET_ROOM'
+export const SET_DISPLAY_NAME = 'SET_DISPLAY_NAME'
+export const SET_GAME = 'SET_GAME'
+/**
+ * Game Actions
+ */
+export const ADD_USER_TO_GAME = 'ADD_USER_TO_GAME'

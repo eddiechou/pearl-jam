@@ -20,7 +20,7 @@ class Arena extends Component {
     this.state = {
       /* * playerID will probably change to userID with Firebase * */
       playerID: null,
-      UID: null
+      uid: null
     }
   }
   componentDidMount () {
@@ -98,13 +98,18 @@ class Arena extends Component {
     )
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addPlayerToGame: dispatch(addPlayerToGame()),
+    updatePlayerPosition: dispatch(updatePlayerPosition())
+  }
+}
 
 const mapStateToProps = ({ screenSize, players }) => {
-  /* * attaching redux state to our props * */
   return { screenSize, players }
 }
 
-export default connect(mapStateToProps, { addPlayerToGame, updatePlayerPosition })(Arena)
+export default connect(mapStateToProps, mapDispatchToProps)(Arena)
 
 /**
  * the result of rootReducer is passed in here as state. Every time the state is updated, the new state is passed to mapStateToProps
