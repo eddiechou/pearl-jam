@@ -7,16 +7,17 @@ const game = (state = {}, action) => {
   switch (action.type) {
     case ADD_USER_TO_GAME: {
       const { user, displayName } = action.payload
-      console.log('user is ', user)
       const { gameID, uid } = user
       const newState = Object.assign({}, state)
-      newState.user = 'testing'
+      /* * if game property exists on state, copy it to new state,
+      otherwise create it and assign to it an empty array * */
+      newState.game = (state.game || [])
+      /* * push user into players array * */
+      newState.game.push({uid, displayName})
+      /* * push user into firebase players * */
       base.ref(`testGames/${gameID}/players/${uid}`).set({ displayName })
       return newState
     }
-    // case REMOVE_USER_FROM_GAME: {
-    //   const { user } = action.payload
-    // }
     default:
       return state
   }

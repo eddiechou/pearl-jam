@@ -8,6 +8,7 @@ import { createLogger } from 'redux-logger'
 
 // const middleware = applyMiddleware(createLogger())
 // let reduxStore = createStore(rootReducer, middleware)
+
 let reduxStore = createStore(rootReducer)
 
 export default reduxStore
