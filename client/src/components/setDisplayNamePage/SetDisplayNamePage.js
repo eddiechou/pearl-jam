@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { setDisplayName } from '../../actions/userActions'
+import { addUserToGame } from '../../actions/gameActions'
 
 import firebaseApp from '../../base'
 import FlatButton from 'material-ui/FlatButton'
@@ -18,7 +19,7 @@ class SetDisplayNamePage extends Component {
   constructor () {
     super()
     this.state = {
-      username: '',
+      displayName: '',
       room: null
     }
   }
@@ -31,29 +32,10 @@ class SetDisplayNamePage extends Component {
 
   handleSubmit () {
     const { setDisplayName, user } = this.props
-    const { username } = this.state
-    const { uid} = user
-    setDisplayName({ uid, displayName: username })
-
-  //   base.ref('users').child(displayName).runTransaction(new Transaction.Handler() {
-  //     @Override
-  //     public Transaction.Result doTransaction(MutableData mutableData) {
-  //         if (mutableData.getValue() == null) {
-  //             mutableData.setValue(authData.getUid());
-  //             return Transaction.success(mutableData);
-  //         }
-  //         return Transaction.abort();
-  //     }
-  //       @Override
-  //       public void onComplete(FirebaseError firebaseError, boolean commited, DataSnapshot dataSnapshot) {
-  //           if (commited) {
-  //             console.log('displayName saved')
-  //             setDisplayName({ displayName })
-  //           } else {
-  //               console.log('displayName exists')
-  //           }
-  //       }
-  //   })
+    const { displayName } = this.state
+    const { uid, gameID } = user
+    setDisplayName({ uid, displayName })
+    addUserToGame({ user })
   }
 
   checkProps () {
@@ -64,10 +46,10 @@ class SetDisplayNamePage extends Component {
     return (
       <div>
         <div style={title}>
-          one more thing ... pick a badass displayName and choose your room!
+          one more thing ... pick a badass username and choose your room!
         </div>
         <TextField
-          hintText='badass displayName'
+          hintText='badass username'
           underlineShow
           fullWidth
           onChange={(event) => this.handleInputChange(event)} />
@@ -95,4 +77,4 @@ const mapStateToProps = ({ user }) => {
   return { user }
 }
 
-export default connect(mapStateToProps, { setDisplayName })(SetDisplayNamePage)
+export default connect(mapStateToProps, { setDisplayName, addUserToGame })(SetDisplayNamePage)

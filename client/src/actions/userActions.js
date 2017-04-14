@@ -1,4 +1,4 @@
-import { CREATE_NEW_USER, SET_DISPLAY_NAME, SET_ROOM } from './actionTypes'
+import { CREATE_NEW_USER, SET_DISPLAY_NAME, SET_GAME } from './actionTypes'
 
 export const createNewUser = ({ uid, email, photoURL }) => ({
   type: CREATE_NEW_USER,
@@ -10,7 +10,7 @@ export const setDisplayName = ({ uid, displayName }) => ({
   payload: { uid, displayName }
 })
 
-export const setRoom = ({ room }) => ({
-  type: SET_ROOM,
-  payload: { room }
+export const setGame = ({ gameID }) => ({
+  type: SET_GAME,
+  payload: { gameID }
 })
