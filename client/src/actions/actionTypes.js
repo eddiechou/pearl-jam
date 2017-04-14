@@ -12,3 +12,8 @@ export const SET_GAME = 'SET_GAME'
  * Game Actions
  */
 export const ADD_USER_TO_GAME = 'ADD_USER_TO_GAME'
+
+/**
+ * Bet Actions
+ */
+export const UPDATE_GAMES_IN_PROGRESS = 'UPDATE_CURRENT_GAMES'
