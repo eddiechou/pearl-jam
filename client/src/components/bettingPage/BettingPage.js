@@ -35,7 +35,7 @@ class BettingPage extends Component {
     const { games } = this.props
     return <div>
         <p>We're in the betting page</p>
-        <div><p>current active games: {games.currentActiveGames && games.currentActiveGames[0].gameID}</p></div>
+        <div><p>current active games: {games.currentActiveGames && games.currentActiveGames.length}</p></div>
         <FlatButton
           label='props'
           secondary
