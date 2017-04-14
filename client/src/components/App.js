@@ -68,6 +68,7 @@ class App extends React.Component {
           <li><Link to='/spectate'>Spectator Page</Link></li>
           <li><Link to='/arena'>lamborghini mercy</Link></li>
           <li><Link to='/bet'>Make Bets Page</Link></li>
+          <li><Link to='/home'>User Page</Link></li>
         </ul>
       </div>
     )
