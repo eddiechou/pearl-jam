@@ -16,10 +16,3 @@ export const updatePlayerPosition = ({ playerID, direction, value }) => ({
   type: UPDATE_PLAYER_POSITION,
   payload: { playerID, direction, value }
 })
-
-
-/* Bet actions */
-export const updateCurrentGamesInProgress = ({ games }) => ({
-  type: UPDATE_GAMES_IN_PROGRESS,
-  payload: { games }
-})

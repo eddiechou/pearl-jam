@@ -2,55 +2,52 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { updateCurrentActiveGames } from '../../actions/betActions'
 import firebase from '../../base'
+import FlatButton from 'material-ui/FlatButton'
 
-export default class BettingPage extends Component {
+class BettingPage extends Component {
   constructor () {
     super()
   }
 
   componentWillMount () {
-
+    const { updateCurrentActiveGames } = this.props
     // Call firebase to grab all games that are in-progress
-    var allGamesRef = firebase.database().ref('games/');
+    var allGamesRef = firebase.database().ref('games/')
     // On every change to games, client will be notified
     allGamesRef.on('value', function(snapshot) {
-      var games = snapshot.val();
-      console.log(games);
-      for (var i = 0; i < games.length; i++) {
-        if (games[i]) {
-          if (games[i].status === 'in-progress') {
-            console.log('in-progress: game with players', games[i].players)
-          }
-        }
-      }
+      var games = snapshot.val()
+      var currentActiveGames = games.filter(function(game) {
+        return game && game.status === 'in-progress'
+      });
+
+      // Update the redux-store
+      updateCurrentActiveGames({currentActiveGames})
     })
+  }
 
-
-
-    // TODO: Send an action to the Redux reducer to update the state
-    // 
-
+  checkProps () {
+    console.log(this.props)
   }
 
   render () {
-    // const {currentGamesInProgress} = this.props
-    // console.log('rendering bet page');
-    // // If no current games, tell that to the user
-    // if (!currentGamesInProgress.length) {
-    //   return <p>There are no games currently being played</p>
-    // } else {
-    //   return <p>Map each game in progress to some component here</p>
-    // }
-
-    return <p>We're in the betting page</p>
+    const { games } = this.props
+    return <div>
+        <p>We're in the betting page</p>
+        <div><p>current active games: {games.currentActiveGames && games.currentActiveGames[0].gameID}</p></div>
+        <FlatButton
+          label='props'
+          secondary
+          fullWidth
+          onClick={this.checkProps.bind(this)} />
+      </div>
   }
-
 }
 
+// Will pass currentActiveGames from the store as props to BettingPage
+const mapStateToProps = ({ games }) => {
+  return { games }
+}
 
-// const mapStateToProps = ({ user }) => {
-//   return { user }
-// }
-
-// export default connect(mapStateToProps, { setUsername })(SetUsernamePage)
+export default connect(mapStateToProps, { updateCurrentActiveGames })(BettingPage)
