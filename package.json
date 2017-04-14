@@ -43,6 +43,7 @@
     "react-transform": "0.0.3",
     "redbox-react": "^1.3.6",
     "redux": "^3.6.0",
+    "redux-logger": "^3.0.1",
     "socket.io": "^1.7.3",
     "standard": "*",
     "style-loader": "^0.16.1",

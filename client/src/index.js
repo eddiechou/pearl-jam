@@ -18,6 +18,7 @@ import AuthenticationPage from './components/authenticationPage/AuthenticationPa
 import SpectatorPage from './components/SpectatorPage'
 import GamePage from './components/GamePage'
 import Arena from './components/arena/Arena'
+import BettingPage from './components/bettingPage/BettingPage'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 /**
  * Styles
@@ -50,6 +51,7 @@ try {
             <Route path='/spectate' component={SpectatorPage} />
             <Route path='/game' component={GamePage} />
             <Route path='/arena' component={Arena} />
+            <Route path='/bet' component={BettingPage} />
           </div>
         </ConnectedRouter>
       </Provider>

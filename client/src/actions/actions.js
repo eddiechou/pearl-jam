@@ -1,5 +1,7 @@
 import { UPDATE_SCREEN_SIZE, ADD_PLAYER_TO_GAME, UPDATE_PLAYER_POSITION } from './actionTypes'
 
+import { UPDATE_GAMES_IN_PROGRESS } from './actionTypes'
+
 export const updateScreenSize = ({ width, height, ratio }) => ({
   type: UPDATE_SCREEN_SIZE,
   payload: { width, height, ratio }
