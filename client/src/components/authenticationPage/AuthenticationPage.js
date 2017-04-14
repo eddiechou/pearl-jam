@@ -39,7 +39,7 @@ class AuthenticationPage extends Component {
       authenticateUser(result)
 
       const token = result.credential.accessToken
-      const { displayName, UID, email, photoURL } = result.user
+      const { displayName, uid, email, photoURL } = result.user
       // check if user exists (bento)
       // add to reduxStore
     })
@@ -80,6 +80,7 @@ class AuthenticationPage extends Component {
   authenticateWithEmail () {
     const { email, password } = this.state
     const promise = auth.signInWithEmailAndPassword(email, password)
+    promise.then(user => console.log(user))
     promise.catch(error => console.log(error.message))
   }
 

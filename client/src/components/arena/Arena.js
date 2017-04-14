@@ -20,7 +20,7 @@ class Arena extends Component {
     this.state = {
       /* * playerID will probably change to userID with Firebase * */
       playerID: null,
-      UID: null
+      uid: null
     }
   }
   componentDidMount () {

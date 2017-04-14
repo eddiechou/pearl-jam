@@ -1,16 +1,26 @@
-import { CREATE_NEW_USER, SET_USERNAME, SET_ROOM } from '../actions/actionTypes'
+import firebaseApp from '../base'
+import { CREATE_NEW_USER, SET_DISPLAY_NAME, SET_ROOM } from '../actions/actionTypes'
+
+const base = firebaseApp.database()
 
 const user = (state = {}, action) => {
   switch (action.type) {
     case CREATE_NEW_USER: {
-      const { UID, email, photoURL } = action.payload
-      const newState = { UID, email, photoURL }
+      const { uid, email, photoURL } = action.payload
+      const newState = { uid, email, photoURL }
+      /* * writing new user to firebase * */
+      base.ref(`users/${uid}`).set({ displayName: null, email, photoURL })
       return newState
     }
-    case SET_USERNAME: {
-      const { username } = action.payload
+
+    case SET_DISPLAY_NAME: {
+      const { uid, displayName } = action.payload
       const newState = Object.assign({}, state)
-      newState.username = username
+      console.log(newState)
+      /* * updating recently added user with display name * */
+      base.ref(`users/${uid}`).set({ displayName })
+      newState.displayName = displayName
+      console.log(newState)
       return newState
     }
     case SET_ROOM: {

@@ -1,13 +1,13 @@
-import { CREATE_NEW_USER, SET_USERNAME, SET_ROOM } from './actionTypes'
+import { CREATE_NEW_USER, SET_DISPLAY_NAME, SET_ROOM } from './actionTypes'
 
-export const createNewUser = ({ UID, email, photoURL }) => ({
+export const createNewUser = ({ uid, email, photoURL }) => ({
   type: CREATE_NEW_USER,
-  payload: { UID, email, photoURL }
+  payload: { uid, email, photoURL }
 })
 
-export const setUsername = ({ username }) => ({
-  type: SET_USERNAME,
-  payload: { username }
+export const setDisplayName = ({ uid, displayName }) => ({
+  type: SET_DISPLAY_NAME,
+  payload: { uid, displayName }
 })
 
 export const setRoom = ({ room }) => ({
