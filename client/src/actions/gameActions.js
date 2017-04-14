@@ -3,9 +3,9 @@ import { ADD_USER_TO_GAME } from './actionTypes'
 
 const base = firebaseApp.database()
 
-export const addUserToGame = ({ user }) => ({
+export const addUserToGame = ({ user, displayName }) => ({
   type: ADD_USER_TO_GAME,
-  payload: { user }
+  payload: { user, displayName }
 })
 
 export const getPlayers = () => {

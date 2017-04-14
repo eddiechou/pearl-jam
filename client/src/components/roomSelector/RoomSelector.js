@@ -19,7 +19,7 @@ class RoomSelector extends Component {
   }
 
   handleChange (event, index, value) {
-    const { user, setGame, addUserToGame } = this.props
+    const { user, setGame } = this.props
     const { gameID } = this.state
     this.setState({ gameID: value })
     setGame({ gameID: value })
