@@ -43,8 +43,9 @@ class BettingPage extends Component {
         </div>
 
         {games.currentActiveGames ? games.currentActiveGames.map((game) => {
-                return <CurrentGameCard game={game}/>
-              }) : null}
+          return <CurrentGameCard game={game}/>
+        }) : null}
+        
         <FlatButton
           label='props'
           secondary
