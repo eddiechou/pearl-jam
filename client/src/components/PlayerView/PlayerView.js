@@ -23,15 +23,6 @@ class PlayerView extends React.Component {
 
         
   }
-  componentWillMount() {
-     /* 
-    const username = prompt("What is your username?");
-    this.setState({
-      username: username
-    })
-    */
-    
-  }
 
   getClickedServer() {
     for (let server of this.props.servers) {
