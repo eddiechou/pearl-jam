@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+/* * Actions * */
 import { setDisplayName } from '../../actions/userActions'
 import { addUserToGame } from '../../actions/gameActions'
 
-import firebaseApp from '../../base'
+/* * Components * */
+import RoomSelector from '../roomSelector/RoomSelector'
+
+/* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import style from './setDisplayNamePage-css'
 
-import RoomSelector from '../roomSelector/RoomSelector'
-
 const { title } = style
-const base = firebaseApp.database()
 
 class SetDisplayNamePage extends Component {
   constructor () {
@@ -35,11 +36,8 @@ class SetDisplayNamePage extends Component {
     const { displayName } = this.state
     const { uid } = user
     setDisplayName({ uid, displayName })
-    addUserToGame({ user, displayName })
-  }
-
-  checkProps () {
-    console.log(this.props)
+    // addUserToGame({ user, displayName })
+    this.context.router.history.push('/home')
   }
 
   render () {
@@ -59,11 +57,6 @@ class SetDisplayNamePage extends Component {
           secondary
           fullWidth
           onClick={this.handleSubmit.bind(this)} />
-        <FlatButton
-          label='props'
-          secondary
-          fullWidth
-          onClick={this.checkProps.bind(this)} />
       </div>
     )
   }

@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
-import UPDATE_SCREEN_SIZE from '../actions/actionTypes'
-import { updateScreenSize } from '../actions/actions'
+
+/* * Utils * */
 import firebaseApp from '../base'
+import createHistory from 'history/createBrowserHistory'
+import { ConnectedRouter } from 'react-router-redux'
+import { Route } from 'react-router-dom'
 
-/**
- * Components
- */
-import TopNavBar from './TopNavBar'
+/* * Actions * */
+import { updateScreenSize } from '../actions/actions'
 
-const base = firebaseApp.database()
+/* * Components * */
+import AuthenticationPage from './authenticationPage/AuthenticationPage'
+import SetDisplayNamePage from './setDisplayNamePage/SetDisplayNamePage'
+import UserHomePage from './userHomePage/UserHomePage'
+import BettingPage from './bettingPage/BettingPage'
+import SpectatorPage from './SpectatorPage'
+import GamePage from './GamePage'
+import Arena from './arena/Arena'
+
+const history = createHistory()
 const auth = firebaseApp.auth()
 
-class App extends React.Component {
+class App extends Component {
   constructor () {
     super()
     auth.onAuthStateChanged(firebaseUser => {
@@ -32,6 +41,8 @@ class App extends React.Component {
   }
 
   componentDidUpdate () {
+    console.log('app component did update')
+
         /**
      * maintain authentication of user for duration of session
      * make this write to redux state
@@ -61,28 +72,27 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
-        <ul>
-          <li><Link to='/game'>Game Page</Link></li>
-          <li><Link to='/join'>Join</Link></li>
-          <li><Link to='/spectate'>Spectator Page</Link></li>
-          <li><Link to='/arena'>lamborghini mercy</Link></li>
-          <li><Link to='/bet'>Make Bets Page</Link></li>
-          <li><Link to='/home'>User Page</Link></li>
-        </ul>
-      </div>
+      <ConnectedRouter history={history}>
+        <div>
+          <Route exact path='/' component={AuthenticationPage} />
+          <Route path='/join' component={AuthenticationPage} />
+          <Route path='/setusername' component={SetDisplayNamePage} />
+          <Route path='/home' component={UserHomePage} />
+          <Route path='/spectate' component={SpectatorPage} />
+          <Route path='/game' component={GamePage} />
+          <Route path='/arena' component={Arena} />
+          <Route path='/bet' component={BettingPage} />
+        </div>
+      </ConnectedRouter>
     )
   }
 }
 
-/**
- * updateScreenSize is an action creator
- * passing in null because we have no need for mapStateToProps .... yet
- */
 const mapStateToProps = (state) => {
   return {
-    user: state.authentication
+    user: state.user,
+    state: state
   }
 }
 
-export default connect(mapStateToProps, { updateScreenSize })(App)
+export default connect(null, { updateScreenSize })(App)
