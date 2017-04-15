@@ -21,9 +21,13 @@ const user = (state = {}, action) => {
 
     case SET_DISPLAY_NAME: {
       const { uid, displayName } = action.payload
+      const pearls = 100
+      const rating = 1200
+      const wins = 0
+      const losses = 0
       const newState = Object.assign({}, state)
       /* * updating recently added user with display name * */
-      base.ref(`users/${uid}`).update({ displayName })
+      base.ref(`users/${uid}`).set({ displayName, pearls, rating, wins, losses })
       newState.displayName = displayName
       return newState
     }
