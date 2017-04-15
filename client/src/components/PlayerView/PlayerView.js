@@ -4,16 +4,13 @@ import Iframe from 'react-iframe'
 import List from './List.js';
 
 //Require stylesheet
-require('/styles.css')
+require('./styles.css');
 
 //REquire animation effect for modal
 var Modal = require('boron/OutlineModal');
 
 //redux stuff
 import {connect} from 'react-redux'
-
-//require lodash
-import _ from 'lodash'
 
 class PlayerView extends React.Component {
   constructor (props) {
