@@ -26,7 +26,7 @@ class GamePlayerStatsTable extends Component {
               <TableRow>
                 <TableRowColumn>{player.displayName}</TableRowColumn>
                 <TableRowColumn>{player.rating}</TableRowColumn>
-                <TableRowColumn>.456</TableRowColumn>
+                <TableRowColumn></TableRowColumn>
               </TableRow>)
           })}
         </TableBody>

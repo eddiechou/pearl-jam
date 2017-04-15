@@ -10,6 +10,7 @@ const paperStyle = {
   margin: 20,
   textAlign: 'center',
   display: 'inline-block',
+  verticalAlign: 'top'
 };
 
 const buttonStyle = {
@@ -56,7 +57,7 @@ class CurrentGameListItem extends Component {
 
         <GamePlayerStatsTable game={this.props.game} onRowSelection={this._onRowSelection.bind(this)} />
 
-        <TextField hintText="100" floatingLabelText="Wager (Pearls)" /><br/>
+        <TextField hintText="10" floatingLabelText="Wager (Pearls)" /><br/>
         <RaisedButton label="Spectate Game" primary={true} style={buttonStyle} onClick={this._handleSpectate.bind(this)} />
         <RaisedButton label="Make Bet" secondary={true} style={buttonStyle} onClick={this._handleMakeBet.bind(this)} />
       </Paper>
