@@ -18,6 +18,7 @@ import BettingPage from './bettingPage/BettingPage'
 import SpectatorPage from './SpectatorPage'
 import GamePage from './GamePage'
 import Arena from './arena/Arena'
+import PlayerView from './PlayerView/PlayerView.js'
 
 const history = createHistory()
 const auth = firebaseApp.auth()
@@ -82,6 +83,7 @@ class App extends Component {
           <Route path='/game' component={GamePage} />
           <Route path='/arena' component={Arena} />
           <Route path='/bet' component={BettingPage} />
+          <Route path='/playerView' component={PlayerView} />
         </div>
       </ConnectedRouter>
     )

@@ -4,7 +4,8 @@ import ListItem from './ListItem'
 
 //Redux stuff
 import {connect} from 'react-redux'
-import {CLICKED_ROOM } from '../actions/actionTypes'
+import {CLICKED_ROOM } from '../../actions/actionTypes'
+
 //import styles
 var styles = require('./componentCSS').listItemStyle;
 
