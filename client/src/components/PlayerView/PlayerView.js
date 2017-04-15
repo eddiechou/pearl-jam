@@ -42,7 +42,6 @@ class PlayerView extends React.Component {
       }, function() {
         console.log('currenterserver', this.state.currentServer);
         this.refs.modal.show();
-        setTimeout(this.fireMessage.bind(this), 1000);
       })
   }
 
@@ -90,7 +89,7 @@ class PlayerView extends React.Component {
 
                 <button style={buttonStyle} onClick={this.showModal.bind(this)}>Join Server!</button>
                 <Modal ref="modal" modalStyle={modalStyle}>
-                    <iframe id='playerView' src={this.state.currentServer.link} 
+                    <iframe id='playerView' onLoad={this.fireMessage.bind(this)} src={this.state.currentServer.link} 
                     height="800px" width="950px"></iframe>
                     <button onClick={this.hideModal.bind(this)}>Close</button>
                 </Modal>
