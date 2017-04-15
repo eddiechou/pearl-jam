@@ -24,6 +24,7 @@ class UserNavBar extends Component {
           <FlatButton label='Props' onClick={this.checkProps.bind(this)} />
           <Link to='/spectate'><FlatButton label='Watch' /></Link>
           <Link to='/game'><FlatButton label='Play' secondary /></Link>
+          <Link to='/bet'><FlatButton label='Bet' /></Link>
           <NavDropMenu />
         </ToolbarGroup>
       </Toolbar>

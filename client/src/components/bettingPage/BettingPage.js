@@ -10,6 +10,7 @@ import { updateCurrentActiveGames } from '../../actions/betActions'
 
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
+import CurrentGameCard from './CurrentGameCard'
 
 class BettingPage extends Component {
   componentWillMount () {
@@ -32,17 +33,25 @@ class BettingPage extends Component {
     console.log(this.props)
   }
 
+  // For each currentActiveGame 
   render () {
     const { games } = this.props
     return <div>
-      <p>We're in the betting page</p>
-      <div><p>current active games: {games.currentActiveGames && games.currentActiveGames.length}</p></div>
-      <FlatButton
-        label='props'
-        secondary
-        fullWidth
-        onClick={this.checkProps.bind(this)} />
-    </div>
+        <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
+        <div>
+          <p>There are currently <strong>{games.currentActiveGames && games.currentActiveGames.length}</strong> active games!</p>
+        </div>
+
+        {games.currentActiveGames ? games.currentActiveGames.map((game) => {
+          return <CurrentGameCard game={game}/>
+        }) : null}
+        
+        <FlatButton
+          label='props'
+          secondary
+          fullWidth
+          onClick={this.checkProps.bind(this)} />
+      </div>
   }
 }
 
