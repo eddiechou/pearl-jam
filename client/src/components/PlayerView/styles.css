@@ -7,7 +7,7 @@
   height: 1000px;
 
   /* Setting this as a flex */
-
+  
   display: flex;
   justify-content: center
 }

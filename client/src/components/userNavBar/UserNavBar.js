@@ -25,6 +25,7 @@ class UserNavBar extends Component {
           <Link to='/spectate'><FlatButton label='Watch' /></Link>
           <Link to='/game'><FlatButton label='Play' secondary /></Link>
           <Link to='/bet'><FlatButton label='Bet' /></Link>
+          <Link to='/playerView'><FlatButton label='Play game' /></Link> 
           <NavDropMenu />
         </ToolbarGroup>
       </Toolbar>
