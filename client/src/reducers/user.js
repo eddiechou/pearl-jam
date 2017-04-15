@@ -27,7 +27,7 @@ const user = (state = {}, action) => {
       const losses = 0
       const newState = Object.assign({}, state)
       /* * updating recently added user with display name * */
-      base.ref(`users/${uid}`).set({ displayName, pearls, rating, wins, losses })
+      base.ref(`users/${uid}`).update({ displayName, pearls, rating, wins, losses })
       newState.displayName = displayName
       return newState
     }
