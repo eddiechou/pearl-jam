@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import renderPearl from '../renderPearl/renderPearl'
-import style from './arena-css'
 
+/* * Utils * */
+import renderPearl from '../renderPearl/renderPearl'
+
+/* * Actions * */
 import { addPlayerToGame, updatePlayerPosition } from '../../actions/actions'
 
+/* * Styles * */
+import style from './arena-css'
 const { main, instructions, canvas } = style
 const KEY_CODE = {
   LEFT: 37,

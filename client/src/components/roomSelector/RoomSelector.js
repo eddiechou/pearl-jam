@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+/* * Actions * */
 import { setGame } from '../../actions/userActions'
 
+/* * Styles * */
+import SelectField from 'material-ui/SelectField'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
-
-import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
 class RoomSelector extends Component {

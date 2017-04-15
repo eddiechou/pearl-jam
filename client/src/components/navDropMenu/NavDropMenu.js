@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
+/* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
+import MenuItem from 'material-ui/MenuItem'
 import Divider from 'material-ui/Divider'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
-import MenuItem from 'material-ui/MenuItem'
-import { Link } from 'react-router-dom'
 
 class NavDropMenu extends Component {
   constructor (props) {
@@ -55,6 +56,7 @@ class NavDropMenu extends Component {
             <MenuItem containerElement={<Link to='/' />} primaryText='Leaderboard' />
             <MenuItem containerElement={<Link to='/' />} primaryText='Friends' />
             <MenuItem containerElement={<Link to='/' />} primaryText='Add Friend' />
+            <MenuItem containerElement={<Link to='/arena' />} primaryText={`Mycah's Arena`} />
             <Divider />
             <MenuItem label='Logout' onClick={event => this.handleLogout(event)} primaryText='Logout' />
           </Menu>

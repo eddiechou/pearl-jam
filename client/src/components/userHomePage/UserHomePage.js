@@ -2,22 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import UserNavBar from '../userNavBar/UserNavBar'
+/* * Utils * */
 import firebaseApp from '../../base'
+
+/* * Components * */
+import UserNavBar from '../userNavBar/UserNavBar'
+
+/* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
 
 class UserHomePage extends Component {
-  constructor () {
-    super()
-    this.state = {
-
-    }
-  }
-
-  checkProps () {
-    console.log(this.props)
-  }
-
   render () {
     return (
       <div>
@@ -28,8 +22,11 @@ class UserHomePage extends Component {
   }
 }
 
-// UserHomePage.contextTypes = {
-//   router: PropTypes.object
-// }
+UserHomePage.contextTypes = {
+  router: PropTypes.object
+}
 
-export default UserHomePage
+const mapStateToProps = ({ user }) => {
+  return { user }
+}
+export default connect(mapStateToProps, null)(UserHomePage)

@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+/* * Utils * */
 import firebaseApp from '../../base'
 import firebaseui from 'firebaseui'
 import baseUIConfig from './baseUIConfig'
 
-import { createNewUser } from '../../actions/userActions'
+/* * Actions * */
+import { setUser, createNewUser } from '../../actions/userActions'
 
+/* * Styles * */
 import style from './authenticationPage-css'
+
 const { button } = style
+
 const base = firebaseApp.database()
 const auth = firebaseApp.auth()
 const ui = new firebaseui.auth.AuthUI(auth)
@@ -37,7 +42,6 @@ class AuthenticationPage extends Component {
     auth.signInWithPopup(provider)
     .then(result => {
       authenticateUser(result)
-
       const token = result.credential.accessToken
       const { displayName, uid, email, photoURL } = result.user
       // check if user exists (bento)
@@ -78,9 +82,14 @@ class AuthenticationPage extends Component {
   }
 
   authenticateWithEmail () {
+    const { setUser } = this.props
     const { email, password } = this.state
     const promise = auth.signInWithEmailAndPassword(email, password)
-    promise.then(user => console.log(user))
+    promise.then(user => {
+      const { uid, displayName, email, photoURL } = user
+      setUser({ uid, displayName, email, photoURL })
+      this.context.router.history.push('/home')
+    })
     promise.catch(error => console.log(error.message))
   }
 
@@ -95,10 +104,10 @@ class AuthenticationPage extends Component {
             </div>
             <input type='email' placeholder='Email' onChange={(event) => this.handleChange(event, 'email')} />
             <input type='password' placeholder='Password' onChange={(event) => this.handleChange(event, 'password')} />
-            <button ref='btnLogin' type='hidden' style={button} onClick={this.authenticateWithEmail}>
+            <button style={button} onClick={this.authenticateWithEmail}>
             log in
             </button>
-            <button id='btnSignUp' style={button} onClick={this.createUserWithEmail}>
+            <button style={button} onClick={this.createUserWithEmail}>
             sign up
             </button>
             <div id='firebaseui-auth-container' />
@@ -113,4 +122,4 @@ AuthenticationPage.contextTypes = {
   router: PropTypes.object
 }
 
-export default connect(null, { createNewUser })(AuthenticationPage)
+export default connect(null, { setUser, createNewUser })(AuthenticationPage)
