@@ -2,6 +2,7 @@ import firebaseApp from '../base'
 import { SET_USER, CREATE_NEW_USER, SET_DISPLAY_NAME, SET_GAME } from '../actions/actionTypes'
 
 const base = firebaseApp.database()
+const auth = firebaseApp.auth()
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -26,9 +27,13 @@ const user = (state = {}, action) => {
       const wins = 0
       const losses = 0
       const newState = Object.assign({}, state)
+      const user = auth.currentUser
       /* * updating recently added user with display name * */
-      base.ref(`users/${uid}`).update({ displayName, pearls, rating, wins, losses })
-      newState.displayName = displayName
+      user.updateProfile({ displayName })
+      .then(() => {
+        base.ref(`users/${uid}`).update({ displayName, pearls, rating, wins, losses })
+        newState.displayName = displayName
+      }, (error) => console.log(error))
       return newState
     }
 
