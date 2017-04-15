@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 /* * Actions * */
 import { setDisplayName } from '../../actions/userActions'
-import { addUserToGame } from '../../actions/gameActions'
 
 /* * Components * */
 import RoomSelector from '../roomSelector/RoomSelector'
@@ -32,11 +31,10 @@ class SetDisplayNamePage extends Component {
   }
 
   handleSubmit (event) {
-    const { setDisplayName, addUserToGame, user } = this.props
+    const { setDisplayName, user } = this.props
     const { displayName } = this.state
     const { uid } = user
     setDisplayName({ uid, displayName })
-    // addUserToGame({ user, displayName })
     this.context.router.history.push('/home')
   }
 
@@ -44,14 +42,13 @@ class SetDisplayNamePage extends Component {
     return (
       <div>
         <div style={title}>
-          one more thing ... pick a badass username and choose your room!
+          pick a badass username!
         </div>
         <TextField
           hintText='badass username'
           underlineShow
           fullWidth
           onChange={(event) => this.handleInputChange(event)} />
-        <RoomSelector />
         <FlatButton
           label='submit'
           secondary
@@ -70,4 +67,4 @@ const mapStateToProps = ({ user }) => {
   return { user }
 }
 
-export default connect(mapStateToProps, { setDisplayName, addUserToGame })(SetDisplayNamePage)
+export default connect(mapStateToProps, { setDisplayName })(SetDisplayNamePage)

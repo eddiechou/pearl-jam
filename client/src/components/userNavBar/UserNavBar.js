@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -11,9 +10,6 @@ import FlatButton from 'material-ui/FlatButton'
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar'
 
 class UserNavBar extends Component {
-  checkProps () {
-    console.log(this.props)
-  }
   render () {
     return (
       <Toolbar>
@@ -21,11 +17,9 @@ class UserNavBar extends Component {
           <ToolbarTitle text='Pearl Jam' />
         </ToolbarGroup>
         <ToolbarGroup>
-          <FlatButton label='Props' onClick={this.checkProps.bind(this)} />
-          <Link to='/spectate'><FlatButton label='Watch' /></Link>
-          <Link to='/game'><FlatButton label='Play' secondary /></Link>
-          <Link to='/bet'><FlatButton label='Bet' /></Link>
-          <Link to='/playerView'><FlatButton label='Play game' /></Link> 
+          <Link to='/'> <FlatButton label='Friends' /> </Link>
+          <Link to='/bet'> <FlatButton label='Bet' /> </Link>
+          <Link to='/playerView'> <FlatButton label='Play' /> </Link>
           <NavDropMenu />
         </ToolbarGroup>
       </Toolbar>
@@ -37,7 +31,4 @@ UserNavBar.contextTypes = {
   router: PropTypes.object
 }
 
-const mapStateToProps = ({ user }) => {
-  return { user }
-}
-export default connect(mapStateToProps, null)(UserNavBar)
+export default UserNavBar

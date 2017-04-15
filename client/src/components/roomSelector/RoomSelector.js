@@ -20,8 +20,7 @@ class RoomSelector extends Component {
   }
 
   handleChange (event, index, value) {
-    const { user, setGame } = this.props
-    const { gameID } = this.state
+    const { setGame } = this.props
     this.setState({ gameID: value })
     setGame({ gameID: value })
   }
@@ -37,15 +36,10 @@ class RoomSelector extends Component {
         <MenuItem value={1} primaryText='main' />
         <MenuItem value={2} primaryText='anti gravity' />
         <MenuItem value={3} primaryText='pink' />
-
       </SelectField>
 
     )
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  return { user }
-}
-
-export default connect(mapStateToProps, { setGame })(RoomSelector)
+export default connect(null, { setGame })(RoomSelector)

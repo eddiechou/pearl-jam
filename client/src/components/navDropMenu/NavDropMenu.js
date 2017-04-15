@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+/* * Utils * */
+import firebaseApp from '../../base'
+
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
 import MenuItem from 'material-ui/MenuItem'
 import Divider from 'material-ui/Divider'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
+
+const auth = firebaseApp.auth()
 
 class NavDropMenu extends Component {
   constructor (props) {
@@ -39,13 +44,18 @@ class NavDropMenu extends Component {
     event.preventDefault()
     this.context.router.history.push('/goodbye')
   }
+  checkUser () {
+    const user = auth.currentUser
+    console.log(user)
+  }
 
   render () {
     return (
       <div>
         <FlatButton
           label='More'
-          onTouchTap={this.handleTouchTap.bind(this)} />
+          onTouchTap={this.handleTouchTap.bind(this)}
+          secondary />
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
@@ -53,8 +63,9 @@ class NavDropMenu extends Component {
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
           onRequestClose={this.handleRequestClose.bind(this)}>
           <Menu>
+            <MenuItem primaryText='Check User' onClick={this.checkUser.bind(this)} />
+            <Divider />
             <MenuItem containerElement={<Link to='/' />} primaryText='Leaderboard' />
-            <MenuItem containerElement={<Link to='/' />} primaryText='Friends' />
             <MenuItem containerElement={<Link to='/' />} primaryText='Add Friend' />
             <MenuItem containerElement={<Link to='/arena' />} primaryText={`Mycah's Arena`} />
             <Divider />
