@@ -2,15 +2,12 @@
 import {CLICKED_ROOM} from '../actions/actionTypes'
 
 const servers =  [
-  {name: 'Game Server 1', clicked: false, link: ''},
-  {name: 'Game Server 2', clicked: false, link: ''},
-  {name: 'Game Server 3', clicked: false,  link: ''},
-  {name: 'Game Server 4', clicked: false, link: ''},
-  {name: 'Game Server 5', clicked: false, link: ''},
-  {name: 'Game Server 6', clicked: false, link: ''},
-  {name: 'Game Server 7', clicked: false,  link: ''},
-  {name: 'Game Server 8', clicked: false, link: ''},
- 
+  {name: 'Game Server 1X', clicked: false, link: 'http://104.236.164.62:3001'},
+  {name: 'Game Server 2', clicked: false, link: 'http://104.236.164.62:3002'},
+  {name: 'Game Server 3', clicked: false,  link: 'http://104.236.164.62:3003'},
+  {name: 'Game Server 4', clicked: false, link: 'http://104.236.164.62:3004'},
+  {name: 'Game Server 5', clicked: false, link: 'http://104.236.164.62:3006'},
+  {name: 'Game Server 6', clicked: false, link: 'http://104.236.164.62:3007'},
 ]
 
 //Default servers

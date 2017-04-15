@@ -1,29 +1,60 @@
+//require componenets
 import React from 'react'
 import Iframe from 'react-iframe'
 import List from './List.js';
+
+//Require stylesheet
 require('../assets/css/styles.css')
 
-import Picker from'react-picker'
-
+//REquire animation effect for modal
 var Modal = require('boron/OutlineModal');
 
-export default class PlayerView extends React.Component {
+//redux stuff
+import {connect} from 'react-redux'
+
+//require lodash
+import _ from 'lodash'
+
+class PlayerView extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      username: 'jeff is eating a burrito'
+      username: 'anonymous',
+      currentServer: ''
     }
+
+        
+  }
+  componentWillMount() {
+    
+    const username = prompt("What is your username?");
+    this.setState({
+      username: username
+    })
     
   }
 
-  componentDidMount() {
+  getClickedServer() {
+    for (let server of this.props.servers) {
+      if (server.clicked === true) {
+        return server;
+      }  
+    }
+    
+    return 'no server selected!'
   }
 
   showModal(){
-      this.refs.modal.show();
-
-      setTimeout(this.fireMessage.bind(this), 1000);
+      var clickedServer = this.getClickedServer();
+      console.log('clickedServer', clickedServer);
+      this.setState({
+        currentServer: clickedServer
+      }, function() {
+        console.log('currenterserver', this.state.currentServer);
+        this.refs.modal.show();
+        setTimeout(this.fireMessage.bind(this), 1000);
+      })
   }
 
   hideModal(){
@@ -33,15 +64,14 @@ export default class PlayerView extends React.Component {
 
   fireMessage() {
     var iframeElement = document.getElementById('playerView').contentWindow;
-    console.log('iframe', iframeElement);
-    iframeElement.postMessage(this.state.username, 'http://10.6.64.169:3005')
+    iframeElement.postMessage(this.state.username, this.state.currentServer.link);
     console.log('finished posting message');
   }
 
   render () {
     var modalStyle = {
-      width: '1500px',
-      height: '850px',
+      width: '950px',
+      height: '800px',
     }; 
 
     var buttonStyle = {
@@ -65,14 +95,14 @@ export default class PlayerView extends React.Component {
       <div className="containerBuilt">
           <h1 className="navBar"> Nav Bar </h1> 
           <div id='gameView'>
-            <button style={buttonStyle} onClick={this.fireMessage.bind(this)}> post message to iframe </button>
 
             <div style={flexParent} >
                 <List />
 
                 <button style={buttonStyle} onClick={this.showModal.bind(this)}>Join Server!</button>
                 <Modal ref="modal" modalStyle={modalStyle}>
-                    <iframe id='playerView' src="http://10.6.64.169:3005" height="700px" width="1700px"></iframe>
+                    <iframe id='playerView' src={this.state.currentServer.link} 
+                    height="800px" width="950px"></iframe>
                     <button onClick={this.hideModal.bind(this)}>Close</button>
                 </Modal>
             </div>
@@ -83,3 +113,12 @@ export default class PlayerView extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    servers: state.rooms
+  }
+}
+
+
+export default connect(mapStateToProps)(PlayerView);
