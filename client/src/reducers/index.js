@@ -4,13 +4,15 @@ import players from './players'
 import user from './user'
 import game from './game'
 import games from './games'
+import rooms from './rooms'
 
 const rootReducer = combineReducers({
   screenSize,
   players,
   user,
   game,
-  games
+  games,
+  rooms,  
 })
 
 export default rootReducer

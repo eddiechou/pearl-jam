@@ -18,3 +18,7 @@ export const ADD_USER_TO_GAME = 'ADD_USER_TO_GAME'
  * Bet Actions
  */
 export const UPDATE_CURRENT_ACTIVE_GAMES = 'UPDATE_CURRENT_ACTIVE_GAMES'
+
+
+//Actions for clicked room
+export const CLICKED_ROOM = 'CLICKED_ROOM'
