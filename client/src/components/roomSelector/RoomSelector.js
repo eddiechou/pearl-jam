@@ -35,7 +35,9 @@ class RoomSelector extends Component {
         onChange={this.handleChange.bind(this)}
       >
         <MenuItem value={1} primaryText='main' />
-        <MenuItem value={2} primaryText='test' />
+        <MenuItem value={2} primaryText='anti gravity' />
+        <MenuItem value={3} primaryText='pink' />
+
       </SelectField>
 
     )
