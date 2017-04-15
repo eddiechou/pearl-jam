@@ -30,12 +30,12 @@ class SetDisplayNamePage extends Component {
     this.setState({ displayName })
   }
 
-  handleSubmit () {
-    const { setDisplayName, user } = this.props
+  handleSubmit (event) {
+    const { setDisplayName, addUserToGame, user } = this.props
     const { displayName } = this.state
-    const { uid, gameID } = user
+    const { uid } = user
     setDisplayName({ uid, displayName })
-    addUserToGame({ user })
+    addUserToGame({ user, displayName })
   }
 
   checkProps () {

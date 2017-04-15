@@ -15,6 +15,7 @@ import RedBox from 'redbox-react'
 import App from './components/App'
 import SetDisplayNamePage from './components/setDisplayNamePage/SetDisplayNamePage'
 import AuthenticationPage from './components/authenticationPage/AuthenticationPage'
+import UserHomePage from './components/userHomePage/UserHomePage'
 import SpectatorPage from './components/SpectatorPage'
 import GamePage from './components/GamePage'
 import Arena from './components/arena/Arena'
@@ -48,6 +49,7 @@ try {
             <Route exact path='/' component={AuthenticationPage} />
             <Route path='/join' component={AuthenticationPage} />
             <Route path='/setusername' component={SetDisplayNamePage} />
+            <Route path='/home' component={UserHomePage} />
             <Route path='/spectate' component={SpectatorPage} />
             <Route path='/game' component={GamePage} />
             <Route path='/arena' component={Arena} />

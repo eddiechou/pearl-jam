@@ -93,7 +93,6 @@ class AuthenticationPage extends Component {
               <h1>Welcome to Pinballish</h1>
               <div>Join the game using your preferred sign in method</div>
             </div>
-            <div id='firebaseui-auth-container' />
             <input type='email' placeholder='Email' onChange={(event) => this.handleChange(event, 'email')} />
             <input type='password' placeholder='Password' onChange={(event) => this.handleChange(event, 'password')} />
             <button ref='btnLogin' type='hidden' style={button} onClick={this.authenticateWithEmail}>
@@ -102,6 +101,7 @@ class AuthenticationPage extends Component {
             <button id='btnSignUp' style={button} onClick={this.createUserWithEmail}>
             sign up
             </button>
+            <div id='firebaseui-auth-container' />
           </div>
         </div>
       )
