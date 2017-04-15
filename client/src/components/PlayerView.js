@@ -20,9 +20,9 @@ class PlayerView extends React.Component {
     super(props);
 
     this.state = {
-      username: 'anonymous',
+      displayName: 'anonymous',
       currentServer: ''
-    }
+  }
 
         
   }
@@ -30,13 +30,13 @@ class PlayerView extends React.Component {
     
     const username = prompt("What is your username?");
     this.setState({
-      username: username
+      displayName: username
     })
     
   }
 
   getClickedServer() {
-    for (let server of this.props.servers) {
+    for (let server of this.props.rooms) {
       if (server.clicked === true) {
         return server;
       }  
@@ -64,7 +64,7 @@ class PlayerView extends React.Component {
 
   fireMessage() {
     var iframeElement = document.getElementById('playerView').contentWindow;
-    iframeElement.postMessage(this.state.username, this.state.currentServer.link);
+    iframeElement.postMessage(this.state.displayName, this.state.currentServer.link);
     console.log('finished posting message');
   }
 
@@ -114,11 +114,11 @@ class PlayerView extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    servers: state.rooms
-  }
+const mapStateToProps = ({ rooms, user }) => {
+  const { displayName } = user
+  return { rooms, displayName }
 }
+
 
 
 export default connect(mapStateToProps)(PlayerView);

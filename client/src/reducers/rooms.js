@@ -2,12 +2,13 @@
 import {CLICKED_ROOM} from '../actions/actionTypes'
 
 const servers =  [
-  {name: 'Game Server 1X', clicked: false, link: 'http://104.236.164.62:3001'},
-  {name: 'Game Server 2', clicked: false, link: 'http://104.236.164.62:3002'},
-  {name: 'Game Server 3', clicked: false,  link: 'http://104.236.164.62:3003'},
-  {name: 'Game Server 4', clicked: false, link: 'http://104.236.164.62:3004'},
-  {name: 'Game Server 5', clicked: false, link: 'http://104.236.164.62:3006'},
-  {name: 'Game Server 6', clicked: false, link: 'http://104.236.164.62:3007'},
+  {name: 'Heroku game server', clicked: false, link: 'https://pearl-jam-game-server.herokuapp.com/'},
+  {name: 'Eddie\'s game server', clicked: false, link: 'http://104.236.164.62:3001'},
+  {name: 'Mycah game server', clicked: false, link: 'http://104.236.164.62:3002'},
+  {name: 'Jeff Game server', clicked: false,  link: 'http://104.236.164.62:3003'},
+  {name: 'Mike game server', clicked: false, link: 'http://104.236.164.62:3004'},
+  {name: 'join here to get TrOLOLLZ', clicked: false, link: 'http://104.236.164.62:3006'},
+  {name: 'xxNoSCOPE420XXX', clicked: false, link: 'http://104.236.164.62:3007'},
 ]
 
 //Default servers

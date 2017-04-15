@@ -24,11 +24,12 @@ class PlayerView extends React.Component {
         
   }
   componentWillMount() {
-    
+     /* 
     const username = prompt("What is your username?");
     this.setState({
       username: username
     })
+    */
     
   }
 
@@ -61,7 +62,7 @@ class PlayerView extends React.Component {
 
   fireMessage() {
     var iframeElement = document.getElementById('playerView').contentWindow;
-    iframeElement.postMessage(this.state.username, this.state.currentServer.link);
+    iframeElement.postMessage(this.props.displayName, this.state.currentServer.link);
     console.log('finished posting message');
   }
 
@@ -111,9 +112,10 @@ class PlayerView extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({rooms, user}) => {
   return {
-    servers: state.rooms
+    servers: rooms,
+    displayName: user.displayName || 'anonymous'
   }
 }
 
