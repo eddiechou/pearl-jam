@@ -19,21 +19,46 @@ const buttonStyle = {
 class CurrentGameListItem extends Component {
   constructor (props) {
     super(props)
+    this.state = {selectedPlayerIndex: null}
   }
 
+  _handleMakeBet () {
+    // Grab selected user from the table row
+      // Only contains the username
+    var selectedPlayerName = this.props.game.players[this.state.selectedPlayerIndex]
+
+    console.log('selectedPlayerName', selectedPlayerName)
+
+    // Grab input value
+
+
+    // Send bet to Firebase
+  }
+
+  _handleSpectate() {
+    console.log('clicked spectate')
+  }
+
+   _onRowSelection (rowNumber) {
+    // Pass the rowNumber up to the Card
+    console.log('the selected row is: ', rowNumber)
+    this.state.selectedPlayerIndex = rowNumber
+  }
+
+  // <h1>{Object.keys(this.props.game.players).map((key, index) => {
+  //   const player = this.props.game.players[key]
+  //   return player.displayName
+  // })}</h1>
   render () {
     return (
       <Paper style={paperStyle} zDepth={2}>
         <h2>GameID: {this.props.game.gameID}</h2>
-        <h1>{this.props.game.players[0]} VS. {this.props.game.players[1]}</h1>
-        <GamePlayerStatsTable/>
 
-        <TextField
-          hintText="1000"
-          floatingLabelText="Wager"
-        /><br/>
-        <RaisedButton label="Spectate Game" primary={true} style={buttonStyle} />
-        <RaisedButton label="Make Bet" secondary={true} style={buttonStyle} />
+        <GamePlayerStatsTable game={this.props.game} onRowSelection={this._onRowSelection.bind(this)} />
+
+        <TextField hintText="100" floatingLabelText="Wager (Pearls)" /><br/>
+        <RaisedButton label="Spectate Game" primary={true} style={buttonStyle} onClick={this._handleSpectate.bind(this)} />
+        <RaisedButton label="Make Bet" secondary={true} style={buttonStyle} onClick={this._handleMakeBet.bind(this)} />
       </Paper>
     )
   }

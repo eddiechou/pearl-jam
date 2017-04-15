@@ -40,8 +40,6 @@ class BettingPage extends Component {
         <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
         <div>
           <p>There are currently <strong>{games.currentActiveGames && games.currentActiveGames.length}</strong> active games!</p>
-          <p>Select a player</p>
-
         </div>
 
         {games.currentActiveGames ? games.currentActiveGames.map((game) => {

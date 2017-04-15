@@ -10,7 +10,7 @@ class GamePlayerStatsTable extends Component {
 
   render () {
     return (
-      <Table deselectOnClickaway={false}>
+      <Table deselectOnClickaway={false} onRowSelection={this.props.onRowSelection}>
         <TableHeader adjustForCheckbox={false}>
           <TableRow adjustForCheckbox={false}>
             <TableHeaderColumn>Player</TableHeaderColumn>
@@ -19,16 +19,16 @@ class GamePlayerStatsTable extends Component {
           </TableRow>
         </TableHeader>
         <TableBody deselectOnClickaway={false}>
-          <TableRow>
-            <TableRowColumn>Eddie</TableRowColumn>
-            <TableRowColumn>1500</TableRowColumn>
-            <TableRowColumn>.456</TableRowColumn>
-          </TableRow>
-          <TableRow>
-            <TableRowColumn>Jeff</TableRowColumn>
-            <TableRowColumn>1550</TableRowColumn>
-            <TableRowColumn>.544</TableRowColumn>
-          </TableRow>
+
+          {Object.keys(this.props.game.players).map((key, index) => {
+            const player = this.props.game.players[key]
+            return (
+              <TableRow>
+                <TableRowColumn>{player.displayName}</TableRowColumn>
+                <TableRowColumn>{player.rating}</TableRowColumn>
+                <TableRowColumn>.456</TableRowColumn>
+              </TableRow>)
+          })}
         </TableBody>
       </Table>
     )  
