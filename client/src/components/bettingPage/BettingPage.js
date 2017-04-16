@@ -20,7 +20,8 @@ class BettingPage extends Component {
     // On every change to games, client will be notified
     allGamesRef.on('value', function (snapshot) {
       var games = snapshot.val()
-      var currentActiveGames = games.filter(function (game) {
+      var gamesArray = Object.keys(games).map((key) => { return games[key] })
+      var currentActiveGames = gamesArray.filter(function (game) {
         return game && game.status === 'in-progress'
       })
 
@@ -45,7 +46,7 @@ class BettingPage extends Component {
         {games.currentActiveGames ? games.currentActiveGames.map((game) => {
           return <CurrentGameCard game={game}/>
         }) : null}
-        
+
         <FlatButton
           label='props'
           secondary
