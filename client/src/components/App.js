@@ -24,13 +24,16 @@ import PlayerView from './PlayerView/PlayerView'
 
 const history = createHistory()
 const auth = firebaseApp.auth()
+const base = firebaseApp.database()
 
 class App extends Component {
   constructor (props) {
     super(props)
-
     const { setGameRooms } = this.props
-    setGameRooms({ gameRooms })
+    base.ref('servers').once('value', snap => {
+      const gameRooms = snap.val()
+      setGameRooms({ gameRooms })
+    })
 
     auth.onAuthStateChanged(firebaseUser => {
       // if (firebaseUser) {

@@ -1,4 +1,8 @@
 import { UPDATE_CURRENT_ACTIVE_GAMES, SET_GAME_ROOMS, SET_GAME } from '../actions/actionTypes'
+import firebaseApp from '../base'
+
+const auth = firebaseApp.auth()
+const base = firebaseApp.database()
 
 const games = (state = {}, action) => {
   switch (action.type) {
@@ -15,8 +19,11 @@ const games = (state = {}, action) => {
       return newState
     }
     case SET_GAME: {
-      const { currentGame } = action.payload
+      const { currentGame, gameID } = action.payload
+      const user = auth.currentUser
       const newState = Object.assign({}, state)
+      console.log('setting new user to game!', user)
+      base.ref(`servers/${gameID}/players`).push(user)
       newState.currentGame = currentGame
       return newState
     }

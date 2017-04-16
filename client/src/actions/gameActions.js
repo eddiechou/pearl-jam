@@ -10,7 +10,7 @@ export const setGameRooms = ({ gameRooms }) => ({
   payload: { gameRooms }
 })
 
-export const setGame = ({ currentGame }) => ({
+export const setGame = ({ currentGame, gameID }) => ({
   type: SET_GAME,
-  payload: { currentGame }
+  payload: { currentGame, gameID }
 })
