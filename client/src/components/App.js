@@ -6,9 +6,11 @@ import firebaseApp from '../base'
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route } from 'react-router-dom'
+import { gameRooms } from '../gameRooms'
 
 /* * Actions * */
 import { updateScreenSize } from '../actions/actions'
+import { setGameRooms } from '../actions/gameActions'
 
 /* * Components * */
 import AuthenticationPage from './authenticationPage/AuthenticationPage'
@@ -24,8 +26,12 @@ const history = createHistory()
 const auth = firebaseApp.auth()
 
 class App extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+
+    const { setGameRooms } = this.props
+    setGameRooms({ gameRooms })
+
     auth.onAuthStateChanged(firebaseUser => {
       // if (firebaseUser) {
       //   this.setState({loggedIn: true})
@@ -36,15 +42,14 @@ class App extends Component {
       // }
     })
   }
+
   componentDidMount () {
     window.addEventListener('resize', this.handleWindowResize.bind(this))
     this.handleWindowResize()
   }
 
   componentDidUpdate () {
-    console.log('app component did update')
-
-        /**
+    /**
      * maintain authentication of user for duration of session
      * make this write to redux state
      */
@@ -90,11 +95,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    state: state
-  }
-}
-
-export default connect(null, { updateScreenSize })(App)
+export default connect(null, { updateScreenSize, setGameRooms })(App)

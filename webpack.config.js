@@ -8,7 +8,7 @@ var webpack = require('webpack')
  */
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'eval',
   entry: `${SRC_DIR}/index.js`,
   output: {
     filename: 'bundle.js',

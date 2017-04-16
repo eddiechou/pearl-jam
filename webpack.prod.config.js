@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'eval',
   entry: `${path.join(__dirname, '/client/src')}/index.js`,
   output: {
     filename: 'bundle.js',

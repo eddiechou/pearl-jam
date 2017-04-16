@@ -14,8 +14,3 @@ export const setDisplayName = ({ uid, displayName }) => ({
   type: SET_DISPLAY_NAME,
   payload: { uid, displayName }
 })
-
-export const setGame = ({ gameID }) => ({
-  type: SET_GAME,
-  payload: { gameID }
-})

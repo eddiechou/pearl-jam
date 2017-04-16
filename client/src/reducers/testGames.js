@@ -3,7 +3,7 @@ import { ADD_USER_TO_GAME } from '../actions/actionTypes'
 
 const base = firebaseApp.database()
 
-const game = (state = {}, action) => {
+const testGames = (state = {}, action) => {
   switch (action.type) {
     case ADD_USER_TO_GAME: {
       const { user, displayName } = action.payload
@@ -23,4 +23,4 @@ const game = (state = {}, action) => {
   }
 }
 
-export default game
+export default testGames
