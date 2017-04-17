@@ -58,7 +58,7 @@ class SetDisplayNamePage extends Component {
             onMouseEnter={this.toggleHover.bind(this)}
             onMouseLeave={this.toggleHover.bind(this)}
             onClick={this.handleSubmit.bind(this)}>
-        game on
+        submit
         </button>
         </div>
       </div>

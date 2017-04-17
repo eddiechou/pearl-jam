@@ -13,7 +13,7 @@ import { setUser, createNewUser } from '../../actions/userActions'
 /* * Styles * */
 import style from './authenticationPage-css'
 
-const { button } = style
+const { container, button, buttonHover } = style
 
 const base = firebaseApp.database()
 const auth = firebaseApp.auth()
@@ -27,7 +27,9 @@ class AuthenticationPage extends Component {
       password: null,
       user: null,
       authenticating: false,
-      loggedIn: true
+      loggedIn: true,
+      hover1: false,
+      hover2: false
     }
     /**
      * authentication handlers
@@ -94,9 +96,10 @@ class AuthenticationPage extends Component {
   }
 
   render () {
+    const { hover1, hover2 } = this.state
     if (!this.state.authenticating) {
       return (
-        <div>
+        <div style={container}>
           <div>
             <div >
               <h1>Welcome to Pinballish</h1>
@@ -104,10 +107,10 @@ class AuthenticationPage extends Component {
             </div>
             <input type='email' placeholder='Email' onChange={(event) => this.handleChange(event, 'email')} />
             <input type='password' placeholder='Password' onChange={(event) => this.handleChange(event, 'password')} />
-            <button style={button} onClick={this.authenticateWithEmail}>
+            <button style={hover1 ? buttonHover : button} onClick={this.authenticateWithEmail}>
             log in
             </button>
-            <button style={button} onClick={this.createUserWithEmail}>
+            <button style={hover2 ? buttonHover : button} onClick={this.createUserWithEmail}>
             sign up
             </button>
             <div id='firebaseui-auth-container' />

@@ -15,12 +15,15 @@ import TextField from 'material-ui/TextField'
 
 import FlatButton from 'material-ui/FlatButton'
 
+const base = firebaseApp.database()
+
 class UserHomePage extends Component {
   constructor () {
     super()
     this.state = {
       hover1: false,
       hover2: false,
+      hover3: false,
       isShowingModal: false,
       gameName: ''
     }
@@ -31,7 +34,7 @@ class UserHomePage extends Component {
     this.setState({isShowingModal: true})
   }
   joinGame () {
-
+    this.context.router.history.push('/playerView')
   }
   toggleHover (btn) {
     this.setState({ [`hover${btn}`]: !this.state[`hover${btn}`] })
@@ -44,12 +47,19 @@ class UserHomePage extends Component {
 
   closeModal () {
     this.setState({isShowingModal: false})
-    /* * send game name to firebae * */
+  }
+
+  handleSubmit (event) {
+    // const {  } = this.props
+    const { gameName } = this.state
+    base.ref(`servers/2/room_name`).set(gameName)
+    // this.setState({isShowingModal: false})
+    this.context.router.history.push('/playerView')
   }
 
   render () {
-    const { container, title, inputContainer, textField, input, underLine, buttonContainer, createButton, createButtonHover, joinButton, joinButtonHover } = style
-    const { hover1, hover2, gameName } = this.state
+    const { container, title, inputContainer, textField, input, underLine, buttonContainer, createButton, createButtonHover, joinButton, joinButtonHover, modalContainer, modalTitle, modalButton, modalButtonHover } = style
+    const { hover1, hover2, hover3, gameName } = this.state
     return (
       <div>
         <UserNavBar />
@@ -70,13 +80,30 @@ class UserHomePage extends Component {
           </button>
           {
             this.state.isShowingModal &&
-            <ModalContainer onClose={this.closeModal.bind(this)}>
-              <ModalDialog onClose={this.closeModal.bind(this)}>
-                <h1>HELLO THIS IS MODAL</h1>
-                <TextField
-                  value={gameName}
-                  onChange={(event) => this.handleInputChange(event)}
+            <ModalContainer
+              onClose={this.closeModal.bind(this)}>
+              <ModalDialog
+                style={modalContainer}
+                onClose={this.closeModal.bind(this)}>
+                <div style={modalTitle}>name yo game</div>
+                <div style={inputContainer}>
+                  <TextField
+                    style={textField}
+                    inputStyle={input}
+                    underlineFocusStyle={underLine}
+                    value={gameName}
+                    onChange={(event) => this.handleInputChange(event)}
                   />
+                </div>
+                <div style={buttonContainer}>
+                  <button
+                    style={hover3 ? modalButtonHover : modalButton}
+                    onMouseEnter={this.toggleHover.bind(this, 3)}
+                    onMouseLeave={this.toggleHover.bind(this, 3)}
+                    onClick={this.handleSubmit.bind(this)}>
+                game on
+                </button>
+                </div>
               </ModalDialog>
             </ModalContainer>
           }

@@ -5,7 +5,7 @@ const style = {
     backgroundColor: '#000000',
     height: '100vh',
     display: 'flex',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -21,11 +21,10 @@ const style = {
   },
   inputContainer: {
     position: 'absolute',
-    top: '50%',
-    margin: '0 auto',
+    width: '100%',
+    paddingTop: '125px',
     display: 'flex',
-    justifyContent: 'center',
-    width: '100vw'
+    justifyContent: 'center'
   },
   textField: {
     margin: '0',
@@ -36,13 +35,6 @@ const style = {
     fontSize: '20px',
     color: '#00ff01',
     textAlign: 'center'
-  },
-  buttonContainer: {
-    position: 'relative',
-    margin: '0 auto',
-    display: 'flex',
-    width: '100vw',
-    justifyContent: 'center'
   },
   createButton: {
     marginRight: '50px',
@@ -90,6 +82,52 @@ const style = {
   },
   underLine: {
     borderColor: '#ffffff'
+  },
+  modalContainer: {
+    position: 'absolute',
+    backgroundColor: '#000000',
+    height: '40vh',
+    width: '60vw',
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: '0 auto',
+    justifyContent: 'center'
+  },
+  modalTitle: {
+    position: 'absolute',
+    top: '40px',
+    fontFamily: 'PT Mono, serif',
+    fontSize: '25px',
+    color: '#ffffff',
+    width: '100%',
+    textAlign: 'center'
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: '20px',
+    margin: '0 auto',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  modalButton: {
+    border: '4px solid #ffffff',
+    backgroundColor: 'transparent',
+    color: '#ffffff',
+    fontSize: '20px',
+    padding: '10px 20px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
+  },
+  modalButtonHover: {
+    border: '4px solid #ffffff',
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    fontSize: '20px',
+    padding: '10px 20px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
   }
 }
 

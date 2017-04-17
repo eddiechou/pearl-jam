@@ -17,18 +17,18 @@ class GameRoomList extends Component {
 
   handleClick (gameID) {
     const { setGame, games } = this.props
-    const { gameRooms } = games
-    const currentGame = gameRooms[gameID]
+    const { servers } = games
+    const currentGame = servers[gameID]
     this.setState({ selected: gameID })
     setGame({ currentGame, gameID })
   }
   render () {
     const { container, entryNonClicked, entryClicked } = style
     const { selected } = this.state
-    const { gameRooms } = this.props.games
+    const { servers } = this.props.games
     return (
       <div style={container} >
-        { gameRooms.map((room, gameID) => (
+        { servers.map((room, gameID) => (
           <div
             key={gameID}
             style={selected === gameID ? entryClicked : entryNonClicked}
