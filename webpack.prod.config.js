@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  devtool: 'eval',
+  devtool: ' cheap-module-eval-source-map ',
   entry: `${path.join(__dirname, '/client/src')}/index.js`,
   output: {
     filename: 'bundle.js',
@@ -14,10 +14,7 @@ module.exports = {
       {
         test: /\.(jsx|js)?$/,
         include: path.join(__dirname, '/client/src'),
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
+        loader: 'babel-loader?cacheDirectory=true'
       },
       {
         test: /\.css$/,

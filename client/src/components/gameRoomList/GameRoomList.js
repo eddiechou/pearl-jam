@@ -26,7 +26,6 @@ class GameRoomList extends Component {
     const { container, entryNonClicked, entryClicked } = style
     const { selected } = this.state
     const { gameRooms } = this.props.games
-    console.log(gameRooms)
     return (
       <div style={container} >
         { gameRooms.map((room, gameID) => (

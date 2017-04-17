@@ -1,4 +1,4 @@
-import { SET_USER, CREATE_NEW_USER, SET_DISPLAY_NAME, SET_GAME } from './actionTypes'
+import { SET_USER, CREATE_NEW_USER, SET_DISPLAY_NAME } from './actionTypes'
 
 export const setUser = ({ uid, displayName, email, photoURL }) => ({
   type: SET_USER,

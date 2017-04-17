@@ -2,9 +2,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-/* * Utils * */
-import Iframe from 'react-iframe'
-
+// /* * Utils * */
+// import Iframe from 'react-iframe'
 /* * Components * */
 import UserNavBar from '../userNavBar/UserNavBar'
 import GameRoomList from '../gameRoomList/GameRoomList'
@@ -32,6 +31,7 @@ class PlayerView extends React.Component {
     const { games } = this.props
     const { currentGame } = games
     const { container, game, flexParent, button, modal } = style
+    console.log('games are', games)
     return (
 
       <div style={container}>

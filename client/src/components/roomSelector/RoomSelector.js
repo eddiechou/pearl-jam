@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 /* * Actions * */
-import { setGame } from '../../actions/userActions'
+import { setGame } from '../../actions/gameActions'
 
 /* * Styles * */
 import SelectField from 'material-ui/SelectField'

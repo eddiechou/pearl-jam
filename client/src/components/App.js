@@ -6,11 +6,10 @@ import firebaseApp from '../base'
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route } from 'react-router-dom'
-import { gameRooms } from '../gameRooms'
 
 /* * Actions * */
 import { updateScreenSize } from '../actions/actions'
-import { setGameRooms } from '../actions/gameActions'
+import { getAvailableServers } from '../actions/gameActions'
 
 /* * Components * */
 import AuthenticationPage from './authenticationPage/AuthenticationPage'
@@ -29,10 +28,10 @@ const base = firebaseApp.database()
 class App extends Component {
   constructor (props) {
     super(props)
-    const { setGameRooms } = this.props
+    const { getAvailableServers } = this.props
     base.ref('servers').once('value', snap => {
-      const gameRooms = snap.val()
-      setGameRooms({ gameRooms })
+      const servers = snap.val()
+      getAvailableServers({ servers })
     })
 
     auth.onAuthStateChanged(firebaseUser => {
@@ -98,4 +97,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, { updateScreenSize, setGameRooms })(App)
+export default connect(null, { updateScreenSize, getAvailableServers })(App)

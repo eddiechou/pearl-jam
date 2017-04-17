@@ -44,22 +44,46 @@ const style = {
     width: '100vw',
     justifyContent: 'center'
   },
-  button: {
+  createButton: {
+    marginRight: '50px',
     border: '4px solid #ffffff',
     backgroundColor: 'transparent',
     color: '#ffffff',
     fontSize: '20px',
-    padding: '10px 20px',
+    padding: '30px 60px',
     margin: '10px',
     fontFamily: 'PT Mono, serif',
     cursor: 'pointer'
   },
-  buttonHover: {
+  createButtonHover: {
+    marginRight: '50px',
     border: '4px solid #ffffff',
     backgroundColor: '#ffffff',
     color: '#000000',
     fontSize: '20px',
-    padding: '10px 20px',
+    padding: '30px 60px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
+  },
+  joinButton: {
+    marginLeft: '50px',
+    border: '4px solid #ffffff',
+    backgroundColor: 'transparent',
+    color: '#ffffff',
+    fontSize: '20px',
+    padding: '30px 60px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
+  },
+  joinButtonHover: {
+    marginLeft: '50px',
+    border: '4px solid #ffffff',
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    fontSize: '20px',
+    padding: '30px 60px',
     margin: '10px',
     fontFamily: 'PT Mono, serif',
     cursor: 'pointer'
