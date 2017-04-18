@@ -3,24 +3,26 @@ import GamePlayerStatsTable from './GamePlayerStatsTable'
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Modal from 'boron/OutlineModal'
 
-const paperStyle = {
-  height: 500,
-  width: 430,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-  verticalAlign: 'top'
-};
+import style from './currentGameCard-css'
 
-const buttonStyle = {
-  margin: 12,
-};
+
+
+
 
 class CurrentGameListItem extends Component {
   constructor (props) {
     super(props)
     this.state = {selectedPlayerIndex: null, betValue: null}
+  }
+
+  showModal () {
+    this.refs.modal.show()
+  }
+
+  hideModal () {
+    this.refs.modal.hide()
   }
 
   _handleMakeBet () {
@@ -38,7 +40,7 @@ class CurrentGameListItem extends Component {
   }
 
   _handleSpectate () {
-    console.log('clicked spectate')
+
   }
 
   _handleTextFieldChange (e) {
@@ -56,15 +58,21 @@ class CurrentGameListItem extends Component {
   //   return player.displayName
   // })}</h1>
   render () {
+    const { buttonStyle, paperStyle, modalStyle } = style
     return (
       <Paper style={paperStyle} zDepth={2}>
-        <h2>GameID: {this.props.game.gameID}</h2>
+        <h2>Game: {this.props.key}</h2>
 
         <GamePlayerStatsTable game={this.props.game} onRowSelection={this._onRowSelection.bind(this)} />
 
         <TextField hintText="10" floatingLabelText="Wager (Pearls)" onChange={this._handleTextFieldChange.bind(this)}/><br/>
-        <RaisedButton label="Spectate Game" primary={true} style={buttonStyle} onClick={this._handleSpectate.bind(this)} />
+        <RaisedButton label="Spectate Game" primary={true} style={buttonStyle} onClick={this.showModal.bind(this)} />
         <RaisedButton label="Make Bet" secondary={true} style={buttonStyle} onClick={this._handleMakeBet.bind(this)} />
+        <Modal ref='modal' modalStyle={modalStyle}>
+          <iframe id='spectateView' src={this.props.game.spectateUrl}
+            height='800px' width='950px' />
+          <button onClick={this.hideModal.bind(this)}>Close</button>
+        </Modal>
       </Paper>
     )
   }
