@@ -53,7 +53,7 @@ class PlayerView extends React.Component {
               <iframe
                 id='playerView'
                 onLoad={this.fireMessage}
-                src={currentGame.link || games.gameRooms[0].link}
+                src={currentGame ? currentGame.link : games.gameRooms[0].link}
                 height='800px'
                 width='950px' />
               <button onClick={this.hideModal}>Close</button>
