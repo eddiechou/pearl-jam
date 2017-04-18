@@ -32,13 +32,11 @@ class PlayerView extends React.Component {
   fireMessage () {
     const { currentGame } = this.props.games
     const iframeElement = document.getElementById('playerView').contentWindow
-    console.log(this.props);
     iframeElement.postMessage(this.props.user.displayName, currentGame.link)
   }
 
   render () {
     const { games } = this.props
-    console.log(games);
     const { currentGame } = games
     const { container, game, flexParent, button, modal } = style
     return (
@@ -53,7 +51,7 @@ class PlayerView extends React.Component {
               <iframe
                 id='playerView'
                 onLoad={this.fireMessage}
-                src={currentGame ? currentGame.link : games.gameRooms[0].link}
+                src={currentGame ? currentGame.link : games.servers[0].link}
                 height='800px'
                 width='950px' />
               <button onClick={this.hideModal}>Close</button>
