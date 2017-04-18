@@ -8,16 +8,13 @@ import { firebaseApp } from '../../base'
 /* * Components * */
 import TestNavBar from '../testNavBar/TestNavBar'
 import UserNavBar from '../userNavBar/UserNavBar'
+import CurrentGameCard from '../currentGameCard/CurrentGameCard'
 
 /* * Actions * */
 import { updateCurrentActiveGames } from '../../actions/gameActions'
 
-/* * Components * */
-import UserNavBar from '../userNavBar/UserNavBar'
-
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
-import CurrentGameCard from '../currentGameCard/CurrentGameCard'
 
 const base = firebaseApp.database()
 
@@ -46,14 +43,10 @@ class BettingPage extends Component {
   // For each currentActiveGame
   render () {
     const { games } = this.props
-<<<<<<< HEAD
-    return <div>
-    <UserNavBar />
-        <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
-=======
     return (
       <div>
->>>>>>> code refactor, added button to check current firebase user
+        <UserNavBar />
+        <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
         <div>
           <UserNavBar />
           <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
