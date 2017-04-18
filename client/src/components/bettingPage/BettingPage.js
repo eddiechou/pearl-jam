@@ -8,6 +8,9 @@ import firebase from '../../base'
 /* * Actions * */
 import { updateCurrentActiveGames } from '../../actions/betActions'
 
+/* * Components * */
+import UserNavBar from '../userNavBar/UserNavBar'
+
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
 import CurrentGameCard from './CurrentGameCard'
@@ -38,6 +41,7 @@ class BettingPage extends Component {
   render () {
     const { games } = this.props
     return <div>
+    <UserNavBar />
         <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
         <div>
           <p>There are currently <strong>{games.currentActiveGames && games.currentActiveGames.length}</strong> active games!</p>
