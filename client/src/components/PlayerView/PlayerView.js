@@ -32,6 +32,7 @@ class PlayerView extends React.Component {
   fireMessage () {
     const { currentGame } = this.props.games
     const iframeElement = document.getElementById('playerView').contentWindow
+    console.log(this.props);
     iframeElement.postMessage(this.props.user.displayName, currentGame.link)
   }
 
