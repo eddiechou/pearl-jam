@@ -17,10 +17,6 @@ import UserHomePage from './userHomePage/UserHomePage'
 import BettingPage from './bettingPage/BettingPage'
 import SpectatorPage from './SpectatorPage'
 import GamePage from './GamePage'
-<<<<<<< HEAD
-import Arena from './arena/Arena'
-=======
->>>>>>> code refactor, added button to check current firebase user
 import PlayerView from './PlayerView/PlayerView'
 
 const history = createHistory()
