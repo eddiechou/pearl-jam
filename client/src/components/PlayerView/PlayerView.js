@@ -38,6 +38,7 @@ class PlayerView extends React.Component {
 
   render () {
     const { games } = this.props
+    console.log(games);
     const { currentGame } = games
     const { container, game, flexParent, button, modal } = style
     return (
@@ -52,7 +53,7 @@ class PlayerView extends React.Component {
               <iframe
                 id='playerView'
                 onLoad={this.fireMessage}
-                src={currentGame.link || games[0].link}
+                src={currentGame.link || games.gameRooms[0].link}
                 height='800px'
                 width='950px' />
               <button onClick={this.hideModal}>Close</button>
