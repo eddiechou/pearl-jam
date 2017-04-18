@@ -25,7 +25,7 @@ class PlayerView extends React.Component {
   fireMessage () {
     const { currentGame } = this.props.games
     const iframeElement = document.getElementById('playerView').contentWindow
-    iframeElement.postMessage(this.props.displayName, this.state.currentGame.link)
+    iframeElement.postMessage(this.props.user.displayName, currentGame.link)
   }
 
   render () {
@@ -41,7 +41,7 @@ class PlayerView extends React.Component {
             <GameRoomList />
             <button style={button} onClick={this.showModal.bind(this)}>Join Game!</button>
             <Modal ref='modal' modalStyle={modal}>
-              <iframe id='playerView' onLoad={this.fireMessage.bind(this)} src={currentGame.link || games[0].link}
+              <iframe id='playerView' onLoad={this.fireMessage.bind(this)} src={currentGame ? currentGame.link : games.gameRooms[0].link}
                 height='800px' width='950px' />
               <button onClick={this.hideModal.bind(this)}>Close</button>
             </Modal>
