@@ -5,22 +5,16 @@ import PropTypes from 'prop-types'
 /* * Actions * */
 import { setDisplayName } from '../../actions/userActions'
 
-/* * Components * */
-import RoomSelector from '../roomSelector/RoomSelector'
-
 /* * Styles * */
-import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import style from './setDisplayNamePage-css'
-
-const { title } = style
 
 class SetDisplayNamePage extends Component {
   constructor () {
     super()
     this.state = {
-      displayName: '',
-      room: null
+      hovering: false,
+      displayName: ''
     }
   }
 
@@ -38,22 +32,35 @@ class SetDisplayNamePage extends Component {
     this.context.router.history.push('/home')
   }
 
+  toggleHover () {
+    this.setState({hovering: !this.state.hovering})
+  }
+
   render () {
+    const { container, title, inputContainer, textField, input, underLine, buttonContainer, button, buttonHover } = style
+    const { hovering, displayName } = this.state
     return (
-      <div>
-        <div style={title}>
-          pick a badass username!
+      <div style={container}>
+        <div style={title}>choose your username</div>
+        <div style={inputContainer}>
+          <TextField
+            style={textField}
+            inputStyle={input}
+            underlineFocusStyle={underLine}
+            value={displayName}
+
+            onChange={(event) => this.handleInputChange(event)}
+            />
         </div>
-        <TextField
-          hintText='badass username'
-          underlineShow
-          fullWidth
-          onChange={(event) => this.handleInputChange(event)} />
-        <FlatButton
-          label='submit'
-          secondary
-          fullWidth
-          onClick={this.handleSubmit.bind(this)} />
+        <div style={buttonContainer}>
+          <button
+            style={hovering ? buttonHover : button}
+            onMouseEnter={::this.toggleHover}
+            onMouseLeave={::this.toggleHover}
+            onClick={::this.handleSubmit }>
+        submit
+        </button>
+        </div>
       </div>
     )
   }

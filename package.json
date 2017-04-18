@@ -8,18 +8,26 @@
     "node": ">=6.4.0"
   },
   "scripts": {
+    "go": "webpack-dev-server",
     "start": "babel-node mainServer/mainServer.js",
     "build": "node_modules/.bin/webpack -p --watch",
     "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
-    "dev-server": "node_modules/.bin/webpack-dev-server --progress"
+    "dev-server": "node_modules/.bin/webpack-dev-server --progress",
+    "check style": "standard"
   },
   "dependencies": {
-    "babel-cli": "^6.7.5",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-function-bind": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.7.2",
     "body-parser": "^1.17.1",
     "boron": "^0.2.3",
@@ -40,6 +48,8 @@
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
+    "react-grid-layout": "^0.14.4",
+    "react-hot-loader": "^3.0.0-beta.6",
     "react-iframe": "^1.0.1",
     "react-picker": "^1.2.5",
     "react-redux": "^5.0.3",
@@ -50,29 +60,25 @@
     "react-transform": "0.0.3",
     "redbox-react": "^1.3.6",
     "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.0",
     "redux-logger": "^3.0.1",
     "redux-persist": "^4.6.0",
+    "redux-promise": "^0.5.3",
     "socket.io": "^1.7.3",
     "standard": "*",
-    "style-loader": "^0.16.1",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.2"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-latest": "^6.24.1",
-    "css-loader": "^0.28.0",
-    "react-transform": "0.0.3",
-    "standard": "^10.0.1",
     "standard-loader": "^6.0.1",
     "style-loader": "^0.16.1",
-    "uglifyjs": "^2.4.10"
+    "uglifyjs": "^2.4.10",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.18.0"
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015",
+      "react",
+      "stage-0"
     ]
   }
 }

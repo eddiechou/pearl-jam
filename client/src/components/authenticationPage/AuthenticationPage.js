@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 /* * Utils * */
-import firebaseApp from '../../base'
+import { firebaseApp, baseUIConfig } from '../../base'
 import firebaseui from 'firebaseui'
-import baseUIConfig from './baseUIConfig'
+
+/* * Components * */
+import TestNavBar from '../testNavBar/TestNavBar'
 
 /* * Actions * */
 import { setUser, createNewUser } from '../../actions/userActions'
@@ -13,11 +15,9 @@ import { setUser, createNewUser } from '../../actions/userActions'
 /* * Styles * */
 import style from './authenticationPage-css'
 
-const { button } = style
-
 const base = firebaseApp.database()
 const auth = firebaseApp.auth()
-const ui = new firebaseui.auth.AuthUI(auth)
+const baseUI = new firebaseui.auth.AuthUI(auth)
 
 class AuthenticationPage extends Component {
   constructor () {
@@ -27,14 +27,16 @@ class AuthenticationPage extends Component {
       password: null,
       user: null,
       authenticating: false,
-      loggedIn: true
+      loggedIn: true,
+      hover1: false,
+      hover2: false
     }
     /**
      * authentication handlers
      */
     this.createUserWithEmail = this.createUserWithEmail.bind(this)
     this.authenticateWithEmail = this.authenticateWithEmail.bind(this)
-    ui.start('#firebaseui-auth-container', baseUIConfig)
+    baseUI.start('#firebaseui-auth-container', baseUIConfig)
   }
 
   authenticateWithProvider (provider) {
@@ -44,8 +46,7 @@ class AuthenticationPage extends Component {
       authenticateUser(result)
       const token = result.credential.accessToken
       const { displayName, uid, email, photoURL } = result.user
-      // check if user exists (bento)
-      // add to reduxStore
+      /* * add to reduxStore * */
     })
     .catch(error => {
       const errorCode = error.code
@@ -65,9 +66,7 @@ class AuthenticationPage extends Component {
     this.setState({ [key]: value })
   }
 
-  /**
-   * Creating new user or authenticating existing user
-   */
+  /* * Creating new user or authenticating existing user * */
   createUserWithEmail () {
     const { createNewUser } = this.props
     /* * check for real email * */
@@ -94,9 +93,11 @@ class AuthenticationPage extends Component {
   }
 
   render () {
+    const { container, button, buttonHover } = style
+    const { hover1, hover2 } = this.state
     if (!this.state.authenticating) {
       return (
-        <div>
+        <div style={container}>
           <div>
             <div >
               <h1>Welcome to Pinballish</h1>
@@ -104,14 +105,15 @@ class AuthenticationPage extends Component {
             </div>
             <input type='email' placeholder='Email' onChange={(event) => this.handleChange(event, 'email')} />
             <input type='password' placeholder='Password' onChange={(event) => this.handleChange(event, 'password')} />
-            <button style={button} onClick={this.authenticateWithEmail}>
+            <button style={hover1 ? buttonHover : button} onClick={this.authenticateWithEmail}>
             log in
             </button>
-            <button style={button} onClick={this.createUserWithEmail}>
+            <button style={hover2 ? buttonHover : button} onClick={this.createUserWithEmail}>
             sign up
             </button>
             <div id='firebaseui-auth-container' />
           </div>
+          <TestNavBar />
         </div>
       )
     }

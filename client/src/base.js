@@ -7,6 +7,20 @@ const config = {
   storageBucket: 'pearl-jam-19d32.appspot.com'
 }
 
-const firebaseApp = firebase.initializeApp(config)
+export const firebaseApp = firebase.initializeApp(config)
 
-export default firebaseApp
+export const baseUIConfig = {
+  signInSuccessUrl: '/arena',
+  signInFlow: 'popup',
+
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: true
+    }
+  ]
+}

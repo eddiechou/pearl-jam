@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["es2015", {"modules": false}],
+    "stage-0",
+    "react"
+  ],
+  "plugins": [
+    ['react-hot-loader/babel'],
+    ['transform-decorators'],
+    ['transform-decorators-legacy'],
+    ['transform-object-rest-spread', { 'useBuiltIns': true }],
+    ['transform-function-bind'],
+    ['transform-class-properties']
+  ]
+}

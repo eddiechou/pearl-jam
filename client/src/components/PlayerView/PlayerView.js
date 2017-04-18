@@ -2,18 +2,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-/* * Utils * */
-import Iframe from 'react-iframe'
-
+// /* * Utils * */
+// import Iframe from 'react-iframe'
 /* * Components * */
 import UserNavBar from '../userNavBar/UserNavBar'
 import GameRoomList from '../gameRoomList/GameRoomList'
 import Modal from 'boron/OutlineModal'
+import TestNavBar from '../testNavBar/TestNavBar'
 
 /* * Styles * */
 import style from './playerView-css'
 
 class PlayerView extends React.Component {
+  constructor () {
+    super()
+
+    this.showModal = this.showModal.bind(this)
+    this.hideModal = this.hideModal.bind(this)
+    this.fireMessage = this.fireMessage.bind(this)
+  }
   showModal () {
     this.refs.modal.show()
   }
@@ -33,20 +40,25 @@ class PlayerView extends React.Component {
     const { currentGame } = games
     const { container, game, flexParent, button, modal } = style
     return (
-      
+
       <div style={container}>
         <UserNavBar />
         <div style={game}>
           <div style={flexParent} >
             <GameRoomList />
-            <button style={button} onClick={this.showModal.bind(this)}>Join Game!</button>
+            <button style={button} onClick={this.showModal}>Join Game!</button>
             <Modal ref='modal' modalStyle={modal}>
-              <iframe id='playerView' onLoad={this.fireMessage.bind(this)} src={currentGame ? currentGame.link : games.gameRooms[0].link}
-                height='800px' width='950px' />
-              <button onClick={this.hideModal.bind(this)}>Close</button>
+              <iframe
+                id='playerView'
+                onLoad={this.fireMessage}
+                src={currentGame ? currentGame.link : games.servers[0].link}
+                height='800px'
+                width='950px' />
+              <button onClick={this.hideModal}>Close</button>
             </Modal>
           </div>
         </div>
+        <TestNavBar />
       </div>
     )
   }

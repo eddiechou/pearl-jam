@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setGame } from '../../actions/gameActions'
+import { firebaseApp } from '../../base'
 /* * Styles * */
 import style from './gameRoomList-css'
 
@@ -12,26 +13,25 @@ class GameRoomList extends Component {
     }
   }
 
-  handleClick (idx) {
+  handleClick (gameID) {
     const { setGame, games } = this.props
-    const { gameRooms } = games
-    const currentGame = gameRooms[idx]
-    this.setState({ selected: idx })
-    setGame({ currentGame })
+    const { servers } = games
+    const currentGame = servers[gameID]
+    this.setState({ selected: gameID })
+    setGame({ currentGame, gameID })
   }
-
   render () {
     const { container, entryNonClicked, entryClicked } = style
     const { selected } = this.state
-    const { gameRooms } = this.props.games
+    const { servers } = this.props.games
     return (
       <div style={container} >
-        { gameRooms.map((room, idx) => (
+        { servers.map((room, gameID) => (
           <div
-            key={idx}
-            style={selected === idx ? entryClicked : entryNonClicked}
-            onClick={this.handleClick.bind(this, idx)}>
-            <h1> {room.name} </h1>
+            key={gameID}
+            style={selected === gameID ? entryClicked : entryNonClicked}
+            onClick={this.handleClick.bind(this, gameID)}>
+            <h1> {room.room_name} </h1>
           </div>
           )
         )}

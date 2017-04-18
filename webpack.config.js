@@ -1,39 +1,37 @@
-var path = require('path')
-var SRC_DIR = path.join(__dirname, '/client/src')
-var DIST_DIR = path.join(__dirname, '/client/dist')
-var webpack = require('webpack')
-
-/**
- * devtool: 'eval' shows absolute path for errors, rather than bundle.js / invariant, etc.
- */
+const path = require('path')
+const SRC_DIR = path.join(__dirname, '/client/src')
+const DIST_DIR = path.join(__dirname, '/client/dist')
+const webpack = require('webpack')
 
 module.exports = {
-  devtool: 'eval',
-  entry: `${SRC_DIR}/index.js`,
+  devtool: 'cheap-module-eval-source-map',
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './client/src/index.js'
+  ],
   output: {
+    path: DIST_DIR,
     filename: 'bundle.js',
     publicPath: '/',
-    path: DIST_DIR,
     devtoolModuleFilenameTemplate: SRC_DIR
   },
   module: {
-    loaders: [
-      {
-        test: /\.(jsx|js)?$/,
-        include: SRC_DIR,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      },
-      {
-        test: /\.css$/,
-        loader: [ 'style-loader', 'css-loader' ]
-      }
+    loaders: [{
+      test: /\.(jsx|js)?$/,
+      loaders: ['babel-loader?cacheDirectory=true'],
+      include: SRC_DIR
+    },
+    {
+      test: /\.css$/,
+      loader: [ 'style-loader', 'css-loader' ]
+    }
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
   ],
   devServer: {
     inline: true,

@@ -1,8 +1,10 @@
 import React from 'react'
-import { render } from 'react-dom'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import PropTypes from 'prop-types'
 
 /* * Utils * */
+import { AppContainer } from 'react-hot-loader'
 import reduxStore from './reduxStore'
 import RedBox from 'redbox-react'
 
@@ -22,16 +24,30 @@ const muiTheme = getMuiTheme({
 
 injectTapEventPlugin()
 
-const root = document.getElementById('root')
+const consoleErrorReporter = ({error}) => {
+  console.error(error)
+  return <RedBox error={error} />
+}
+
+consoleErrorReporter.propTypes = {
+  error: React.PropTypes.instanceOf(Error).isRequired
+}
 
 /* * wrapping App.js in Proivder component to allow access to our redux store * */
-try {
-  render(
-    <MuiThemeProvider muiTheme={muiTheme}>
-      <Provider store={reduxStore}>
-        <App />
-      </Provider>
-    </MuiThemeProvider>, root)
-} catch (e) {
-  render(<RedBox error={e} />, root)
+const render = (Component) => {
+  ReactDOM.render(
+    <AppContainer errorReporter={consoleErrorReporter}>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={reduxStore}>
+          <Component />
+        </Provider>
+      </MuiThemeProvider>
+    </AppContainer>,
+    document.getElementById('root')
+  )
+}
+render(App)
+
+if (module.hot) {
+  module.hot.accept('./components/App.js', () => { render(App) })
 }

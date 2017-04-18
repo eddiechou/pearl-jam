@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 /* * Utils * */
-import firebaseApp from '../../base'
+import { firebaseApp } from '../../base'
 
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
@@ -17,7 +17,6 @@ const auth = firebaseApp.auth()
 class NavDropMenu extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
       open: false
     }
@@ -32,7 +31,7 @@ class NavDropMenu extends Component {
       open: true,
       anchorEl: event.currentTarget
     })
-  };
+  }
 
   handleRequestClose () {
     this.setState({
@@ -42,11 +41,13 @@ class NavDropMenu extends Component {
 
   handleLogout (event) {
     event.preventDefault()
-    this.context.router.history.push('/goodbye')
-  }
-  checkUser () {
-    const user = auth.currentUser
-    console.log(user)
+    auth.signOut()
+    .then(() => {
+      this.context.router.history.push('/goodbye')
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
 
   render () {
@@ -63,11 +64,8 @@ class NavDropMenu extends Component {
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
           onRequestClose={this.handleRequestClose.bind(this)}>
           <Menu>
-            <MenuItem primaryText='Check User' onClick={this.checkUser.bind(this)} />
-            <Divider />
             <MenuItem containerElement={<Link to='/' />} primaryText='Leaderboard' />
             <MenuItem containerElement={<Link to='/' />} primaryText='Add Friend' />
-            <MenuItem containerElement={<Link to='/arena' />} primaryText={`Mycah's Arena`} />
             <Divider />
             <MenuItem label='Logout' onClick={event => this.handleLogout(event)} primaryText='Logout' />
           </Menu>

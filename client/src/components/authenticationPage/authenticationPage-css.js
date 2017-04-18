@@ -1,4 +1,7 @@
 const style = {
+  container: {
+    backgroundColor: 'black'
+  },
   body: {
     padding: '0',
     margin: '0',
@@ -7,7 +10,7 @@ const style = {
   },
   button: {
     border: '4px solid #ffffff',
-    backgrounrColor: 'transparent',
+    backgroundColor: 'transparent',
     color: '#ffffff',
     fontSize: '20px',
     padding: '10px 20px',
@@ -16,8 +19,14 @@ const style = {
     cursor: 'pointer'
   },
   buttonHover: {
+    border: '4px solid #ffffff',
     backgroundColor: '#ffffff',
-    color: '#000000'
+    color: '#000000',
+    fontSize: '20px',
+    padding: '10px 20px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
   },
   loginButton: {
     flex: '1 1 100%',
@@ -75,7 +84,6 @@ const style = {
     color: 'black',
     backgroundColor: 'white'
   },
-
   twitter: {
     border: '1px solid white',
     backgroundColor: '#00aced',

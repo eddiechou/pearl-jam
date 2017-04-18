@@ -2,15 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 /* * Utils * */
-import firebaseApp from '../base'
+import { firebaseApp } from '../base'
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
-import { Route } from 'react-router-dom'
-import { gameRooms } from '../gameRooms'
+import { Route, Redirect } from 'react-router-dom'
 
 /* * Actions * */
-import { updateScreenSize } from '../actions/actions'
-import { setGameRooms } from '../actions/gameActions'
+import { getAvailableServers } from '../actions/gameActions'
 
 /* * Components * */
 import AuthenticationPage from './authenticationPage/AuthenticationPage'
@@ -19,18 +17,20 @@ import UserHomePage from './userHomePage/UserHomePage'
 import BettingPage from './bettingPage/BettingPage'
 import SpectatorPage from './SpectatorPage'
 import GamePage from './GamePage'
-import Arena from './arena/Arena'
 import PlayerView from './PlayerView/PlayerView'
 
 const history = createHistory()
 const auth = firebaseApp.auth()
+const base = firebaseApp.database()
 
 class App extends Component {
   constructor (props) {
     super(props)
-
-    const { setGameRooms } = this.props
-    setGameRooms({ gameRooms })
+    const { getAvailableServers } = this.props
+    base.ref('servers').once('value', snap => {
+      const servers = snap.val()
+      getAvailableServers({ servers })
+    })
 
     auth.onAuthStateChanged(firebaseUser => {
       // if (firebaseUser) {
@@ -41,11 +41,7 @@ class App extends Component {
       //   console.log('not logged in')
       // }
     })
-  }
-
-  componentDidMount () {
-    window.addEventListener('resize', this.handleWindowResize.bind(this))
-    this.handleWindowResize()
+    this.returnToAuth = this.returnToAuth.bind(this)
   }
 
   componentDidUpdate () {
@@ -64,35 +60,29 @@ class App extends Component {
     })
   }
 
-  componentWillUnmount () {
-    window.removeEventListener('resize', this.handleWindowResize)
-  }
-
-  handleWindowResize () {
-    const { updateScreenSize } = this.props
-    const width = window.innerWidth
-    const height = window.innerHeight
-    const ratio = window.devicePixelRatio || 1
-    updateScreenSize({ width, height, ratio })
+  returnToAuth () {
+    return <Redirect to='/' />
   }
 
   render () {
     return (
-      <ConnectedRouter history={history}>
-        <div>
-          <Route exact path='/' component={AuthenticationPage} />
-          <Route path='/join' component={AuthenticationPage} />
-          <Route path='/setusername' component={SetDisplayNamePage} />
-          <Route path='/home' component={UserHomePage} />
-          <Route path='/spectate' component={SpectatorPage} />
-          <Route path='/game' component={GamePage} />
-          <Route path='/arena' component={Arena} />
-          <Route path='/bet' component={BettingPage} />
-          <Route path='/playerView' component={PlayerView} />
-        </div>
-      </ConnectedRouter>
+      <div>
+        <ConnectedRouter history={history}>
+          <div>
+            <Route exact path='/' component={AuthenticationPage} />
+            <Route path='/join' component={AuthenticationPage} />
+            <Route path='/setusername' component={SetDisplayNamePage} />
+            <Route path='/home' component={UserHomePage} />
+            <Route path='/spectate' component={SpectatorPage} />
+            <Route path='/game' component={GamePage} />
+            <Route path='/bet' component={BettingPage} />
+            <Route path='/playerView' component={PlayerView} />
+            <Route path='/goodbye' render={this.returnToAuth} />
+          </div>
+        </ConnectedRouter>
+      </div>
     )
   }
 }
 
-export default connect(null, { updateScreenSize, setGameRooms })(App)
+export default connect(null, { getAvailableServers })(App)
