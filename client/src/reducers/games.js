@@ -1,5 +1,5 @@
 import { UPDATE_CURRENT_ACTIVE_GAMES, GET_AVAILABLE_SERVERS, SET_GAME, CREATE_GAME } from '../actions/actionTypes'
-import firebaseApp from '../base'
+import { firebaseApp } from '../base'
 
 const auth = firebaseApp.auth()
 const base = firebaseApp.database()

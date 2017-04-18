@@ -1,4 +1,4 @@
-import firebaseApp from '../base'
+import { firebaseApp } from '../base'
 import { SET_USER, CREATE_NEW_USER, SET_DISPLAY_NAME, SET_GAME } from '../actions/actionTypes'
 
 const base = firebaseApp.database()

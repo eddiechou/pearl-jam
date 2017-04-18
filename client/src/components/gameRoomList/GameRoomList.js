@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setGame } from '../../actions/gameActions'
-import firebaseApp from '../../base'
+import { firebaseApp } from '../../base'
 /* * Styles * */
 import style from './gameRoomList-css'
-
-const base = firebaseApp.database()
 
 class GameRoomList extends Component {
   constructor () {

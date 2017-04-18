@@ -2,24 +2,30 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-/* * Actions * */
-import firebase from '../../base'
+/* * Utils * */
+import { firebaseApp } from '../../base'
+
+/* * Components * */
+import TestNavBar from '../testNavBar/TestNavBar'
+import UserNavBar from '../userNavBar/UserNavBar'
 
 /* * Actions * */
-import { updateCurrentActiveGames } from '../../actions/betActions'
+import { updateCurrentActiveGames } from '../../actions/gameActions'
 
 /* * Components * */
 import UserNavBar from '../userNavBar/UserNavBar'
 
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
-import CurrentGameCard from './CurrentGameCard'
+import CurrentGameCard from '../currentGameCard/CurrentGameCard'
+
+const base = firebaseApp.database()
 
 class BettingPage extends Component {
   componentWillMount () {
     const { updateCurrentActiveGames } = this.props
     // Call firebase to grab all games that are in-progress
-    var allGamesRef = firebase.database().ref('games/')
+    var allGamesRef = base.ref('games/')
     // On every change to games, client will be notified
     allGamesRef.on('value', function (snapshot) {
       var games = snapshot.val()
@@ -37,26 +43,37 @@ class BettingPage extends Component {
     console.log(this.props)
   }
 
-  // For each currentActiveGame 
+  // For each currentActiveGame
   render () {
     const { games } = this.props
+<<<<<<< HEAD
     return <div>
     <UserNavBar />
         <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
+=======
+    return (
+      <div>
+>>>>>>> code refactor, added button to check current firebase user
         <div>
-          <p>There are currently <strong>{games.currentActiveGames && games.currentActiveGames.length}</strong> active games!</p>
+          <UserNavBar />
+          <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
+          <div>
+            <p>There are currently <strong>{games.currentActiveGames && games.currentActiveGames.length}</strong> active games!</p>
+          </div>
+          {
+            games.currentActiveGames ? games.currentActiveGames.map((game) => {
+              return <CurrentGameCard game={game} />
+            }) : null
+          }
+          <FlatButton
+            label='props'
+            secondary
+            fullWidth
+            onClick={this.checkProps.bind(this)} />
         </div>
-
-        {games.currentActiveGames ? games.currentActiveGames.map((game) => {
-          return <CurrentGameCard game={game}/>
-        }) : null}
-
-        <FlatButton
-          label='props'
-          secondary
-          fullWidth
-          onClick={this.checkProps.bind(this)} />
+        <TestNavBar />
       </div>
+    )
   }
 }
 

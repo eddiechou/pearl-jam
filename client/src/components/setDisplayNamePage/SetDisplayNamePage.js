@@ -55,9 +55,9 @@ class SetDisplayNamePage extends Component {
         <div style={buttonContainer}>
           <button
             style={hovering ? buttonHover : button}
-            onMouseEnter={this.toggleHover.bind(this)}
-            onMouseLeave={this.toggleHover.bind(this)}
-            onClick={this.handleSubmit.bind(this)}>
+            onMouseEnter={::this.toggleHover}
+            onMouseLeave={::this.toggleHover}
+            onClick={::this.handleSubmit }>
         submit
         </button>
         </div>

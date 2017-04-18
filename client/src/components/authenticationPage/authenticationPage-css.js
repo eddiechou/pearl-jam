@@ -84,7 +84,6 @@ const style = {
     color: 'black',
     backgroundColor: 'white'
   },
-
   twitter: {
     border: '1px solid white',
     backgroundColor: '#00aced',
