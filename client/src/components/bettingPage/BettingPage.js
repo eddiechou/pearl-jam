@@ -48,23 +48,11 @@ class BettingPage extends Component {
         <UserNavBar />
         <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
         <div>
-          <UserNavBar />
-          <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
-          <div>
-            <p>There are currently <strong>{games.currentActiveGames && games.currentActiveGames.length}</strong> active games!</p>
-          </div>
-          {
-            games.currentActiveGames ? games.currentActiveGames.map((game) => {
-              return <CurrentGameCard game={game} />
-            }) : null
-          }
-          <FlatButton
-            label='props'
-            secondary
-            fullWidth
-            onClick={this.checkProps.bind(this)} />
+          <p>There are currently <strong>{(games.currentActiveGames && games.currentActiveGames.length) || 0}</strong> active games!</p>
         </div>
-        <TestNavBar />
+        {games.currentActiveGames ? games.currentActiveGames.map((game, index) => {
+            return <CurrentGameCard game={game} key={index} i={index}/>
+          }) : null}
       </div>
     )
   }
