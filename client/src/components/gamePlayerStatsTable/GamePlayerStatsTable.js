@@ -2,35 +2,34 @@ import React, { Component } from 'react'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 
 class GamePlayerStatsTable extends Component {
-  render () {
-    const { onRowSelection, game } = this.props
-    const { players } = game
 
+  constructor (props) {
+    super(props)
+  }
+
+  render () {
     return (
-      <Table deselectOnClickaway={false} onRowSelection={onRowSelection}>
+      <Table deselectOnClickaway={false} onRowSelection={this.props.onRowSelection}>
         <TableHeader adjustForCheckbox={false}>
-          <TableRow adjustForCheckbox={false}>
+          <TableRow>
             <TableHeaderColumn>Player</TableHeaderColumn>
             <TableHeaderColumn>Rating</TableHeaderColumn>
             <TableHeaderColumn>Odds</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody deselectOnClickaway={false}>
-          {
-            Object.keys(players).map((key, index) => {
-              const player = players[key]
-              return (
-                <TableRow>
-                  <TableRowColumn>{player.displayName}</TableRowColumn>
-                  <TableRowColumn>{player.rating}</TableRowColumn>
-                  <TableRowColumn />
-                </TableRow>
-              )
-            })
-          }
+          {Object.keys(this.props.game.players).map((key, index) => {
+            const player = this.props.game.players[key]
+            return (
+              <TableRow key={index}>
+                <TableRowColumn>{player.displayName}</TableRowColumn>
+                <TableRowColumn>{player.rating}</TableRowColumn>
+                <TableRowColumn></TableRowColumn>
+              </TableRow>)
+          })}
         </TableBody>
       </Table>
-    )
+    )  
   }
 }
 
