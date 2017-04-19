@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import GamePlayerStatsTable from '../gamePlayerStatsTable/GamePlayerStatsTable'
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 import Modal from 'boron/OutlineModal'
 import style from './currentGameCard-css'
 
