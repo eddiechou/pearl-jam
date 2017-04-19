@@ -53,6 +53,7 @@ class BettingPage extends Component {
         {games.currentActiveGames ? games.currentActiveGames.map((game, index) => {
             return <CurrentGameCard game={game} key={index} i={index}/>
           }) : null}
+        <TestNavBar />
       </div>
     )
   }
