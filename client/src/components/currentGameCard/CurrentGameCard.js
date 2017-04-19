@@ -14,7 +14,7 @@ const base = firebaseApp.database()
 class CurrentGameCard extends Component {
   constructor (props) {
     super(props)
-    this.state = {selectedPlayerIndex: null, betValue: null}
+    this.state = {selectedPlayerIndex: null, betValue: null, errorText: ''}
   }
 
   showModal () {
@@ -27,8 +27,17 @@ class CurrentGameCard extends Component {
 
   _handleMakeBet () {
     const selectedPlayer = this.props.game.players[this.state.selectedPlayerIndex]
+
     const { gameID, user } = this.props
 
+    // Ensure there's a selectedPlayer and a betValue
+    if (!selectedPlayer) {
+      this.setState({errorText: 'Select a player to bet on!'})
+      return
+    } else if (!this.state.betValue) {
+      this.setState({errorText: 'Enter a bet value!'})
+      return
+    }
     // Update bet in database
     const gameBetsRef = base.ref('games/' + this.props.gameID + '/bets')
     gameBetsRef.push({bettorID: user.displayName, betValue: this.state.betValue, predictedWinner: selectedPlayer.displayName})
@@ -44,8 +53,10 @@ class CurrentGameCard extends Component {
           userInfo.pearls = users[key].pearls
         } 
       }
-      // If we found it, take the money out
-      if (userInfo.key) {
+      if (userInfo.pearls - this.state.betValue < 0) {
+        this.state.errorText = 'Not enough funds'
+      } else if (userInfo.key) { // If we found it, take the money out
+        this.state.errorText = ''
         const userRef = base.ref('users/' + userInfo.key)
         userRef.update({pearls: userInfo.pearls - this.state.betValue})
       }
@@ -68,7 +79,7 @@ class CurrentGameCard extends Component {
 
         <GamePlayerStatsTable game={this.props.game} onRowSelection={this._onRowSelection.bind(this)} />
 
-        <TextField hintText="10" floatingLabelText="Wager (Pearls)" onChange={this._handleTextFieldChange.bind(this)}/><br/>
+        <TextField errorText= {this.state.errorText} hintText="10" floatingLabelText="Wager (Pearls)" onChange={this._handleTextFieldChange.bind(this)}/><br/>
         <RaisedButton label="Spectate Game" primary={true} style={buttonStyle} onClick={this.showModal.bind(this)} />
         <RaisedButton label="Make Bet" secondary={true} style={buttonStyle} onClick={this._handleMakeBet.bind(this)} />
         <Modal ref='modal' modalStyle={modalStyle}>
