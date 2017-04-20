@@ -44,9 +44,10 @@ class App extends Component {
         })
       }
     })
+
     base.ref('servers').on('child_changed', (data) => {
       const { setAvailableServers } = this.props
-      base.ref('servers').once('value', snap => {
+      base.ref('servers').orderByChild('player_count').endAt(10).once('value', snap => {
         const servers = snap.val()
         setAvailableServers({ servers })
       })

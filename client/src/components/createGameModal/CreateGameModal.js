@@ -41,7 +41,6 @@ class CreateGameModal extends Component {
       const server = base.ref(`servers/${serverID}`)
       server.child('room_name').set(gameName)
       server.child('player_count').set(1)
-      return
     })
     .then(() => {
       this.context.router.history.push('/playerView')
