@@ -19,9 +19,8 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './reducers/index.js'
+import { firebaseApp, baseMiddleware } from './base'
 import promiseMiddleware from 'redux-promise'
-
-/* * Using redux persist to store the data, so it doesnt leave on browser refresh * */
 import {persistStore, autoRehydrate} from 'redux-persist'
 
 const middleware = applyMiddleware(promiseMiddleware)

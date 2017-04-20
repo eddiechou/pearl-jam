@@ -30,7 +30,7 @@ class CreateGameModal extends Component {
     this.setState({ gameName })
   }
 
-  handleSubmit (event) {
+  handleSubmit () {
     const { gameName } = this.state
     let serverID = null
     base.ref('servers').orderByChild('player_count').equalTo(0).once('value', snap => {

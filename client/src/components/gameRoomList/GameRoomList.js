@@ -26,12 +26,12 @@ class GameRoomList extends Component {
     const { servers } = this.props.games
     return (
       <div style={container} >
-        { servers.map((room, gameID) => (
+        { servers.map((server, gameID) => (
           <div
             key={gameID}
             style={selected === gameID ? entryClicked : entryNonClicked}
             onClick={this.handleClick.bind(this, gameID)}>
-            <h1> {room.room_name} </h1>
+            <h1> {server.room_name} </h1>
           </div>
           )
         )}

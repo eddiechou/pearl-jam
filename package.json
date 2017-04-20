@@ -36,6 +36,7 @@
     "elemental": "^0.6.1",
     "express": "^4.15.2",
     "firebase": "^3.7.5",
+    "firebase-admin": "^4.2.1",
     "firebaseui": "^1.0.1",
     "history": "^4.6.1",
     "hover.css": "^2.2.0",

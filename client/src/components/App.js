@@ -8,7 +8,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import { Route, Redirect } from 'react-router-dom'
 
 /* * Actions * */
-import { getAvailableServers } from '../actions/gameActions'
+import { setAvailableServers } from '../actions/gameActions'
 import { setUser } from '../actions/userActions'
 
 /* * Components * */
@@ -27,12 +27,7 @@ const base = firebaseApp.database()
 class App extends Component {
   constructor (props) {
     super(props)
-    const { getAvailableServers, setUser, user } = this.props
-
-    base.ref('servers').once('value', snap => {
-      const servers = snap.val()
-      getAvailableServers({ servers })
-    })
+    const { setUser, user } = this.props
 
     auth.onAuthStateChanged(baseUser => {
       const { setUser, user } = this.props
@@ -49,27 +44,16 @@ class App extends Component {
         })
       }
     })
-    this.handleLogout = this.handleLogout.bind(this)
-  }
-
-  componentDidUpdate () {
-    /**
-     * maintain authentication of user for duration of session
-     * make this write to redux state
-     */
-    auth.onAuthStateChanged(firebaseUser => {
-      // if (firebaseUser) {
-      //   this.setState({loggedIn: true})
-      //   console.log(firebaseUser)
-      // } else {
-      //   this.setState({loggedIn: false})
-      //   console.log('not logged in')
-      // }
+    base.ref('servers').on('child_changed', (data) => {
+      const { setAvailableServers } = this.props
+      base.ref('servers').once('value', snap => {
+        const servers = snap.val()
+        setAvailableServers({ servers })
+      })
     })
   }
 
   handleLogout () {
-
   }
 
   render () {
@@ -85,7 +69,7 @@ class App extends Component {
             <Route path='/game' component={GamePage} />
             <Route path='/bet' component={BettingPage} />
             <Route path='/playerView' component={PlayerView} />
-            <Route path='/goodbye' render={() => this.handleLogout()} />
+            <Route path='/goodbye' render={() => ::this.handleLogout()} />
           </div>
         </ConnectedRouter>
       </div>
@@ -97,4 +81,4 @@ const mapStateToProps = ({ user }) => {
   return { user }
 }
 
-export default connect(mapStateToProps, { getAvailableServers, setUser })(App)
+export default connect(mapStateToProps, { setAvailableServers, setUser })(App)

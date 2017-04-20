@@ -35,13 +35,12 @@ class AuthenticationPage extends Component {
   }
 
   authenticateWithProvider (provider) {
-    const { authenticateUser } = this.props
+    const { setUser } = this.props
     auth.signInWithPopup(provider)
-    .then(result => {
-      authenticateUser(result)
-      const token = result.credential.accessToken
-      const { displayName, uid, email, photoURL } = result.user
-      /* * add to reduxStore * */
+    .then(user => {
+      const { uid, displayName, email, photoURL } = user
+      setUser({ uid, displayName, email, photoURL })
+      this.context.router.history.push('/home')
     })
     .catch(error => {
       const errorCode = error.code

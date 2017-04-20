@@ -1,4 +1,6 @@
 import firebase from 'firebase'
+import { SET_AVAILABLE_SERVERS } from './actions/actionTypes'
+import { setAvailableServers } from './actions/gameActions'
 
 const config = {
   apiKey: 'AIzaSyAr-h45K0XxMQf2PzQdzVW8EJH7upLsxiI',
@@ -23,4 +25,17 @@ export const baseUIConfig = {
       requireDisplayName: true
     }
   ]
+}
+
+export const baseMiddleware = ({ dispatch }) => (next) => (action) => {
+  const base = firebaseApp.database()
+  base.ref('servers').on('child_changed', () => {
+    console.log('servers child changed')
+    return base.ref('servers').once('value', snap => {
+      return snap.val()
+    })
+    .then(() => {
+      setAvailableServers({ servers })
+    })
+  })
 }

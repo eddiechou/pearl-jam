@@ -1,4 +1,4 @@
-import { UPDATE_CURRENT_ACTIVE_GAMES, GET_AVAILABLE_SERVERS, SET_GAME, CREATE_GAME } from '../actions/actionTypes'
+import { UPDATE_CURRENT_ACTIVE_GAMES, SET_AVAILABLE_SERVERS, UPDATE_AVAILABLE_SERVERS, SET_GAME, CREATE_GAME } from '../actions/actionTypes'
 import { firebaseApp } from '../base'
 
 const auth = firebaseApp.auth()
@@ -12,13 +12,13 @@ const games = (state = {}, action) => {
       newState.currentActiveGames = currentActiveGames
       return newState
     }
-    case GET_AVAILABLE_SERVERS: {
-      const { servers } = action.payload
+    case SET_AVAILABLE_SERVERS: {
+      console.log('setting avail servers')
       const newState = Object.assign({}, state)
+      const { servers } = action.payload
       newState.servers = servers
       return newState
     }
-
     case SET_GAME: {
       const { currentGame, gameID } = action.payload
       const user = auth.currentUser
