@@ -10,7 +10,7 @@ const config = {
 export const firebaseApp = firebase.initializeApp(config)
 
 export const baseUIConfig = {
-  signInSuccessUrl: '/arena',
+  signInSuccessUrl: '/home',
   signInFlow: 'popup',
 
   signInOptions: [

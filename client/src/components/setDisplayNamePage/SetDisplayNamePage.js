@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+/* * Utils * */
+import { firebaseApp } from '../../base'
+
 /* * Actions * */
 import { setDisplayName } from '../../actions/userActions'
 
@@ -9,12 +12,16 @@ import { setDisplayName } from '../../actions/userActions'
 import TextField from 'material-ui/TextField'
 import style from './setDisplayNamePage-css'
 
+const auth = firebaseApp.auth()
+const base = firebaseApp.database()
+
 class SetDisplayNamePage extends Component {
   constructor () {
     super()
     this.state = {
       hovering: false,
-      displayName: ''
+      displayName: '',
+      instructions: 'please choose a username'
     }
   }
 
@@ -24,12 +31,27 @@ class SetDisplayNamePage extends Component {
     this.setState({ displayName })
   }
 
+
+
   handleSubmit (event) {
     const { setDisplayName, user } = this.props
     const { displayName } = this.state
     const { uid } = user
-    setDisplayName({ uid, displayName })
-    this.context.router.history.push('/home')
+    const baseUser = auth.currentUser
+
+    const q = base.ref('users').orderByChild('displayName').equalTo(displayName)
+    q.once('value', (snap) => {
+      if (snap.val() === null) {
+        setDisplayName({ uid, displayName })
+      this.context.router.history.push('/home')
+      } else {
+        const instructions = 'oh snap, that username\
+        has been taken!\
+        try a different one :)'
+        this.setState({ instructions })
+      }
+    })
+
   }
 
   toggleHover () {
@@ -38,17 +60,16 @@ class SetDisplayNamePage extends Component {
 
   render () {
     const { container, title, inputContainer, textField, input, underLine, buttonContainer, button, buttonHover } = style
-    const { hovering, displayName } = this.state
+    const { hovering, displayName, instructions } = this.state
     return (
       <div style={container}>
-        <div style={title}>choose your username</div>
+        <div style={title}>{instructions}</div>
         <div style={inputContainer}>
           <TextField
             style={textField}
             inputStyle={input}
             underlineFocusStyle={underLine}
             value={displayName}
-
             onChange={(event) => this.handleInputChange(event)}
             />
         </div>

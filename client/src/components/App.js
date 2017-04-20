@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 /* * Utils * */
-import { firebaseApp } from '../base'
+import { firebaseApp, baseUIConfig } from '../base'
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route, Redirect } from 'react-router-dom'
 
 /* * Actions * */
 import { getAvailableServers } from '../actions/gameActions'
+import { setUser } from '../actions/userActions'
 
 /* * Components * */
 import AuthenticationPage from './authenticationPage/AuthenticationPage'
@@ -26,22 +27,29 @@ const base = firebaseApp.database()
 class App extends Component {
   constructor (props) {
     super(props)
-    const { getAvailableServers } = this.props
+    const { getAvailableServers, setUser, user } = this.props
+
     base.ref('servers').once('value', snap => {
       const servers = snap.val()
       getAvailableServers({ servers })
     })
 
-    auth.onAuthStateChanged(firebaseUser => {
-      // if (firebaseUser) {
-      //   this.setState({loggedIn: true})
-      //   console.log(firebaseUser)
-      // } else {
-      //   this.setState({loggedIn: false})
-      //   console.log('not logged in')
-      // }
+    auth.onAuthStateChanged(baseUser => {
+      const { setUser, user } = this.props
+      const { uid, displayName, email, photoURL } = baseUser
+      if (baseUser && uid !== user.uid) {
+        setUser({ uid, displayName, email, photoURL })
+      }
+      if (!baseUser) {
+        setUser({
+          uid: null,
+          displayName: null,
+          email: null,
+          photoURL: null
+        })
+      }
     })
-    this.returnToAuth = this.returnToAuth.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   componentDidUpdate () {
@@ -60,8 +68,8 @@ class App extends Component {
     })
   }
 
-  returnToAuth () {
-    return <Redirect to='/' />
+  handleLogout () {
+
   }
 
   render () {
@@ -77,7 +85,7 @@ class App extends Component {
             <Route path='/game' component={GamePage} />
             <Route path='/bet' component={BettingPage} />
             <Route path='/playerView' component={PlayerView} />
-            <Route path='/goodbye' render={this.returnToAuth} />
+            <Route path='/goodbye' render={() => this.handleLogout()} />
           </div>
         </ConnectedRouter>
       </div>
@@ -85,4 +93,8 @@ class App extends Component {
   }
 }
 
-export default connect(null, { getAvailableServers })(App)
+const mapStateToProps = ({ user }) => {
+  return { user }
+}
+
+export default connect(mapStateToProps, { getAvailableServers, setUser })(App)

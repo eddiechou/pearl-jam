@@ -30,7 +30,7 @@ const style = {
     fontFamily: 'PT Mono, serif',
     cursor: 'pointer'
   },
-  joinButton: {
+  button1: {
     marginLeft: '50px',
     border: '4px solid #ffffff',
     backgroundColor: 'transparent',
@@ -41,7 +41,29 @@ const style = {
     fontFamily: 'PT Mono, serif',
     cursor: 'pointer'
   },
-  joinButtonHover: {
+  buttonHover1: {
+    marginLeft: '50px',
+    border: '4px solid #ffffff',
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    fontSize: '20px',
+    padding: '30px 60px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
+  },
+  button2: {
+    marginLeft: '50px',
+    border: '4px solid #ffffff',
+    backgroundColor: 'transparent',
+    color: '#ffffff',
+    fontSize: '20px',
+    padding: '30px 60px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
+  },
+  buttonHover2: {
     marginLeft: '50px',
     border: '4px solid #ffffff',
     backgroundColor: '#ffffff',

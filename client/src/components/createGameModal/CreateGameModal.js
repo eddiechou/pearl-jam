@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 /* * Utils * */
-import firebaseApp from '../../base'
+import { firebaseApp } from '../../base'
 
 /* * Styles * */
 import { ModalContainer, ModalDialog } from 'react-modal-dialog'
@@ -22,19 +22,30 @@ class CreateGameModal extends Component {
   }
 
   toggleHover (btn) {
-    this.setState({ [`hover${btn}`]: !this.state[`hover${btn}`] })
+    this.setState({ hover: !this.state.hover })
   }
+
   handleInputChange ({ target }) {
     const gameName = target.value
     this.setState({ gameName })
   }
 
   handleSubmit (event) {
-    // const {  } = this.props
     const { gameName } = this.state
-    base.ref(`servers/2/room_name`).set(gameName)
-    // this.setState({isShowingModal: false})
-    this.context.router.history.push('/playerView')
+    let serverID = null
+    base.ref('servers').orderByChild('player_count').equalTo(0).once('value', snap => {
+      serverID = Object.keys(snap.val())[0]
+      return
+    })
+    .then(() => {
+      const server = base.ref(`servers/${serverID}`)
+      server.child('room_name').set(gameName)
+      server.child('player_count').set(1)
+      return
+    })
+    .then(() => {
+      this.context.router.history.push('/playerView')
+    })
   }
 
   render () {
@@ -48,6 +59,7 @@ class CreateGameModal extends Component {
           <div style={title}>name yo game</div>
           <div style={inputContainer}>
             <TextField
+              id='textField'
               style={textField}
               inputStyle={input}
               underlineFocusStyle={underLine}
@@ -58,9 +70,9 @@ class CreateGameModal extends Component {
           <div style={buttonContainer}>
             <button
               style={hover ? buttonHover : button}
-              onMouseEnter={this.toggleHover.bind(this)}
-              onMouseLeave={this.toggleHover.bind(this)}
-              onClick={this.handleSubmit.bind(this)}>
+              onMouseEnter={::this.toggleHover}
+              onMouseLeave={::this.toggleHover}
+              onClick={::this.handleSubmit}>
           game on
           </button>
           </div>
@@ -69,6 +81,10 @@ class CreateGameModal extends Component {
 
     )
   }
+}
+
+CreateGameModal.contextTypes = {
+  router: PropTypes.object
 }
 
 export default CreateGameModal

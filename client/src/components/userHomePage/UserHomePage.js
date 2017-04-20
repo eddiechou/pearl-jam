@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-/* * Utils * */
-import firebaseApp from '../../base'
-
 /* * Components * */
 import UserNavBar from '../userNavBar/UserNavBar'
 import TestNavBar from '../testNavBar/TestNavBar'
+import CreateGameModal from '../createGameModal/CreateGameModal'
 
 /* * Styles * */
 import style from './userHomePage-css'
@@ -20,46 +18,65 @@ class UserHomePage extends Component {
       hover2: false,
       isShowingModal: false
     }
-    this.handleClick = this.handleClick.bind(this)
-    this.joinGame = this.joinGame.bind(this)
-    this.toggleHover = this.toggleHover.bind(this)
   }
 
   componentDidMount () {
 
   }
 
-  handleClick () {
-    console.log('')
+  handleClick (clickID) {
+    clickID === 1 && ::this.showModal()
+    clickID === 2 && ::this.joinGame()
   }
-  joinGame () {
+
+  showModal () {
+    this.setState({isShowingModal: true})
+  }
+
+  joinGame() {
     this.context.router.history.push('/playerView')
   }
+
   toggleHover (btn) {
     this.setState({ [`hover${btn}`]: !this.state[`hover${btn}`] })
   }
 
+  handleInputChange ({ target }) {
+    const gameName = target.value
+    this.setState({ gameName })
+  }
+
+  closeModal () {
+    this.setState({isShowingModal: false})
+    /* * send game name to firebae * */
+  }
+
   render () {
-    const { container, createButton, createButtonHover, joinButton, joinButtonHover } = style
+    const { container, button1, buttonHover1, button2, buttonHover2 } = style
     const { hover1, hover2 } = this.state
     return (
       <div>
         <UserNavBar />
         <div style={container}>
           <button
-            style={hover1 ? createButtonHover : createButton}
-            onMouseEnter={() => this.toggleHover(1)}
-            onMouseLeave={() => this.toggleHover(1)}
-            onClick={this.handleClick()}>
+            ref='createGame'
+            style={hover1 ? buttonHover1 : button1}
+            onMouseEnter={() => ::this.toggleHover(1)}
+            onMouseLeave={() => ::this.toggleHover(1)}
+            onClick={() => ::this.handleClick(1)}>
             create game
           </button>
           <button
-            style={hover2 ? joinButtonHover : joinButton}
-            onMouseEnter={() => this.toggleHover(2)}
-            onMouseLeave={() => this.toggleHover(2)}
-            onClick={this.joinGame}>
+            ref='joinGame'
+            style={hover2 ? buttonHover2 : button2}
+            onMouseEnter={() => ::this.toggleHover(2)}
+            onMouseLeave={() => ::this.toggleHover(2)}
+            onClick={() => ::this.handleClick(2)}>
             join game
           </button>
+          {
+            this.state.isShowingModal && <CreateGameModal />
+          }
         </div>
         <TestNavBar />
       </div>
@@ -75,3 +92,16 @@ const mapStateToProps = ({ user }) => {
   return { user }
 }
 export default connect(mapStateToProps, null)(UserHomePage)
+
+/*
+<ModalContainer onClose={::this.closeModal}>
+  <ModalDialog onClose={::this.closeModal}>
+    <h1>HELLO THIS IS MODAL</h1>
+    <TextField
+      value={gameName}
+      onChange={(event) => this.handleInputChange(event)}
+      />
+  </ModalDialog>
+
+</ModalContainer>
+*/
