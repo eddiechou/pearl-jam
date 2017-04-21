@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 /* * Utils * */
 import { firebaseApp, baseUIConfig } from '../base'
@@ -29,32 +30,40 @@ class App extends Component {
     super(props)
     const { setUser, user } = this.props
 
-    auth.onAuthStateChanged(baseUser => {
-      const { setUser, user } = this.props
-      const { uid, displayName, email, photoURL } = baseUser
-      if (baseUser && uid !== user.uid) {
-        setUser({ uid, displayName, email, photoURL })
-      }
-      if (!baseUser) {
-        setUser({
-          uid: null,
-          displayName: null,
-          email: null,
-          photoURL: null
-        })
-      }
-    })
+    // auth.onAuthStateChanged(baseUser => {
+    //   const { setUser, user } = this.props
+    //   const { uid, displayName, email, photoURL } = baseUser
+    //   if (baseUser && uid && uid !== user.uid) {
+    //     setUser({ uid, displayName, email, photoURL })
+    //   }
+    //   if (!baseUser) {
+    //     setUser({
+    //       uid: null,
+    //       displayName: null,
+    //       email: null,
+    //       photoURL: null
+    //     })
+    //   }
+    // })
 
-    base.ref('servers').on('child_changed', (data) => {
-      const { setAvailableServers } = this.props
-      base.ref('servers').orderByChild('player_count').endAt(10).once('value', snap => {
-        const servers = snap.val()
-        setAvailableServers({ servers })
-      })
-    })
+    // base.ref('servers').on('child_changed', (data) => {
+    //   const { setAvailableServers } = this.props
+    //   base.ref('servers').orderByChild('player_count').endAt(10).once('value', snap => {
+    //     const servers = snap.val()
+    //     setAvailableServers({ servers })
+    //   })
+    // })
   }
 
   handleLogout () {
+  }
+
+  componentWillMount () {
+    const { setAvailableServers } = this.props
+    base.ref('servers').orderByChild('player_count').endAt(10).once('value', snap => {
+      const servers = snap.val()
+      setAvailableServers({ servers })
+    })
   }
 
   render () {
@@ -77,7 +86,9 @@ class App extends Component {
     )
   }
 }
-
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({}, dispatch)
+// }
 const mapStateToProps = ({ user }) => {
   return { user }
 }

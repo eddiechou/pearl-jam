@@ -28,14 +28,14 @@ export const baseUIConfig = {
 }
 
 export const baseMiddleware = ({ dispatch }) => (next) => (action) => {
+  console.log('base middleware!')
   const base = firebaseApp.database()
   base.ref('servers').on('child_changed', () => {
-    console.log('servers child changed')
-    return base.ref('servers').once('value', snap => {
-      return snap.val()
-    })
-    .then(() => {
+    base.ref('servers').once('value', snap => {
+      const servers = snap.val()
+      console.log('updating servers - ', servers)
       setAvailableServers({ servers })
     })
   })
+  next(action)
 }

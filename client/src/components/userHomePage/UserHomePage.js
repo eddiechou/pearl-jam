@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import UserNavBar from '../userNavBar/UserNavBar'
 import TestNavBar from '../testNavBar/TestNavBar'
 import CreateGameModal from '../createGameModal/CreateGameModal'
+import ColorPicker from '../colorPicker/ColorPicker'
 
 /* * Styles * */
 import style from './userHomePage-css'
@@ -58,22 +59,23 @@ class UserHomePage extends Component {
       <div>
         <UserNavBar />
         <div style={container}>
-          <button
-            ref='createGame'
-            style={hover1 ? buttonHover1 : button1}
-            onMouseEnter={() => ::this.toggleHover(1)}
-            onMouseLeave={() => ::this.toggleHover(1)}
-            onClick={() => ::this.handleClick(1)}>
-            create game
-          </button>
-          <button
-            ref='joinGame'
-            style={hover2 ? buttonHover2 : button2}
-            onMouseEnter={() => ::this.toggleHover(2)}
-            onMouseLeave={() => ::this.toggleHover(2)}
-            onClick={() => ::this.handleClick(2)}>
-            join game
-          </button>
+        <button
+          ref='createGame'
+          style={hover1 ? buttonHover1 : button1}
+          onMouseEnter={() => ::this.toggleHover(1)}
+          onMouseLeave={() => ::this.toggleHover(1)}
+          onClick={() => ::this.handleClick(1)}>
+          create game
+        </button>
+        <button
+          ref='joinGame'
+          style={hover2 ? buttonHover2 : button2}
+          onMouseEnter={() => ::this.toggleHover(2)}
+          onMouseLeave={() => ::this.toggleHover(2)}
+          onClick={() => ::this.handleClick(2)}>
+          join game
+        </button>
+
           {
             this.state.isShowingModal && <CreateGameModal />
           }

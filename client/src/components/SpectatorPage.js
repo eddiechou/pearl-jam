@@ -1,15 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 export default class Login extends React.Component {
-
-  constructor(props) {
-    super(props);
-    
+  constructor (props) {
+    super(props)
   }
 
-  render() {
+  render () {
     return (
       <h1>Spectator View!</h1>
-    );
+    )
   }
 }

@@ -29,11 +29,11 @@ class BettingPage extends Component {
 
       // Copy games that are in-progress to currentActiveGames
       var currentActiveGames = {}
-      Object.keys(games).map((key) => { 
+      Object.keys(games).map((key) => {
         if (games[key].status === 'in-progress') {
-          currentActiveGames[key] = Object.assign({}, games[key]);
+          currentActiveGames[key] = Object.assign({}, games[key])
         }
-      });
+      })
 
       // Update the redux-store
       updateCurrentActiveGames({currentActiveGames})
@@ -58,7 +58,7 @@ class BettingPage extends Component {
         {currentActiveGames ? Object.keys(currentActiveGames).map((key, index) => {
           const game = currentActiveGames[key]
 
-          return <CurrentGameCard game={game} key={index} gameID={key} index={index + 1}/>
+          return <CurrentGameCard game={game} key={index} gameID={key} index={index + 1} />
         }) : null}
         <TestNavBar />
       </div>

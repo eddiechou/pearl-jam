@@ -1,7 +1,7 @@
 /* * User Actions * */
 export const SET_USER = 'SET_USER'
 export const CREATE_NEW_USER = 'CREATE_NEW_USER'
-export const SET_DISPLAY_NAME = 'SET_DISPLAY_NAME'
+export const UPDATE_USER_INFO = 'UPDATE_USER_INFO'
 
 /* * Game Actions * */
 export const ADD_USER_TO_GAME = 'ADD_USER_TO_GAME'

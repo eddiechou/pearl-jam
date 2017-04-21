@@ -41,11 +41,12 @@ class NavDropMenu extends Component {
 
   handleLogout (event) {
     event.preventDefault()
+    const self = this
     auth.signOut()
     .then(function () {
       console.log('handled logout')
       console.log(this )
-      this.context.router.history.push('/')
+      self.context.router.history.push('/')
     })
     .catch((error) => {
       console.log(error)

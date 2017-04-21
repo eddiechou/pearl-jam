@@ -23,8 +23,10 @@ import { firebaseApp, baseMiddleware } from './base'
 import promiseMiddleware from 'redux-promise'
 import {persistStore, autoRehydrate} from 'redux-persist'
 
-const middleware = applyMiddleware(promiseMiddleware)
-const reduxStore = createStore(rootReducer, composeWithDevTools(middleware, autoRehydrate()))
+const defaultState = {}
+
+// const middleware = applyMiddleware(baseMiddleware)
+const reduxStore = createStore(rootReducer, defaultState, composeWithDevTools(applyMiddleware(baseMiddleware), autoRehydrate()))
 
 persistStore(reduxStore)
 

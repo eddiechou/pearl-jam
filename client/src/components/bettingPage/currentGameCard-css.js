@@ -12,7 +12,7 @@ const style = {
     height: '800px'
   },
   buttonStyle: {
-    margin: 12,
+    margin: 12
   }
 }
 

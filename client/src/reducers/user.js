@@ -1,5 +1,5 @@
 import { firebaseApp } from '../base'
-import { SET_USER, CREATE_NEW_USER, SET_DISPLAY_NAME, SET_GAME } from '../actions/actionTypes'
+import { SET_USER, CREATE_NEW_USER, UPDATE_USER_INFO, SET_GAME } from '../actions/actionTypes'
 
 const base = firebaseApp.database()
 const auth = firebaseApp.auth()
@@ -20,8 +20,8 @@ const user = (state = {}, action) => {
       return newState
     }
 
-    case SET_DISPLAY_NAME: {
-      const { uid, displayName } = action.payload
+    case UPDATE_USER_INFO: {
+      const { uid, displayName, avatarColor } = action.payload
       const pearls = 100
       const rating = 1200
       const wins = 0
@@ -31,7 +31,7 @@ const user = (state = {}, action) => {
       /* * updating recently added user with display name * */
       user.updateProfile({ displayName })
       .then(() => {
-        base.ref(`users/${uid}`).update({ displayName, pearls, rating, wins, losses })
+        base.ref(`users/${uid}`).update({ displayName, avatarColor, pearls, rating, wins, losses })
         newState.displayName = displayName
       }, (error) => console.log(error))
       return newState

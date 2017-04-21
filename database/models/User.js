@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var UsersSchema = mongoose.Schema({
   userName: String,
@@ -7,8 +7,8 @@ var UsersSchema = mongoose.Schema({
   wins: Number,
   losses: Number,
   pearls: Number
-});
+})
 
-var User = mongoose.model('User', UsersSchema);
+var User = mongoose.model('User', UsersSchema)
 
-module.exports = User;
+module.exports = User

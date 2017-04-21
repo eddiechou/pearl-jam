@@ -5,8 +5,11 @@ import PropTypes from 'prop-types'
 /* * Utils * */
 import { firebaseApp } from '../../base'
 
+/* * Components * */
+import ColorPicker from '../colorPicker/ColorPicker'
+
 /* * Actions * */
-import { setDisplayName } from '../../actions/userActions'
+import { updateUserInfo } from '../../actions/userActions'
 
 /* * Styles * */
 import TextField from 'material-ui/TextField'
@@ -21,7 +24,8 @@ class SetDisplayNamePage extends Component {
     this.state = {
       hovering: false,
       displayName: '',
-      instructions: 'please choose a username'
+      instructions: 'pick a color and set your username',
+      avatarColor: '#f44336'
     }
   }
 
@@ -34,15 +38,15 @@ class SetDisplayNamePage extends Component {
 
 
   handleSubmit (event) {
-    const { setDisplayName, user } = this.props
-    const { displayName } = this.state
+    const { updateUserInfo, user } = this.props
+    const { displayName, avatarColor } = this.state
     const { uid } = user
     const baseUser = auth.currentUser
 
     const q = base.ref('users').orderByChild('displayName').equalTo(displayName)
     q.once('value', (snap) => {
       if (snap.val() === null) {
-        setDisplayName({ uid, displayName })
+        updateUserInfo({ uid, displayName, avatarColor })
       this.context.router.history.push('/home')
       } else {
         const instructions = 'oh snap, that username\
@@ -58,16 +62,27 @@ class SetDisplayNamePage extends Component {
     this.setState({hovering: !this.state.hovering})
   }
 
+  getColorThroughProps (color) {
+    console.log('setting the state')
+
+    this.setState({ avatarColor: color.hex })
+  }
   render () {
-    const { container, title, inputContainer, textField, input, underLine, buttonContainer, button, buttonHover } = style
-    const { hovering, displayName, instructions } = this.state
+    const { container, title, colorPicker, inputContainer, textField, input, underLine, buttonContainer, button, buttonHover } = style
+    const { hovering, displayName, instructions, avatarColor } = this.state
+
     return (
       <div style={container}>
         <div style={title}>{instructions}</div>
+        <div style={colorPicker}>
+        <ColorPicker
+          getColorThroughProps={::this.getColorThroughProps}
+          color={avatarColor}/>
+          </div>
         <div style={inputContainer}>
           <TextField
             style={textField}
-            inputStyle={input}
+            inputStyle={{...input, ...{color: avatarColor}}}
             underlineFocusStyle={underLine}
             value={displayName}
             onChange={(event) => this.handleInputChange(event)}
@@ -95,4 +110,4 @@ const mapStateToProps = ({ user }) => {
   return { user }
 }
 
-export default connect(mapStateToProps, { setDisplayName })(SetDisplayNamePage)
+export default connect(mapStateToProps, { updateUserInfo })(SetDisplayNamePage)
