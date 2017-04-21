@@ -1,6 +1,7 @@
+
 const style = {
   container: {
-    margin: '0',
+    position: 'absolute',
     overflow: 'hidden',
     backgroundColor: '#000000',
     height: '100vh',
@@ -15,26 +16,28 @@ const style = {
     justifyContent: 'center',
     width: '100vw',
     fontSize: '60px',
-    fontFamily: 'PT Mono, serif',
+    fontFamily: 'Arsenal, sans-serif',
     color: '#ffffff',
     lineHeight: '80px'
   },
-  inputContainer: {
-    position: 'absolute',
-    top: '50%',
+  colorPicker: {
     margin: '0 auto',
     display: 'flex',
     justifyContent: 'center',
     width: '100vw'
   },
+  inputContainer: {
+    margin: '0 auto',
+    display: 'flex',
+    justifyContent: 'center'
+  },
   textField: {
-    margin: '0',
+    margin: '0 auto',
     width: '40vw'
   },
   input: {
-    fontFamily: 'inconsolata',
-    fontSize: '20px',
-    color: '#00ff01',
+    fontFamily: 'Quicksand',
+    fontSize: '25px',
     textAlign: 'center'
   },
   buttonContainer: {
@@ -51,7 +54,7 @@ const style = {
     fontSize: '20px',
     padding: '10px 20px',
     margin: '10px',
-    fontFamily: 'PT Mono, serif',
+    fontFamily: 'Arsenal',
     cursor: 'pointer'
   },
   buttonHover: {
@@ -61,7 +64,7 @@ const style = {
     fontSize: '20px',
     padding: '10px 20px',
     margin: '10px',
-    fontFamily: 'PT Mono, serif',
+    fontFamily: 'Arsenal',
     cursor: 'pointer'
   },
   underLine: {

@@ -49,9 +49,12 @@ class CurrentGameCard extends Component {
       var userInfo = {}
       for (var key in users) {
         if (users[key].displayName === user.displayName) {
-          userInfo.key = key;
+
+          userInfo.key = key
           userInfo.pearls = users[key].pearls
-        } 
+        }
+
+
       }
       if (userInfo.pearls - this.state.betValue < 0) {
         this.state.errorText = 'Not enough funds'
@@ -79,9 +82,10 @@ class CurrentGameCard extends Component {
 
         <GamePlayerStatsTable game={this.props.game} onRowSelection={this._onRowSelection.bind(this)} />
 
-        <TextField errorText= {this.state.errorText} hintText="10" floatingLabelText="Wager (Pearls)" onChange={this._handleTextFieldChange.bind(this)}/><br/>
-        <RaisedButton label="Spectate Game" primary={true} style={buttonStyle} onClick={this.showModal.bind(this)} />
-        <RaisedButton label="Make Bet" secondary={true} style={buttonStyle} onClick={this._handleMakeBet.bind(this)} />
+        <TextField errorText={this.state.errorText} hintText='10' floatingLabelText='Wager (Pearls)' onChange={this._handleTextFieldChange.bind(this)} /><br />
+        <RaisedButton label='Spectate Game' primary style={buttonStyle} onClick={this.showModal.bind(this)} />
+        <RaisedButton label='Make Bet' secondary style={buttonStyle} onClick={this._handleMakeBet.bind(this)} />
+
         <Modal ref='modal' modalStyle={modalStyle}>
           <iframe id='spectateView' src={this.props.game.spectateUrl}
             height='800px' width='950px' />
@@ -97,4 +101,6 @@ const mapStateToProps = ({ user }) => {
 }
 
 export default connect(mapStateToProps, null)(CurrentGameCard)
+
 // export default CurrentGameCard
+

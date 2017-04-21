@@ -11,6 +11,10 @@ const checkUser = () => {
   console.log(user)
 }
 
+const deleteUser = () => {
+  const user = auth.currentUser
+}
+
 const TestNavBar = () => {
   const { bar, button } = style
   return (

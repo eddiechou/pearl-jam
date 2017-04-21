@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 /* * Utils * */
-import { firebaseApp } from '../base'
+import { firebaseApp, baseUIConfig } from '../base'
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route, Redirect } from 'react-router-dom'
 
 /* * Actions * */
-import { getAvailableServers } from '../actions/gameActions'
+import { setAvailableServers } from '../actions/gameActions'
+import { setUser } from '../actions/userActions'
 
 /* * Components * */
 import AuthenticationPage from './authenticationPage/AuthenticationPage'
@@ -26,42 +28,42 @@ const base = firebaseApp.database()
 class App extends Component {
   constructor (props) {
     super(props)
-    const { getAvailableServers } = this.props
-    base.ref('servers').once('value', snap => {
+    const { setUser, user } = this.props
+
+    // auth.onAuthStateChanged(baseUser => {
+    //   const { setUser, user } = this.props
+    //   const { uid, displayName, email, photoURL } = baseUser
+    //   if (baseUser && uid && uid !== user.uid) {
+    //     setUser({ uid, displayName, email, photoURL })
+    //   }
+    //   if (!baseUser) {
+    //     setUser({
+    //       uid: null,
+    //       displayName: null,
+    //       email: null,
+    //       photoURL: null
+    //     })
+    //   }
+    // })
+
+    // base.ref('servers').on('child_changed', (data) => {
+    //   const { setAvailableServers } = this.props
+    //   base.ref('servers').orderByChild('player_count').endAt(10).once('value', snap => {
+    //     const servers = snap.val()
+    //     setAvailableServers({ servers })
+    //   })
+    // })
+  }
+
+  handleLogout () {
+  }
+
+  componentWillMount () {
+    const { setAvailableServers } = this.props
+    base.ref('servers').orderByChild('player_count').endAt(10).once('value', snap => {
       const servers = snap.val()
-      getAvailableServers({ servers })
+      setAvailableServers({ servers })
     })
-
-    auth.onAuthStateChanged(firebaseUser => {
-      // if (firebaseUser) {
-      //   this.setState({loggedIn: true})
-      //   console.log(firebaseUser)
-      // } else {
-      //   this.setState({loggedIn: false})
-      //   console.log('not logged in')
-      // }
-    })
-    this.returnToAuth = this.returnToAuth.bind(this)
-  }
-
-  componentDidUpdate () {
-    /**
-     * maintain authentication of user for duration of session
-     * make this write to redux state
-     */
-    auth.onAuthStateChanged(firebaseUser => {
-      // if (firebaseUser) {
-      //   this.setState({loggedIn: true})
-      //   console.log(firebaseUser)
-      // } else {
-      //   this.setState({loggedIn: false})
-      //   console.log('not logged in')
-      // }
-    })
-  }
-
-  returnToAuth () {
-    return <Redirect to='/' />
   }
 
   render () {
@@ -77,12 +79,18 @@ class App extends Component {
             <Route path='/game' component={GamePage} />
             <Route path='/bet' component={BettingPage} />
             <Route path='/playerView' component={PlayerView} />
-            <Route path='/goodbye' render={this.returnToAuth} />
+            <Route path='/goodbye' render={() => ::this.handleLogout()} />
           </div>
         </ConnectedRouter>
       </div>
     )
   }
 }
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({}, dispatch)
+// }
+const mapStateToProps = ({ user }) => {
+  return { user }
+}
 
-export default connect(null, { getAvailableServers })(App)
+export default connect(mapStateToProps, { setAvailableServers, setUser })(App)

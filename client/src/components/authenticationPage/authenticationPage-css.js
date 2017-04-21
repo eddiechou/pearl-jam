@@ -8,7 +8,7 @@ const style = {
     fontFamily: 'PT Mono, serif',
     color: '#ffffff'
   },
-  button: {
+  button1: {
     border: '4px solid #ffffff',
     backgroundColor: 'transparent',
     color: '#ffffff',
@@ -18,7 +18,27 @@ const style = {
     fontFamily: 'PT Mono, serif',
     cursor: 'pointer'
   },
-  buttonHover: {
+  buttonHover1: {
+    border: '4px solid #ffffff',
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    fontSize: '20px',
+    padding: '10px 20px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
+  },
+  button2: {
+    border: '4px solid #ffffff',
+    backgroundColor: 'transparent',
+    color: '#ffffff',
+    fontSize: '20px',
+    padding: '10px 20px',
+    margin: '10px',
+    fontFamily: 'PT Mono, serif',
+    cursor: 'pointer'
+  },
+  buttonHover2: {
     border: '4px solid #ffffff',
     backgroundColor: '#ffffff',
     color: '#000000',

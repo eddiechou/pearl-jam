@@ -1,4 +1,6 @@
 import firebase from 'firebase'
+import { SET_AVAILABLE_SERVERS } from './actions/actionTypes'
+import { setAvailableServers } from './actions/gameActions'
 
 const config = {
   apiKey: 'AIzaSyAr-h45K0XxMQf2PzQdzVW8EJH7upLsxiI',
@@ -10,7 +12,7 @@ const config = {
 export const firebaseApp = firebase.initializeApp(config)
 
 export const baseUIConfig = {
-  signInSuccessUrl: '/arena',
+  signInSuccessUrl: '/home',
   signInFlow: 'popup',
 
   signInOptions: [
@@ -23,4 +25,17 @@ export const baseUIConfig = {
       requireDisplayName: true
     }
   ]
+}
+
+export const baseMiddleware = ({ dispatch }) => (next) => (action) => {
+  console.log('base middleware!')
+  const base = firebaseApp.database()
+  base.ref('servers').on('child_changed', () => {
+    base.ref('servers').once('value', snap => {
+      const servers = snap.val()
+      console.log('updating servers - ', servers)
+      setAvailableServers({ servers })
+    })
+  })
+  next(action)
 }

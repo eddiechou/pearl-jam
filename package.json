@@ -13,7 +13,7 @@
     "build": "node_modules/.bin/webpack -p --watch",
     "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
     "dev-server": "node_modules/.bin/webpack-dev-server --progress",
-    "check style": "standard"
+    "style": "standard"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
@@ -36,6 +36,7 @@
     "elemental": "^0.6.1",
     "express": "^4.15.2",
     "firebase": "^3.7.5",
+    "firebase-admin": "^4.2.1",
     "firebaseui": "^1.0.1",
     "history": "^4.6.1",
     "hover.css": "^2.2.0",
@@ -47,10 +48,12 @@
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",
+    "react-color": "^2.11.4",
     "react-dom": "^15.5.4",
     "react-grid-layout": "^0.14.4",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-iframe": "^1.0.1",
+    "react-modal-dialog": "^4.0.7",
     "react-picker": "^1.2.5",
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
@@ -64,14 +67,15 @@
     "redux-logger": "^3.0.1",
     "redux-persist": "^4.6.0",
     "redux-promise": "^0.5.3",
+    "reselect": "^3.0.0",
     "socket.io": "^1.7.3",
     "standard": "*",
     "standard-loader": "^6.0.1",
     "style-loader": "^0.16.1",
     "uglifyjs": "^2.4.10",
     "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.2",
     "webpack-dev-middleware": "^1.10.1",
+    "webpack-dev-server": "^2.4.2",
     "webpack-hot-middleware": "^2.18.0"
   },
   "babel": {

@@ -40,8 +40,8 @@ class PlayerView extends React.Component {
     const { games } = this.props
     const { currentGame } = games
     const { container, game, flexParent, button, modal } = style
+    console.log(games)
     return (
-
       <div style={container}>
         <UserNavBar />
         <div style={game}>

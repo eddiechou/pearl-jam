@@ -31,22 +31,16 @@ class AuthenticationPage extends Component {
       hover1: false,
       hover2: false
     }
-    /**
-     * authentication handlers
-     */
-    this.createUserWithEmail = this.createUserWithEmail.bind(this)
-    this.authenticateWithEmail = this.authenticateWithEmail.bind(this)
     baseUI.start('#firebaseui-auth-container', baseUIConfig)
   }
 
   authenticateWithProvider (provider) {
-    const { authenticateUser } = this.props
+    const { setUser } = this.props
     auth.signInWithPopup(provider)
-    .then(result => {
-      authenticateUser(result)
-      const token = result.credential.accessToken
-      const { displayName, uid, email, photoURL } = result.user
-      /* * add to reduxStore * */
+    .then(user => {
+      const { uid, displayName, email, photoURL } = user
+      setUser({ uid, displayName, email, photoURL })
+      this.context.router.history.push('/home')
     })
     .catch(error => {
       const errorCode = error.code
@@ -71,29 +65,33 @@ class AuthenticationPage extends Component {
     const { createNewUser } = this.props
     /* * check for real email * */
     const { email, password } = this.state
-    const promise = auth.createUserWithEmailAndPassword(email, password)
-    promise.then(user => {
+    auth.createUserWithEmailAndPassword(email, password)
+    .then(user => {
       const { uid, email, photoURL } = user
       createNewUser({ uid, email, photoURL })
       this.context.router.history.push('/setusername')
     })
-    promise.catch(error => console.log(error.message))
+    .catch(error => console.log(error.message))
   }
 
   authenticateWithEmail () {
     const { setUser } = this.props
     const { email, password } = this.state
-    const promise = auth.signInWithEmailAndPassword(email, password)
-    promise.then(user => {
+    auth.signInWithEmailAndPassword(email, password)
+    .then(user => {
       const { uid, displayName, email, photoURL } = user
       setUser({ uid, displayName, email, photoURL })
       this.context.router.history.push('/home')
     })
-    promise.catch(error => console.log(error.message))
+    .catch(error => console.log(error.message))
+  }
+
+  toggleHover (btn) {
+    this.setState({ [`hover${btn}`]: !this.state[`hover${btn}`] })
   }
 
   render () {
-    const { container, button, buttonHover } = style
+    const { container, button1, buttonHover1, button2, buttonHover2 } = style
     const { hover1, hover2 } = this.state
     if (!this.state.authenticating) {
       return (
@@ -103,12 +101,25 @@ class AuthenticationPage extends Component {
               <h1>Welcome to Pinballish</h1>
               <div>Join the game using your preferred sign in method</div>
             </div>
-            <input type='email' placeholder='Email' onChange={(event) => this.handleChange(event, 'email')} />
-            <input type='password' placeholder='Password' onChange={(event) => this.handleChange(event, 'password')} />
-            <button style={hover1 ? buttonHover : button} onClick={this.authenticateWithEmail}>
+            <input
+              type='email'
+              placeholder='Email'
+              onChange={(event) => ::this.handleChange(event, 'email')} />
+            <input type='password'
+              placeholder='Password'
+              onChange={(event) => ::this.handleChange(event, 'password')} />
+            <button
+              style={hover1 ? buttonHover1 : button1}
+              onMouseEnter={() => ::this.toggleHover(1)}
+              onMouseLeave={() => ::this.toggleHover(1)}
+              onClick={::this.authenticateWithEmail}>
             log in
             </button>
-            <button style={hover2 ? buttonHover : button} onClick={this.createUserWithEmail}>
+            <button
+              style={hover2 ? buttonHover2 : button2}
+              onMouseEnter={() => ::this.toggleHover(2)}
+              onMouseLeave={() => ::this.toggleHover(2)}
+              onClick={::this.createUserWithEmail}>
             sign up
             </button>
             <div id='firebaseui-auth-container' />

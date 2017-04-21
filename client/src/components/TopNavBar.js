@@ -9,7 +9,7 @@ export default class TopNavBar extends React.Component {
   render () {
     return (
       <ul>
-        <li><Link to='/login'> Login Page </Link> </li> 
+        <li><Link to='/login'> Login Page </Link> </li>
         <li><Link to='/playerView'>Player View</Link></li>
         <li><Link to='/spectatorView'>Spectator View</Link></li>
       </ul>

@@ -41,9 +41,12 @@ class NavDropMenu extends Component {
 
   handleLogout (event) {
     event.preventDefault()
+    const self = this
     auth.signOut()
-    .then(() => {
-      this.context.router.history.push('/goodbye')
+    .then(function () {
+      console.log('handled logout')
+      console.log(this )
+      self.context.router.history.push('/')
     })
     .catch((error) => {
       console.log(error)
@@ -55,19 +58,19 @@ class NavDropMenu extends Component {
       <div>
         <FlatButton
           label='More'
-          onTouchTap={this.handleTouchTap.bind(this)}
+          onTouchTap={::this.handleTouchTap}
           secondary />
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
           anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
-          onRequestClose={this.handleRequestClose.bind(this)}>
+          onRequestClose={::this.handleRequestClose}>
           <Menu>
             <MenuItem containerElement={<Link to='/' />} primaryText='Leaderboard' />
             <MenuItem containerElement={<Link to='/' />} primaryText='Add Friend' />
             <Divider />
-            <MenuItem label='Logout' onClick={event => this.handleLogout(event)} primaryText='Logout' />
+            <MenuItem label='Logout' onClick={::this.handleLogout} primaryText='Logout' />
           </Menu>
         </Popover>
       </div>

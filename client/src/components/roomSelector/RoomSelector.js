@@ -31,7 +31,7 @@ class RoomSelector extends Component {
         fullWidth
         hintText='rooms'
         value={this.state.gameID}
-        onChange={this.handleChange.bind(this)}
+        onChange={::this.handleChange}
       >
         <MenuItem value={1} primaryText='main' />
         <MenuItem value={2} primaryText='anti gravity' />

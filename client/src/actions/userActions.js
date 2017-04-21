@@ -1,4 +1,4 @@
-import { SET_USER, CREATE_NEW_USER, SET_DISPLAY_NAME } from './actionTypes'
+import { SET_USER, CREATE_NEW_USER, UPDATE_USER_INFO } from './actionTypes'
 
 export const setUser = ({ uid, displayName, email, photoURL }) => ({
   type: SET_USER,
@@ -10,7 +10,7 @@ export const createNewUser = ({ uid, email, photoURL }) => ({
   payload: { uid, email, photoURL }
 })
 
-export const setDisplayName = ({ uid, displayName }) => ({
-  type: SET_DISPLAY_NAME,
-  payload: { uid, displayName }
+export const updateUserInfo = ({ uid, displayName, avatarColor }) => ({
+  type: UPDATE_USER_INFO,
+  payload: { uid, displayName, avatarColor }
 })

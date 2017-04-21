@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 
 class GamePlayerStatsTable extends Component {
-
   constructor (props) {
     super(props)
   }
@@ -24,12 +23,12 @@ class GamePlayerStatsTable extends Component {
               <TableRow key={index}>
                 <TableRowColumn>{player.displayName}</TableRowColumn>
                 <TableRowColumn>{player.rating}</TableRowColumn>
-                <TableRowColumn></TableRowColumn>
+                <TableRowColumn />
               </TableRow>)
           })}
         </TableBody>
       </Table>
-    )  
+    )
   }
 }
 
