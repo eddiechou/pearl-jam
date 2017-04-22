@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 /* * Utils * */
-import { firebaseApp, baseUIConfig } from '../../base'
+import { baseUIConfig } from '../../baseConfig'
+import { firebaseApp } from '../../base'
 import firebaseui from 'firebaseui'
 
 /* * Components * */

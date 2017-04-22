@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 /* * Utils * */
 import { AppContainer } from 'react-hot-loader'
-import reduxStore from './reduxStore'
+import store from './store'
 import RedBox from 'redbox-react'
 
 /* * Components * */
@@ -38,7 +38,7 @@ const render = (Component) => {
   ReactDOM.render(
     <AppContainer errorReporter={consoleErrorReporter}>
       <MuiThemeProvider muiTheme={muiTheme}>
-        <Provider store={reduxStore}>
+        <Provider store={store}>
           <Component />
         </Provider>
       </MuiThemeProvider>
