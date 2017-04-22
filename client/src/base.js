@@ -17,7 +17,6 @@ export const initServers = () => {
       payload: { servers }
     })
   })
-}
 
 export const listenForServerUpdates = () => {
   base.ref('servers')
@@ -66,7 +65,6 @@ export const getUsers = () => {
 
 export const addFriend = (user) => {
   const baseUser = auth.currentUser
-
   const { uid } = baseUser
   const { id, displayName } = user
   base.ref(`users/${uid}/friends`).child(id).set({ displayName })
