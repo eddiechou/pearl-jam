@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import GamePlayerStatsTable from '../../client/src/components/gamePlayerStatsTable/gamePlayerStatsTable'
+import GamePlayerStatsTable from '../../client/src/components/gamePlayerStatsTable/GamePlayerStatsTable'
 
 describe('<GamePlayerStatsTable/>', () => {
   const game = {
