@@ -4,38 +4,40 @@ import axios from 'axios'
 
 import UserNavBar from '../userNavBar/UserNavBar'
 
+import style from './game-css.js'
+
 class Game extends React.Component {
 	constructor (props) {
 		super(props)
 	}
 
   componentDidMount() {
-    window.username = 'Jeff';
+    var scripts = document.getElementById('scripts')
 
     let script = document.createElement("script");
     script.src = "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js";
     script.async = false;
-    document.body.appendChild(script);
+    scripts.appendChild(script);
 
     let script1 = document.createElement("script");
-    script1.src = "https://pearl-jam-game-server.herokuapp.com/client/js/dist/phaser.min.js";
+    script1.src = "https://ddu0j6ouvozck.cloudfront.net/phaser.min.js";
     script1.async = false;
-    document.body.appendChild(script1);
+    scripts.appendChild(script1);
 
     let script2 = document.createElement("script");
-    script2.src = "https://pearl-jam-game-server.herokuapp.com/socket.io/socket.io.js";
+    script2.src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js";
     script2.async = false;
-    document.body.appendChild(script2);
+    scripts.appendChild(script2);
 
     let script3 = document.createElement("script");
-    script3.src = "https://pearl-jam-game-server.herokuapp.com/client/sockets/socket.js";
+    script3.src = "https://ddu0j6ouvozck.cloudfront.net/socket.js";
     script3.async = false;
-    document.body.appendChild(script3);
+    scripts.appendChild(script3);
 
     let script4 = document.createElement("script");
-    script4.src = "https://pearl-jam-game-server.herokuapp.com/client/js/dist/deployment.js";
+    script4.src = "https://ddu0j6ouvozck.cloudfront.net/deployment.min.js";
     script4.async = false;
-    document.body.appendChild(script4);
+    scripts.appendChild(script4);
   }
 
   render() {
@@ -43,9 +45,10 @@ class Game extends React.Component {
     const { games } = this.props
     const { currentGame } = games
     return (
-      <div>
+      <div id="scripts">
         <UserNavBar />
-        <div id="game">Please Wait, your game will show up momentarily! <br/>{user.displayName}, you are the current user<br/>, this is the game you are in</div>
+        <div>Please Wait, your game will show up momentarily! <br/>{user.displayName}, you are the current user<br/>, this is the game you are in</div>
+        <div id="game" style={style.game}></div>
       </div>
     )
   }
