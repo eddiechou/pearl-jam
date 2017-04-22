@@ -15,8 +15,8 @@ describe('Games Reducer', () => {
     expect(games(undefined, {type, payload})).toHaveProperty('currentActiveGames', ['game1', 'game3'])
   })
 
-  it('can handle GET_AVAILABLE_SERVERS', () => {
-    const type = 'GET_AVAILABLE_SERVERS'
+  it('can handle SET_AVAILABLE_SERVERS', () => {
+    const type = 'SET_AVAILABLE_SERVERS'
     const payload = {
       servers: ['server1', 'server2']
     }

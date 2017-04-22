@@ -1,4 +1,4 @@
-import {addUserToGame, getAvailableServers, setGame, createGame, updateCurrentActiveGames} from '../../client/src/actions/gameActions.js'
+import {addUserToGame, setAvailableServers, setGame, createGame, updateCurrentActiveGames} from '../../client/src/actions/gameActions.js'
 
 describe('Game Actions', () => {
   it('`addUserToGame` dispatches an ADD_USER_TO_GAME action', () => {
@@ -8,10 +8,10 @@ describe('Game Actions', () => {
     expect(addUserToGame({user, displayName})).toEqual({type, payload: {user, displayName}})
   })
 
-  it('`getAvailableServers` dispatches a GET_AVAILABLE_SERVERS action', () => {
-    const type = 'GET_AVAILABLE_SERVERS'
+  it('`setAvailableServers` dispatches a SET_AVAILABLE_SERVERS action', () => {
+    const type = 'SET_AVAILABLE_SERVERS'
     const servers = ['server1', 'server2']
-    expect(getAvailableServers({servers})).toEqual({type, payload: {servers}})
+    expect(setAvailableServers({servers})).toEqual({type, payload: {servers}})
   })
 
   it('`setGame` dispatches a SET_GAME action', () => {
