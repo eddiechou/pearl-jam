@@ -1,6 +1,7 @@
 // require componenets
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 // /* * Utils * */
 // import Iframe from 'react-iframe'
@@ -22,7 +23,8 @@ class PlayerView extends React.Component {
     this.fireMessage = this.fireMessage.bind(this)
   }
   showModal () {
-    this.refs.modal.show()
+
+    //this.refs.modal.show()
   }
 
   hideModal () {
@@ -47,16 +49,7 @@ class PlayerView extends React.Component {
         <div style={game}>
           <div style={flexParent} >
             <GameRoomList />
-            <button style={button} onClick={this.showModal}>Join Game!</button>
-            <Modal ref='modal' modalStyle={modal}>
-              <iframe
-                id='playerView'
-                onLoad={this.fireMessage}
-                src={currentGame ? currentGame.link : games.servers[0].link}
-                height='800px'
-                width='950px' />
-              <button onClick={this.hideModal}>Close</button>
-            </Modal>
+          <Link to="/playGame"> <button style={button}>Join Game!</button> </Link>
           </div>
         </div>
         <TestNavBar />
@@ -70,3 +63,15 @@ const mapStateToProps = ({ games, user }) => {
 }
 
 export default connect(mapStateToProps)(PlayerView)
+
+
+            // <button style={button} onClick={this.showModal}>Join Game!</button>
+// <Modal ref='modal' modalStyle={modal}>
+              // <iframe
+                // id='playerView'
+                // onLoad={this.fireMessage}
+                // src={currentGame ? currentGame.link : games.servers[0].link}
+                // height='800px'
+                // width='950px' />
+              // <button onClick={this.hideModal}>Close</button>
+            // </Modal>
