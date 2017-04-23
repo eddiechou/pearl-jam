@@ -20,7 +20,7 @@ import BettingPage from './bettingPage/BettingPage'
 import SpectatorPage from './SpectatorPage'
 import GamePage from './GamePage'
 import PlayerView from './PlayerView/PlayerView'
-import Game from './Game/game'
+import Game from './game/Game'
 
 const history = createHistory()
 const auth = firebaseApp.auth()
