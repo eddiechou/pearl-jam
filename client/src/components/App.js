@@ -19,7 +19,7 @@ import UserHomePage from './userHomePage/UserHomePage'
 import BettingPage from './bettingPage/BettingPage'
 import SpectatorPage from './SpectatorPage'
 import GamePage from './GamePage'
-import PlayerView from './PlayerView/PlayerView'
+import PlayerView from './playerView/PlayerView'
 import Game from './game/Game'
 
 const history = createHistory()
