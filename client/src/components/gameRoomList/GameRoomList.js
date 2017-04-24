@@ -24,17 +24,18 @@ class GameRoomList extends Component {
     const { container, entryNonClicked, entryClicked } = style
     const { selected } = this.state
     const { servers } = this.props.games
+    console.log(!servers)
     return (
       <div style={container} >
-        { servers.map((server, gameID) => (
+        { !servers ? <h1> no free rooms </h1> : servers.map((server, gameID) => (
           <div
             key={gameID}
             style={selected === gameID ? entryClicked : entryNonClicked}
             onClick={this.handleClick.bind(this, gameID)}>
             <h1> {server.room_name} </h1>
           </div>
-          )
-        )}
+          ))
+        }
       </div>
     )
   }

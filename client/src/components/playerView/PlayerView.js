@@ -24,7 +24,7 @@ class PlayerView extends React.Component {
   }
   showModal () {
 
-    //this.refs.modal.show()
+    // this.refs.modal.show()
   }
 
   hideModal () {
@@ -42,14 +42,13 @@ class PlayerView extends React.Component {
     const { games } = this.props
     const { currentGame } = games
     const { container, game, flexParent, button, modal } = style
-    console.log(games)
     return (
       <div style={container}>
         <UserNavBar />
         <div style={game}>
           <div style={flexParent} >
             <GameRoomList />
-          <Link to="/playGame"> <button style={button}>Join Game!</button> </Link>
+            <Link to='/playGame'> <button style={button}>Join Game!</button> </Link>
           </div>
         </div>
         <TestNavBar />
@@ -63,7 +62,6 @@ const mapStateToProps = ({ games, user }) => {
 }
 
 export default connect(mapStateToProps)(PlayerView)
-
 
             // <button style={button} onClick={this.showModal}>Join Game!</button>
 // <Modal ref='modal' modalStyle={modal}>
