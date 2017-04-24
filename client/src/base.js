@@ -8,17 +8,6 @@ export const firebaseApp = firebase.initializeApp(baseConfig)
 
 const base = firebaseApp.database()
 const auth = firebaseApp.auth()
-// const baseUser = auth.currentUser
-
- /*
-export const baseMiddleware = ({ dispatch }) => (next) => (action) => {
-  dispatch({
-    type: ACTION_TYPE,
-    payload: { payload }
-  })
-  next(action)
-}
-*/
 
 export const initServers = () => {
   base.ref('servers').orderByChild('player_count').endAt(10).once('value').then((snap) => {
@@ -66,7 +55,6 @@ export const getFriends = () => {
 }
 
 export const getUsers = () => {
-  const baseUser = auth.currentUser
   return new Promise((resolve, reject) => {
     return base.ref('users')
     .once('value').then((snap) => {

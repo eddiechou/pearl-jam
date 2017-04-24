@@ -50,13 +50,8 @@ const render = (Component) => {
 render(App)
 
 if (module.hot) {
-  console.log('module hot')
   module.hot.accept('./components/App.js', () => {
     const hotApp = require('./components/App.js').default
     render(hotApp)
   })
 }
-
-// if (module.hot) {
-//   module.hot.accept('./components/App.js', () => { render(App) })
-// }

@@ -16,7 +16,7 @@
 // export default store
 
 /* *  WITHOUT LOGGER * */
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './reducers/index.js'
 import thunk from 'redux-thunk'
@@ -24,7 +24,6 @@ import {persistStore, autoRehydrate} from 'redux-persist'
 
 const defaultState = {}
 
-// const middleware = applyMiddleware(baseMiddleware)
 const store = createStore(rootReducer, defaultState, composeWithDevTools(applyMiddleware(thunk), autoRehydrate()))
 
 persistStore(store)
