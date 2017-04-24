@@ -1,41 +1,75 @@
 import firebase from 'firebase'
-import { SET_AVAILABLE_SERVERS } from './actions/actionTypes'
-import { setAvailableServers } from './actions/gameActions'
+import { baseConfig } from './baseConfig'
+import store from './store'
 
-const config = {
-  apiKey: 'AIzaSyAr-h45K0XxMQf2PzQdzVW8EJH7upLsxiI',
-  authDomain: 'pearl-jam-19d32.firebaseapp.com',
-  databaseURL: 'https://pearl-jam-19d32.firebaseio.com',
-  storageBucket: 'pearl-jam-19d32.appspot.com'
-}
+import { SET_AVAILABLE_SERVERS, HANDLE_SERVER_UPDATE } from './actions/actionTypes'
 
-export const firebaseApp = firebase.initializeApp(config)
+export const firebaseApp = firebase.initializeApp(baseConfig)
 
-export const baseUIConfig = {
-  signInSuccessUrl: '/home',
-  signInFlow: 'popup',
+const base = firebaseApp.database()
+const auth = firebaseApp.auth()
 
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    {
-      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      requireDisplayName: true
-    }
-  ]
-}
-
-export const baseMiddleware = ({ dispatch }) => (next) => (action) => {
-  console.log('base middleware!')
-  const base = firebaseApp.database()
-  base.ref('servers').on('child_changed', () => {
-    base.ref('servers').once('value', snap => {
-      const servers = snap.val()
-      console.log('updating servers - ', servers)
-      setAvailableServers({ servers })
+export const initServers = () => {
+  base.ref('servers').orderByChild('player_count').endAt(10).once('value').then((snap) => {
+    console.log('snap', snap)
+    console.log('val', snap.val())
+    const servers = snap.val()
+    store.dispatch({
+      type: SET_AVAILABLE_SERVERS,
+      payload: { servers }
     })
   })
-  next(action)
+}
+
+export const listenForServerUpdates = () => {
+  base.ref('servers')
+  .on('child_changed', data => {
+    console.log('child changed ')
+    const server = data.val()
+    server.player_count < 10 &&
+    store.dispatch({
+      type: HANDLE_SERVER_UPDATE,
+      payload: { server }
+    })
+  })
+}
+
+export const checkDisplaynameUnique = (displayName) => {
+  return new Promise((resolve, reject) => {
+    const q = base.ref('users')
+    .orderByChild('displayName').equalTo(displayName)
+    return q.once('value').then((snap) => {
+      resolve(snap.val() === null)
+    })
+    .catch(error => console.log('error', error))
+  })
+}
+
+export const getFriends = () => {
+  const baseUser = auth.currentUser
+  const { uid } = baseUser
+  return new Promise((resolve, reject) => {
+    return base.ref(`users/${uid}/friends`)
+    .once('value').then((snap) => {
+      resolve(snap.val())
+    })
+    .catch(error => console.log(error))
+  })
+}
+
+export const getUsers = () => {
+  return new Promise((resolve, reject) => {
+    return base.ref('users')
+    .once('value').then((snap) => {
+      resolve(snap.val())
+    })
+    .catch(error => console.log(error))
+  })
+}
+
+export const addFriend = (user) => {
+  const baseUser = auth.currentUser
+  const { uid } = baseUser
+  const { id, displayName } = user
+  base.ref(`users/${uid}/friends`).child(id).set({ displayName })
 }

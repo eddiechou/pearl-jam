@@ -3,6 +3,7 @@ import { SET_USER, CREATE_NEW_USER, UPDATE_USER_INFO, SET_GAME } from '../action
 
 const base = firebaseApp.database()
 const auth = firebaseApp.auth()
+const baseUser = auth.currentUser
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -15,8 +16,8 @@ const user = (state = {}, action) => {
     case CREATE_NEW_USER: {
       const { uid, email, photoURL } = action.payload
       const newState = { uid, email, photoURL }
-      /* * writing new user to firebase * */
-      base.ref(`users/${uid}`).set({ displayName: null, email: email, photoURL: photoURL })
+      base.ref(`users/${uid}`)
+      .set({ displayName: null, email: email, photoURL: photoURL })
       return newState
     }
 
@@ -27,13 +28,15 @@ const user = (state = {}, action) => {
       const wins = 0
       const losses = 0
       const newState = Object.assign({}, state)
-      const user = auth.currentUser
-      /* * updating recently added user with display name * */
-      user.updateProfile({ displayName })
+      baseUser.updateProfile({ displayName, avatarColor })
       .then(() => {
-        base.ref(`users/${uid}`).update({ displayName, avatarColor, pearls, rating, wins, losses })
+        base.ref(`users/${uid}`)
+        .update({ displayName, avatarColor, pearls, rating, wins, losses })
+      })
+      .then(() => {
         newState.displayName = displayName
-      }, (error) => console.log(error))
+        newState.avatarColor = avatarColor
+      })
       return newState
     }
 

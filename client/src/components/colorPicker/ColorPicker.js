@@ -5,25 +5,23 @@ import { CirclePicker } from 'react-color'
 import style from './colorPicker-css'
 import colors from './colors'
 
-class ColorPicker extends React.Component {
-  constructor (props) {
-    super(props)
+const ColorPicker = (props) => {
+  const handleChange = (color) => {
+    const { getColorThroughProps } = props
+    const colorName = colors[color.hex]
+    getColorThroughProps(color, colorName)
   }
 
-  render () {
-    const { getColorThroughProps, color } = this.props
-    const { standard, spring, crayola, neon, material } = colors
-    // const { color } = this.state
-    return (
-      <CirclePicker
-        onChange={getColorThroughProps}
-        color={color}
-        colors={material}
-        width='600px'
-        circleSize='70'
-        circleSpacing='25' />
-    )
-  }
+  const { color } = props
+  return (
+    <CirclePicker
+      onChange={handleChange}
+      color={color}
+      colors={colors.hex}
+      width='600px'
+      circleSize='70'
+      circleSpacing='25' />
+  )
 }
 
 export default ColorPicker

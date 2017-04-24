@@ -2,11 +2,12 @@ var express = require('express')
 var path = require('path')
 var cors = require('express-cors')
 
-var app = express()
+const app = express()
 
 app.use(cors({
-	allowedOrigins: ['https://pearl-jam-game-server.herokuapp.com/']
+  allowedOrigins: ['https://pearl-jam-game-server.herokuapp.com/']
 }))
+
 app.use(express.static(__dirname + '/../client/dist'))
 
 app.get('*', function (req, res) {

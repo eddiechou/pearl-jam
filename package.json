@@ -8,14 +8,15 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "go": "webpack-dev-server",
     "start": "babel-node mainServer/mainServer.js",
+    "rollout": "webpack-dev-server --watch --progress",
     "build": "node_modules/.bin/webpack -p --watch",
+    "dev-server": "webpack-dev-server --watch --progress",
     "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
     "dev-server": "node_modules/.bin/webpack-dev-server --progress",
-    "style": "standard",
     "test": "jest --verbose --coverage",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "style": "standard"
   },
   "dependencies": {
     "axios": "^0.16.1",
@@ -58,6 +59,7 @@
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-test-utils": "^15.5.1",
     "react-addons-transition-group": "^15.5.2",
+    "react-autosuggest": "^9.0.1",
     "react-color": "^2.11.4",
     "react-dom": "^15.5.4",
     "react-grid-layout": "^0.14.4",
@@ -78,6 +80,7 @@
     "redux-logger": "^3.0.1",
     "redux-persist": "^4.6.0",
     "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0",
     "reselect": "^3.0.0",
     "sinon": "^2.1.0",
     "socket.io": "^1.7.3",

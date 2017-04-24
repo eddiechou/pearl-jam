@@ -2,7 +2,8 @@ const style = {
   container: {
     margin: '0',
     overflow: 'hidden',
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
+    backgroundColor: 'gray',
     display: 'flex',
     alignItems: 'center',
     height: '100vh',

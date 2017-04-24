@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 /* * Utils * */
 import { firebaseApp } from '../../base'
 
 /* * Styles * */
+import style from './navDropMenu-css'
 import FlatButton from 'material-ui/FlatButton'
 import MenuItem from 'material-ui/MenuItem'
 import Divider from 'material-ui/Divider'
@@ -54,9 +55,11 @@ class NavDropMenu extends Component {
   }
 
   render () {
+    const { button2 } = style
     return (
       <div>
         <FlatButton
+          style={button2}
           label='More'
           onTouchTap={::this.handleTouchTap}
           secondary />
