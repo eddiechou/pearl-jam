@@ -8,6 +8,7 @@
     "node": ">=6.4.0"
   },
   "scripts": {
+    "start": "babel-node mainServer/mainServer.js",
     "rollout": "webpack-dev-server --watch --progress",
     "build": "node_modules/.bin/webpack -p --watch",
     "dev-server": "webpack-dev-server --watch --progress",
@@ -15,7 +16,6 @@
     "dev-server": "node_modules/.bin/webpack-dev-server --progress",
     "test": "jest --verbose --coverage",
     "test:watch": "npm test -- --watch",
-    "server": "babel-node mainServer/mainServer.js",
     "style": "standard"
   },
   "dependencies": {
