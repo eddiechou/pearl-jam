@@ -17,6 +17,7 @@ export const initServers = () => {
       payload: { servers }
     })
   })
+}
 
 export const listenForServerUpdates = () => {
   base.ref('servers')
