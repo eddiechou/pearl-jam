@@ -55,3 +55,7 @@ if (module.hot) {
     render(hotApp)
   })
 }
+
+// if (module.hot) {
+//   module.hot.accept('./components/App.js', () => { render(App) })
+// }
