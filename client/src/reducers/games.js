@@ -3,6 +3,7 @@ import { firebaseApp } from '../base'
 
 const auth = firebaseApp.auth()
 const base = firebaseApp.database()
+const baseUser = auth.currentUser
 
 const games = (state = {}, action) => {
   switch (action.type) {
@@ -26,8 +27,7 @@ const games = (state = {}, action) => {
     }
     case SET_GAME: {
       const { currentGame, gameID } = action.payload
-      const user = auth.currentUser
-      const { uid, displayName } = user
+      const { uid, displayName } = baseUser
       const newState = Object.assign({}, state)
       base.ref(`servers/${gameID}/player_count`).once('value', snap => {
         const count = snap.val() + 1

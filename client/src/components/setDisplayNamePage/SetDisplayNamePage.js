@@ -38,6 +38,7 @@ class SetDisplayNamePage extends Component {
 
 
   handleSubmit (event) {
+    console.log('handle submit')
     const { updateUserInfo, user } = this.props
     const { displayName, colorHex, colorName } = this.state
     const { uid } = user
@@ -62,7 +63,6 @@ class SetDisplayNamePage extends Component {
   }
 
   getColorThroughProps (colorHex, colorName) {
-    console.log(colorHex.hex, colorName)
     this.setState({ colorHex: colorHex.hex, colorName })
   }
   render () {

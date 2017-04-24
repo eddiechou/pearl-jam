@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import PropTypes from 'prop-types'
 
 /* * Utils * */
+import 'react-hot-loader/patch'
 import { AppContainer } from 'react-hot-loader'
 import store from './store'
 import RedBox from 'redbox-react'
@@ -46,8 +46,17 @@ const render = (Component) => {
     document.getElementById('root')
   )
 }
+
 render(App)
 
 if (module.hot) {
-  module.hot.accept('./components/App.js', () => { render(App) })
+  console.log('module hot')
+  module.hot.accept('./components/App.js', () => {
+    const hotApp = require('./components/App.js').default
+    render(hotApp)
+  })
 }
+
+// if (module.hot) {
+//   module.hot.accept('./components/App.js', () => { render(App) })
+// }
