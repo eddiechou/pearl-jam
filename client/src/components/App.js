@@ -21,6 +21,7 @@ import GamePage from './GamePage'
 import PlayerView from './playerView/PlayerView'
 import Game from './game/Game'
 import SignUp from './authenticationPage/SignUp'
+
 const history = createHistory()
 const auth = firebaseApp.auth()
 const base = firebaseApp.database()
