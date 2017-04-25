@@ -11,9 +11,8 @@
     "start": "babel-node mainServer/mainServer.js",
     "rollout": "webpack-dev-server --watch --progress",
     "build": "node_modules/.bin/webpack -p --watch",
-    "dev-server": "webpack-dev-server --watch --progress",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
     "dev-server": "node_modules/.bin/webpack-dev-server --progress",
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
     "test": "jest --verbose --coverage",
     "test:watch": "npm test -- --watch",
     "style": "standard"
@@ -71,6 +70,7 @@
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "react-router-redux": "^5.0.0-alpha.4",
+    "react-select": "^1.0.0-rc.3",
     "react-tap-event-plugin": "^2.0.1",
     "react-test-renderer": "^15.5.4",
     "react-transform": "0.0.3",
