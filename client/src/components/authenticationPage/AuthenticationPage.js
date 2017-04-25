@@ -84,13 +84,25 @@ class AuthenticationPage extends Component {
     .catch(error => console.log(error.message))
   }
 
+
+
+
   authenticateWithEmail () {
     const { setUser } = this.props
     const { email, password } = this.state
     auth.signInWithEmailAndPassword(email, password)
     .then(user => {
-      const { uid, displayName, email, photoURL } = user
-      setUser({ uid, displayName, email, photoURL })
+      return new Promise((resolve, reject) => {
+        const { uid, displayName, email, photoURL } = user
+        return base.ref(`users/${uid}`).once('value').then(snap => {
+          const { avatar } = snap.val()
+          resolve({ uid, displayName, avatar, email, photoURL })
+        })
+      })
+    })
+    .then((userObject) => {
+      console.log('about to set user with user object = ', userObject)
+      setUser(userObject)
       this.context.router.history.push('/home')
     })
     .catch(error => console.log(error.message))

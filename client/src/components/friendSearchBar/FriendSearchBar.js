@@ -77,32 +77,33 @@ class FriendsSearchBar extends Component {
         }
       }
 
-      const initUsersArray = (users, friends) => {
-        for (let id in users) {
-          if (!friends[id]) {
-            const { displayName } = users[id]
-            const nonFriend = { id, displayName }
-            this.userCategories[1].users.push(nonFriend)
-          }
-        }
-      }
 
-      getFriendsPromise.then(friends => {
-        return new Promise((resolve, reject) => {
-          initFriendsArray(friends)
-          resolve(friends)
-        })
-      })
-      .then(friends => {
-        getUsersPromise.then(users => {
-          initUsersArray(users, friends)
-        })
-      })
-    } catch (e) {
-      console.log('e', e);
+    const initUsersArray = (users, friends) => {
+      for (let id in users) {
+        const { displayName } = users[id]
+        const nonFriend = { id, displayName }
+        !friends && this.userCategories[1].users.push(nonFriend)
+        friends && !friends[id] && this.userCategories[1].users.push(nonFriend)
+      }
     }
- 
-  }
+
+
+    getFriendsPromise.then(friends => {
+      return new Promise((resolve, reject) => {
+        friends && initFriendsArray(friends)
+        resolve(friends)
+       })
+     })
+     .then(friends => {
+       getUsersPromise.then(users => {
+         initUsersArray(users, friends)
+       })
+     })
+   } catch (e) {
+    console.log('e', e);
+   }
+ }
+
 
   onChange (event, { newValue }) {
     this.setState({ showButton: false, value: newValue })

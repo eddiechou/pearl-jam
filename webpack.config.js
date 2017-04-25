@@ -7,7 +7,6 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'react-hot-loader/patch',
-    'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr',
     './client/src/index.js'
   ],
   output: {
