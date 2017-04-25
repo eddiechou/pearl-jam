@@ -3,7 +3,7 @@ const style = {
     margin: '0',
     overflow: 'hidden',
     // backgroundColor: '#000000',
-    backgroundColor: 'gray',
+    // backgroundColor: '#ffbfda',
     display: 'flex',
     alignItems: 'center',
     height: '100vh',

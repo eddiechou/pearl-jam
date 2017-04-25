@@ -35,6 +35,9 @@ const user = (state = {}, action) => {
         newState.displayName = displayName
         newState.avatar = avatarColorID
       })
+      .catch((err) => {
+        console.log('err', err);
+      })
       return newState
     }
 
