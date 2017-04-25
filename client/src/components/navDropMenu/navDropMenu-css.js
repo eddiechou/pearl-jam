@@ -17,6 +17,7 @@ const style = {
     fontSize: '15px',
     padding: '10px 20px',
     margin: '10px',
+    marginTop: '-10px',
     fontFamily: 'Quicksand',
     cursor: 'pointer'
   }

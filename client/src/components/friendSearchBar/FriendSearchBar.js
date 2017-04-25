@@ -65,38 +65,43 @@ class FriendsSearchBar extends Component {
   }
 
   componentWillMount () {
-    const getFriendsPromise = getFriends()
-    const getUsersPromise = getUsers()
+    try {
+      const getFriendsPromise = getFriends()
+      const getUsersPromise = getUsers()
 
-    const initFriendsArray = (friends) => {
-      for (let id in friends) {
-        const { displayName } = friends[id]
-        const friend = { id, displayName }
-        this.userCategories[0].users.push(friend)
-      }
-    }
-
-    const initUsersArray = (users, friends) => {
-      for (let id in users) {
-        if (!friends[id]) {
-          const { displayName } = users[id]
-          const nonFriend = { id, displayName }
-          this.userCategories[1].users.push(nonFriend)
+      const initFriendsArray = (friends) => {
+        for (let id in friends) {
+          const { displayName } = friends[id]
+          const friend = { id, displayName }
+          this.userCategories[0].users.push(friend)
         }
       }
-    }
 
-    getFriendsPromise.then(friends => {
-      return new Promise((resolve, reject) => {
-        initFriendsArray(friends)
-        resolve(friends)
+      const initUsersArray = (users, friends) => {
+        for (let id in users) {
+          if (!friends[id]) {
+            const { displayName } = users[id]
+            const nonFriend = { id, displayName }
+            this.userCategories[1].users.push(nonFriend)
+          }
+        }
+      }
+
+      getFriendsPromise.then(friends => {
+        return new Promise((resolve, reject) => {
+          initFriendsArray(friends)
+          resolve(friends)
+        })
       })
-    })
-    .then(friends => {
-      getUsersPromise.then(users => {
-        initUsersArray(users, friends)
+      .then(friends => {
+        getUsersPromise.then(users => {
+          initUsersArray(users, friends)
+        })
       })
-    })
+    } catch (e) {
+      console.log('e', e);
+    }
+ 
   }
 
   onChange (event, { newValue }) {

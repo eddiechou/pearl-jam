@@ -12,6 +12,9 @@ import FriendSearchBar from '../friendSearchBar/FriendSearchBar'
 /* * Styles * */
 import style from './userHomePage-css'
 
+require('./gradient.css');
+
+
 class UserHomePage extends Component {
   constructor () {
     super()
@@ -59,7 +62,7 @@ class UserHomePage extends Component {
     return (
       <div>
         <UserNavBar />
-        <div style={container}>
+        <div id="gradient" style={container}>
           <button
             ref='createGame'
             style={hover1 ? buttonHover1 : button1}
