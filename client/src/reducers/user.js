@@ -7,8 +7,8 @@ const auth = firebaseApp.auth()
 const user = (state = {}, action) => {
   switch (action.type) {
     case SET_USER: {
-      const { uid, displayName, email, photoURL } = action.payload
-      const newState = { uid, displayName, email, photoURL }
+      const { uid, displayName, avatar, email, photoURL } = action.payload
+      const newState = { uid, displayName, avatar, email, photoURL }
       return newState
     }
 

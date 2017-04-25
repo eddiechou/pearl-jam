@@ -29,7 +29,8 @@ const games = (state = {}, action) => {
       const { currentGame, gameID } = action.payload
       const { uid, displayName } = baseUser
       const newState = Object.assign({}, state)
-      base.ref(`servers/${gameID}/player_count`).once('value', snap => {
+      base.ref(`servers/${gameID}/player_count`).once('value')
+      .then((snap) => {
         const count = snap.val() + 1
         base.ref(`servers/${gameID}/player_count`).set(count)
       })

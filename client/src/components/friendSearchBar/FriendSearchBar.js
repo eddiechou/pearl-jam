@@ -78,17 +78,16 @@ class FriendsSearchBar extends Component {
 
     const initUsersArray = (users, friends) => {
       for (let id in users) {
-        if (!friends[id]) {
-          const { displayName } = users[id]
-          const nonFriend = { id, displayName }
-          this.userCategories[1].users.push(nonFriend)
-        }
+        const { displayName } = users[id]
+        const nonFriend = { id, displayName }
+        !friends && this.userCategories[1].users.push(nonFriend)
+        friends && !friends[id] && this.userCategories[1].users.push(nonFriend)
       }
     }
 
     getFriendsPromise.then(friends => {
       return new Promise((resolve, reject) => {
-        initFriendsArray(friends)
+        friends && initFriendsArray(friends)
         resolve(friends)
       })
     })
