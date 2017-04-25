@@ -8,8 +8,8 @@ import colors from './colors'
 const ColorPicker = (props) => {
   const handleChange = (color) => {
     const { getColorThroughProps } = props
-    const colorName = colors[color.hex]
-    getColorThroughProps(color, colorName)
+    const colorIdx = colors.indexOf(color.hex)
+    getColorThroughProps(color, colorIdx)
   }
 
   const { color } = props
@@ -17,7 +17,7 @@ const ColorPicker = (props) => {
     <CirclePicker
       onChange={handleChange}
       color={color}
-      colors={colors.hex}
+      colors={colors}
       width='600px'
       circleSize='70'
       circleSpacing='25' />

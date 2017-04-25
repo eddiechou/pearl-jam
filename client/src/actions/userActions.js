@@ -10,7 +10,7 @@ export const createNewUser = ({ uid, email, photoURL }) => ({
   payload: { uid, email, photoURL }
 })
 
-export const updateUserInfo = ({ uid, displayName, avatarColor }) => ({
+export const updateUserInfo = ({ uid, displayName, avatarColorID }) => ({
   type: UPDATE_USER_INFO,
-  payload: { uid, displayName, avatarColor }
+  payload: { uid, displayName, avatarColorID }
 })

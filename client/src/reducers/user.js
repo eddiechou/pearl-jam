@@ -3,7 +3,6 @@ import { SET_USER, CREATE_NEW_USER, UPDATE_USER_INFO, SET_GAME } from '../action
 
 const base = firebaseApp.database()
 const auth = firebaseApp.auth()
-const baseUser = auth.currentUser
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -17,25 +16,24 @@ const user = (state = {}, action) => {
       const { uid, email, photoURL } = action.payload
       const newState = { uid, email, photoURL }
       base.ref(`users/${uid}`)
-      .set({ displayName: null, email: email, photoURL: photoURL })
+      .set({ displayName: null, email: email, photoURL: photoURL, avatar: null, pearls: 100, rating: 1200, wins: 0, losses: 0 })
       return newState
     }
 
     case UPDATE_USER_INFO: {
-      const { uid, displayName, avatarColor } = action.payload
-      const pearls = 100
-      const rating = 1200
-      const wins = 0
-      const losses = 0
+      console.log('updating user info')
+      const { uid, displayName, avatarColorID } = action.payload
+      console.log('info', uid, displayName, avatarColorID)
+      const baseUser = auth.currentUser
       const newState = Object.assign({}, state)
-      baseUser.updateProfile({ displayName, avatarColor })
+      baseUser.updateProfile({ displayName })
       .then(() => {
         base.ref(`users/${uid}`)
-        .update({ displayName, avatarColor, pearls, rating, wins, losses })
+        .update({ displayName, avatar: avatarColorID })
       })
       .then(() => {
         newState.displayName = displayName
-        newState.avatarColor = avatarColor
+        newState.avatar = avatarColorID
       })
       return newState
     }
