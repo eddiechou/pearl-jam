@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -38,16 +38,14 @@ class SetDisplayNamePage extends Component {
 
 
   handleSubmit (event) {
-    console.log('handle submit')
     const { updateUserInfo, user } = this.props
-    const { displayName, colorHex, colorName } = this.state
+    const { displayName, colorHex, colorIdx } = this.state
     const { uid } = user
     const baseUser = auth.currentUser
-    // check username
     const promise = checkDisplaynameUnique(displayName)
     promise.then(unique => {
       if (unique) {
-        updateUserInfo({ uid, displayName, avatarColor: colorName })
+        updateUserInfo({ uid, displayName, avatarColorID: colorIdx })
         this.context.router.history.push('/home')
       } else {
         const instructions = 'oh snap, that username\
@@ -62,8 +60,8 @@ class SetDisplayNamePage extends Component {
     this.setState({hovering: !this.state.hovering})
   }
 
-  getColorThroughProps (colorHex, colorName) {
-    this.setState({ colorHex: colorHex.hex, colorName })
+  getColorThroughProps (colorHex, colorIdx) {
+    this.setState({ colorHex: colorHex.hex, colorIdx })
   }
   render () {
     const { container, title, colorPicker, inputContainer, textField, input, underLine, buttonContainer, button, buttonHover } = style
