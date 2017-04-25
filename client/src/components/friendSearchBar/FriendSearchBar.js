@@ -99,7 +99,11 @@ class FriendsSearchBar extends Component {
          initUsersArray(users, friends)
        })
      })
+   } catch (e) {
+    console.log('e', e);
    }
+ }
+
 
   onChange (event, { newValue }) {
     this.setState({ showButton: false, value: newValue })
