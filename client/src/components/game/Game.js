@@ -18,7 +18,7 @@ class Game extends React.Component {
     scripts.appendChild(script)
 
     let script1 = document.createElement('script')
-    script1.src = 'https://ddu0j6ouvozck.cloudfront.net/phaser.min.js'
+    script1.src = 'https://s3-us-west-1.amazonaws.com/pearljamhrsf72/phaser.min.js'
     script1.async = false
     scripts.appendChild(script1)
 
@@ -28,12 +28,12 @@ class Game extends React.Component {
     scripts.appendChild(script2)
 
     let script3 = document.createElement('script')
-    script3.src = 'https://ddu0j6ouvozck.cloudfront.net/socket.js'
+    script3.src = 'https://s3-us-west-1.amazonaws.com/pearljamhrsf72/socket.js'
     script3.async = false
     scripts.appendChild(script3)
 
     let script4 = document.createElement('script')
-    script4.src = 'https://ddu0j6ouvozck.cloudfront.net/deployment.min.js'
+    script4.src = 'https://s3-us-west-1.amazonaws.com/pearljamhrsf72/deployment.min.js'
     script4.async = false
     scripts.appendChild(script4)
   }
