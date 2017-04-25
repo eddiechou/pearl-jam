@@ -20,7 +20,7 @@ import SpectatorPage from './SpectatorPage'
 import GamePage from './GamePage'
 import PlayerView from './playerView/PlayerView'
 import Game from './game/Game'
-
+import SignUp from './authenticationPage/SignUp'
 const history = createHistory()
 const auth = firebaseApp.auth()
 const base = firebaseApp.database()
@@ -40,9 +40,9 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <div style={{height: '100%', width: '100%'}}>
         <ConnectedRouter history={history}>
-          <div>
+          <div style={{height: '100%', width: '100%'}}>
             <Route exact path='/' component={AuthenticationPage} />
             <Route path='/join' component={AuthenticationPage} />
             <Route path='/setusername' component={SetDisplayNamePage} />
@@ -53,6 +53,7 @@ class App extends Component {
             <Route path='/playerView' component={PlayerView} />
             <Route path='/goodbye' render={() => ::this.handleLogout()} />
             <Route path='/playGame' component={Game} />
+            <Route path='/signUp' component={SignUp} />
           </div>
         </ConnectedRouter>
       </div>

@@ -7,7 +7,11 @@ import { SET_AVAILABLE_SERVERS, HANDLE_SERVER_UPDATE } from './actions/actionTyp
 export const firebaseApp = firebase.initializeApp(baseConfig)
 
 const base = firebaseApp.database()
+//Export the base
+
 const auth = firebaseApp.auth()
+
+
 
 export const initServers = () => {
   base.ref('servers').orderByChild('player_count').endAt(10).once('value').then((snap) => {

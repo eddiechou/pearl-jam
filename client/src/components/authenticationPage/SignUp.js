@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-
-/* * Utils * */
-import { baseUIConfig } from '../../baseConfig'
-import { firebaseApp } from '../../base'
-import firebaseui from 'firebaseui'
-
-/* * Components * */
-import TestNavBar from '../testNavBar/TestNavBar'
 /* * Actions * */
 import { setUser, createNewUser } from '../../actions/userActions'
+
+/** Utils */
+import { firebaseApp } from '../../base'
 
 /* * Styles * */
 import style from './authenticationPage-css'
@@ -18,11 +12,15 @@ require("./bounce-animation.css")
 
 
 
+
+import PropTypes from 'prop-types'
+
+
 const base = firebaseApp.database()
 const auth = firebaseApp.auth()
-const baseUI = new firebaseui.auth.AuthUI(auth)
+// const baseUI = new firebaseui.auth.AuthUI(auth)
 
-class AuthenticationPage extends Component {
+class SignUp extends Component {
   constructor () {
     super()
     this.state = {
@@ -34,15 +32,7 @@ class AuthenticationPage extends Component {
       hover1: false,
       hover2: false
     }
-    // baseUI.start('#firebaseui-auth-container', baseUIConfig)
   }
-  componentDidMount() {
-
-
-
-  }
-
-
 
   authenticateWithProvider (provider) {
     const { setUser } = this.props
@@ -84,30 +74,6 @@ class AuthenticationPage extends Component {
     .catch(error => console.log(error.message))
   }
 
-
-
-
-  authenticateWithEmail () {
-    const { setUser } = this.props
-    const { email, password } = this.state
-    auth.signInWithEmailAndPassword(email, password)
-    .then(user => {
-      return new Promise((resolve, reject) => {
-        const { uid, displayName, email, photoURL } = user
-        return base.ref(`users/${uid}`).once('value').then(snap => {
-          const { avatar } = snap.val()
-          resolve({ uid, displayName, avatar, email, photoURL })
-        })
-      })
-    })
-    .then((userObject) => {
-      console.log('about to set user with user object = ', userObject)
-      setUser(userObject)
-      this.context.router.history.push('/home')
-    })
-    .catch(error => console.log(error.message))
-  }
-
   toggleHover (btn) {
     this.setState({ [`hover${btn}`]: !this.state[`hover${btn}`] })
   }
@@ -117,14 +83,14 @@ class AuthenticationPage extends Component {
     const { hover1, hover2 } = this.state
     if (!this.state.authenticating) {
       return (
-        <div id="stage" style={container}>
+        <div style={container}>
           <div id="traveler">
-            <div id="bouncer"></div>
+            <div id="bouncer"> </div>
           </div>
           <div style={formContainer} >
             <div >
-              <h1>Sign In</h1>
-              <div style={{textAlign: 'center'}}>Log in!</div>
+              <h1>Sign Up</h1>
+              <div style={{textAlign: 'center'}}>Sign Up!</div>
             </div>
             <input
               type='email'
@@ -144,13 +110,13 @@ class AuthenticationPage extends Component {
                 style={hover1 ? buttonHover1 : button1}
                 onMouseEnter={() => ::this.toggleHover(1)}
                 onMouseLeave={() => ::this.toggleHover(1)}
-                onClick={::this.authenticateWithEmail}>
-              log in
+                onClick={::this.createUserWithEmail}>
+                Sign Up
               </button>
-              <span onClick={() => {this.context.router.history.push('/signUp')}}
+              <span onClick={() => {this.context.router.history.push('/join')}}
                 style={{textAlign: 'right'}}> 
-              No account? <span style={{cursor: 'pointer', color: 'blue'}}> Sign up </span> </span>
-              <hr style={{width: '100%', marginTop: 30}}/>
+              Have an Account? <span style={{cursor: 'pointer', color: 'blue'}}> Sign In </span></span>
+              <hr style={{width: '100%'}}/>
 
               <button
                 style={hover2 ? buttonHover2 : button2}
@@ -166,8 +132,9 @@ class AuthenticationPage extends Component {
   }
 }
 
-AuthenticationPage.contextTypes = {
+SignUp.contextTypes = {
   router: PropTypes.object
 }
 
-export default connect(null, { setUser, createNewUser })(AuthenticationPage)
+
+export default connect(null, { setUser, createNewUser })(SignUp);

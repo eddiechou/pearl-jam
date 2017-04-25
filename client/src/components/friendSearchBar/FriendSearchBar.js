@@ -65,16 +65,18 @@ class FriendsSearchBar extends Component {
   }
 
   componentWillMount () {
-    const getFriendsPromise = getFriends()
-    const getUsersPromise = getUsers()
+    try {
+      const getFriendsPromise = getFriends()
+      const getUsersPromise = getUsers()
 
-    const initFriendsArray = (friends) => {
-      for (let id in friends) {
-        const { displayName } = friends[id]
-        const friend = { id, displayName }
-        this.userCategories[0].users.push(friend)
+      const initFriendsArray = (friends) => {
+        for (let id in friends) {
+          const { displayName } = friends[id]
+          const friend = { id, displayName }
+          this.userCategories[0].users.push(friend)
+        }
       }
-    }
+
 
     const initUsersArray = (users, friends) => {
       for (let id in users) {
@@ -85,18 +87,19 @@ class FriendsSearchBar extends Component {
       }
     }
 
+
     getFriendsPromise.then(friends => {
       return new Promise((resolve, reject) => {
         friends && initFriendsArray(friends)
         resolve(friends)
-      })
-    })
-    .then(friends => {
-      getUsersPromise.then(users => {
-        initUsersArray(users, friends)
-      })
-    })
-  }
+       })
+     })
+     .then(friends => {
+       getUsersPromise.then(users => {
+         initUsersArray(users, friends)
+       })
+     })
+   }
 
   onChange (event, { newValue }) {
     this.setState({ showButton: false, value: newValue })
