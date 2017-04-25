@@ -16,6 +16,10 @@ import { updateCurrentActiveGames } from '../../actions/gameActions'
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
 
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 const base = firebaseApp.database()
 
 class BettingPage extends Component {
@@ -23,21 +27,17 @@ class BettingPage extends Component {
     const { updateCurrentActiveGames } = this.props
     // Call firebase to grab all games that are in-progress
     var allGamesRef = base.ref('games/')
-    // On every change to games, client will be notified
     allGamesRef.on('value', function (snapshot) {
       var games = snapshot.val()
 
-      // Copy games that are in-progress to currentActiveGames
       var currentActiveGames = {}
-
       Object.keys(games).map((key) => {
+        // Grab currently active games (status: 'in-progress')
         if (games[key].status === 'in-progress') {
           currentActiveGames[key] = Object.assign({}, games[key])
         }
       })
 
-
-      // Update the redux-store
       updateCurrentActiveGames({currentActiveGames})
     })
   }
@@ -46,31 +46,28 @@ class BettingPage extends Component {
     console.log(this.props)
   }
 
-  // For each currentActiveGame
   render () {
     const { games } = this.props
     const { currentActiveGames } = games
     return (
-      <div>
-        <UserNavBar />
-        <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
+      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <div>
-          <p>There are currently <strong>{currentActiveGames && Object.keys(currentActiveGames).length || 0}</strong> active games!</p>
-        </div>
-        {currentActiveGames ? Object.keys(currentActiveGames).map((key, index) => {
-          const game = currentActiveGames[key]
-
-
-          return <CurrentGameCard game={game} key={index} gameID={key} index={index + 1} />
-
-        }) : null}
-        <TestNavBar />
-      </div>
+          <UserNavBar />
+          <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
+          <div>
+            <p>There are currently <strong>{currentActiveGames && Object.keys(currentActiveGames).length || 0}</strong> active games!</p>
+          </div>
+          {currentActiveGames ? Object.keys(currentActiveGames).map((key, index) => {
+            const game = currentActiveGames[key]
+            return <CurrentGameCard game={game} key={index} gameID={key} index={index + 1} />
+          }) : null}
+          <TestNavBar />
+          </div>
+      </MuiThemeProvider>
     )
   }
 }
 
-// Will pass currentActiveGames from the store as props to BettingPage
 const mapStateToProps = ({ games }) => {
   return { games }
 }
