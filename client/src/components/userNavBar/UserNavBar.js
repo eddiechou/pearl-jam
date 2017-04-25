@@ -18,7 +18,7 @@ class UserNavBar extends Component {
         style={bar}>
         <FriendSearchBar />
         <ToolbarGroup>
-          <Link to='/'>
+          <Link to='/home'>
             <button style={button}>HOME</button>
           </Link>
           <Link to='/bet'>

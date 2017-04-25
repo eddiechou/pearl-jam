@@ -1,6 +1,19 @@
 const style = {
   container: {
-    backgroundColor: 'black'
+    backgroundColor: '#ffbfda',
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    
+  },
+  formContainer: {
+    width: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    
   },
   body: {
     padding: '0',
@@ -26,7 +39,7 @@ const style = {
     padding: '10px 20px',
     margin: '10px',
     fontFamily: 'PT Mono, serif',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   button2: {
     border: '4px solid #ffffff',
@@ -108,7 +121,22 @@ const style = {
     border: '1px solid white',
     backgroundColor: '#00aced',
     color: 'white'
+  },
+  emailInput: {
+    marginTop: '20px',
+    // width: 'calc(100% - 70px)',
+    height: '40px',
+    width: '320px'
+
+
+  },
+  passwordInput: {
+    marginTop: '20px',
+    height: '40px',
+    // width: 'calc(100% - 70px)',
+    width: '320px'
   }
+
 
 }
 
