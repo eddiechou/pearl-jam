@@ -34,7 +34,7 @@ consoleErrorReporter.propTypes = {
 }
 
 /* * wrapping App.js in Proivder component to allow access to our redux store * */
-const render = (Component) => {
+const render = function (Component) {
   ReactDOM.render(
     <AppContainer errorReporter={consoleErrorReporter}>
       <MuiThemeProvider muiTheme={muiTheme}>

@@ -11,8 +11,6 @@ const auth = firebaseApp.auth()
 
 export const initServers = () => {
   base.ref('servers').orderByChild('player_count').endAt(10).once('value').then((snap) => {
-    console.log('snap', snap)
-    console.log('val', snap.val())
     const servers = snap.val()
     store.dispatch({
       type: SET_AVAILABLE_SERVERS,
@@ -24,7 +22,6 @@ export const initServers = () => {
 export const listenForServerUpdates = () => {
   base.ref('servers')
   .on('child_changed', data => {
-    console.log('child changed ')
     const server = data.val()
     server.player_count < 10 &&
     store.dispatch({
