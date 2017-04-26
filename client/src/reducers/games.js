@@ -26,16 +26,28 @@ const games = (state = {}, action) => {
       return newState
     }
     case SET_GAME: {
-      const { currentGame, gameID } = action.payload
-      const { uid, displayName } = baseUser
+      console.log('in setting game!');
+      console.log('action payload', action.payload);
+
       const newState = Object.assign({}, state)
-      base.ref(`servers/${gameID}/player_count`).once('value')
-      .then((snap) => {
-        const count = snap.val() + 1
-        base.ref(`servers/${gameID}/player_count`).set(count)
-      })
-      base.ref(`servers/${gameID}/players`).child(uid).set({ displayName })
+      const { currentGame, gameID } = action.payload
+      try {
+        if (baseUser && baseUser.uid && baseUser.displayName) {
+          const { uid, displayName } = baseUser
+          base.ref(`servers/${gameID}/player_count`).once('value')
+          .then((snap) => {
+            const count = snap.val() + 1
+            base.ref(`servers/${gameID}/player_count`).set(count)
+          })
+          base.ref(`servers/${gameID}/players`).child(uid).set({ displayName })
+        } else {
+          console.log('need to set stuff');
+        }
+      } catch (e) {
+        console.log('error in set game reducer', e);
+      }
       newState.currentGame = currentGame
+      console.log('newSTATE', newState);
       return newState
     }
     default:

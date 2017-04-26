@@ -6,7 +6,7 @@ const style = {
   },
   game: {
     flex: '1',
-    backgroundImage: 'url("https://www.transparenttextures.com/patterns/concrete-wall-2.png")',
+    backgroundColor: 'pink',
     width: '100%',
     height: '1000px',
     display: 'flex',

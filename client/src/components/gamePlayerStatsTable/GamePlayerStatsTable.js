@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
+import style from './gamePlayerStatsTable-css.js'
 
 class GamePlayerStatsTable extends Component {
   constructor (props) {
@@ -7,13 +8,13 @@ class GamePlayerStatsTable extends Component {
   }
 
   render () {
+    const { tableStyle, colStyle } = style
     return (
-      <Table deselectOnClickaway={false} onRowSelection={this.props.onRowSelection}>
+      <Table style={tableStyle} deselectOnClickaway={false} onRowSelection={this.props.onRowSelection}>
         <TableHeader adjustForCheckbox={false}>
           <TableRow>
             <TableHeaderColumn>Player</TableHeaderColumn>
             <TableHeaderColumn>Rating</TableHeaderColumn>
-            <TableHeaderColumn>Odds</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody deselectOnClickaway={false}>
@@ -23,7 +24,6 @@ class GamePlayerStatsTable extends Component {
               <TableRow key={index}>
                 <TableRowColumn>{player.displayName}</TableRowColumn>
                 <TableRowColumn>{player.rating}</TableRowColumn>
-                <TableRowColumn />
               </TableRow>)
           })}
         </TableBody>

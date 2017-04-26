@@ -18,11 +18,11 @@ class UserNavBar extends Component {
         style={bar}>
         <FriendSearchBar />
         <ToolbarGroup>
-          <Link to='/'>
+          <Link to='/home'>
             <button style={button}>HOME</button>
           </Link>
-          <Link to='/bet'>
-            <button style={button}>BET</button>
+          <Link to='/spectate'>
+            <button style={button}>SPECTATE</button>
           </Link>
           <Link to='/playerView'>
             <button style={button}>PLAY</button>
