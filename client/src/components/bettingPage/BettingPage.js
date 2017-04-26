@@ -50,7 +50,6 @@ class BettingPage extends Component {
     const { games } = this.props
     const { currentActiveGames } = games
    
-
     return (
       <MuiThemeProvider muiTheme={customMuiTheme}>
         <div style={{backgroundColor: 'pink'}}>
