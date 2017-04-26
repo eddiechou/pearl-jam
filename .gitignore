@@ -22,6 +22,7 @@ coverage
 build/
 dist/
 !dist/index.html
+!dist/main.css
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:

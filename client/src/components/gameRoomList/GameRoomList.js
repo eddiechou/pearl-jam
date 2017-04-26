@@ -17,8 +17,12 @@ class GameRoomList extends Component {
     const { setGame, games } = this.props
     const { servers } = games
     const currentGame = servers[gameID]
+    console.log('currentGame', currentGame);
     this.setState({ selected: gameID })
+    window.currentGame = currentGame;
+    
     setGame({ currentGame, gameID })
+
   }
   render () {
     const { container, entryNonClicked, entryClicked } = style
