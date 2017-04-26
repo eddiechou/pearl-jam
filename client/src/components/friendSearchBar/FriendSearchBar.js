@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+/* * Utils * */
+import { getFriends, getUsers } from '../../base'
+
+/* * Actions * */
+import { setBaseUsers } from '../../actions/userActions'
+
+/* * Components * */
 import Autosuggest from 'react-autosuggest'
-import { getFriends, getUsers, addFriend } from '../../base'
 
 /* * Styles * */
 import style from './friendSearchBar-css'
@@ -16,19 +24,32 @@ const renderSuggestion = (suggestion) => (
 )
 
 const renderSectionTitle = (section) => {
+  if (section.category === 'Friends') {
+    const { sectionDiv } = style
+    return (
+      <div>
+        <br />
+        <br />
+        <div style={sectionDiv} />
+        <br />
+      </div>
+    )
+  }
   return (
-    <strong>{section.category}</strong>
+    <div>
+      <br />
+      <br />
+    </div>
   )
 }
 
-const updateUsersArray = (users, userID) => users.filter(user => user.id !== userID)
+// const updateUsersArray = (users, userID) => users.filter(user => user.id !== userID)
 
 class FriendsSearchBar extends Component {
   constructor () {
     super()
 
     this.state = {
-      showButton: false,
       value: '',
       id: null,
       suggestions: [],
@@ -36,11 +57,11 @@ class FriendsSearchBar extends Component {
     }
     this.userCategories = [
       {
-        category: 'Friends',
+        category: 'Members',
         users: []
       },
       {
-        category: 'Members',
+        category: 'Friends',
         users: []
       }
     ]
@@ -49,28 +70,29 @@ class FriendsSearchBar extends Component {
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
     this.onSuggestionSelected = this.onSuggestionSelected.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-    this.toggleHover = this.toggleHover.bind(this)
   }
 
   componentWillMount () {
+    const { setBaseUsers } = this.props
     const getFriendsPromise = getFriends()
     const getUsersPromise = getUsers()
+    const friendsArray = []
+    const usersArray = []
 
     const initFriendsArray = (friends) => {
       for (let id in friends) {
         const { displayName } = friends[id]
         const friend = { id, displayName, color: '#ffffff' }
-        this.userCategories[0].users.push(friend)
+        friendsArray.push(friend)
       }
     }
 
     const initUsersArray = (users, friends) => {
       for (let id in users) {
         const { displayName } = users[id]
-        const user = { id, displayName, color: '#f001f2' }
-        !friends && this.userCategories[1].users.push(user)
-        friends && !friends[id] && this.userCategories[1].users.push(user)
+        const user = { id, displayName, color: '#ffffff' }
+        !friends && usersArray.push(user)
+        friends && !friends[id] && usersArray.push(user)
       }
     }
 
@@ -84,12 +106,15 @@ class FriendsSearchBar extends Component {
        getUsersPromise.then(users => {
          initUsersArray(users, friends)
        })
+       setBaseUsers({ usersArray, friendsArray })
      })
-      .catch(error => console.log(error))
+     .catch(error => console.log(error))
   }
 
   onChange (event, { newValue }) {
-    this.setState({ showButton: false, value: newValue })
+    const { getStateThroughProps } = this.props
+    getStateThroughProps(false)
+    this.setState({ value: newValue })
   }
 
   onSuggestionsFetchRequested ({ value }) {
@@ -103,7 +128,8 @@ class FriendsSearchBar extends Component {
   }
 
   getSuggestions (value) {
-    const { userCategories } = this
+    const { user } = this.props
+    const { userCategories } = user
     const inputValue = value.trim().toLowerCase()
     const inputLength = inputValue.length
 
@@ -118,66 +144,41 @@ class FriendsSearchBar extends Component {
   }
 
   onSuggestionSelected (event, { suggestion }) {
-    const { id } = suggestion
-    this.setState({ showButton: true, id })
-  }
-
-  handleClick () {
-    const { id, value } = this.state
-    const user = { id, displayName: value }
-    this.userCategories[1].users = updateUsersArray(this.userCategories[1].users, id)
-    this.userCategories[0].users.push(user)
-    this.setState({ showButton: false, value: '', id: null })
-    addFriend(user)
-  }
-
-  toggleHover () {
-    this.setState({ hover: !this.state.hover })
+    const { id, displayName } = suggestion
+    const { getStateThroughProps } = this.props
+    getStateThroughProps(true, displayName, id)
   }
 
   render () {
-    console.log(this.userCategories)
-
-    const { button, buttonHover } = style
-    const { value, suggestions, hover } = this.state
+    const { main } = style
+    const { value, suggestions } = this.state
     const inputProps = {
       placeholder: 'FIND FRIENDS',
       value,
       onChange: this.onChange
     }
     return (
-      <div>
-        <div>
-          <Autosuggest
-            theme={style}
-            multiSection
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            renderSectionTitle={renderSectionTitle}
-            getSectionSuggestions={getSectionSuggestions}
-            onSuggestionSelected={this.onSuggestionSelected}
-            inputProps={inputProps}
+      <div style={main}>
+        <Autosuggest
+          theme={style}
+          multiSection
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          renderSectionTitle={renderSectionTitle}
+          getSectionSuggestions={getSectionSuggestions}
+          onSuggestionSelected={this.onSuggestionSelected}
+          inputProps={inputProps}
         />
-        </div>
-        <div>
-          {
-        this.state.showButton && (
-          <button
-            style={hover ? buttonHover : button}
-            onMouseEnter={() => this.toggleHover()}
-            onMouseLeave={() => this.toggleHover()}
-            onClick={this.handleClick}>
-            {`add ${this.state.value}`}
-          </button>
-        )
-      }
-        </div>
       </div>
     )
   }
 }
 
-export default FriendsSearchBar
+const mapStateToProps = ({ user }) => {
+  return { user }
+}
+
+export default connect(mapStateToProps, { setBaseUsers })(FriendsSearchBar)

@@ -19,6 +19,30 @@ const style = {
     margin: '10px',
     fontFamily: 'Quicksand',
     cursor: 'pointer'
+  },
+  searchButton: {
+    backgroundColor: 'transparent',
+    border: '2px solid #ffbfda',
+    marginRight: '20px',
+    color: '#ffffff',
+    fontSize: '13px',
+    letterSpacing: '1px',
+    padding: '10px 20px',
+    margin: '10px',
+    fontFamily: 'Quicksand',
+    cursor: 'pointer'
+  },
+  searchButtonHover: {
+    backgroundColor: '#ffbfda',
+    border: '2px solid #ffbfda',
+    marginRight: '20px',
+    color: '#000000',
+    fontSize: '13px',
+    letterSpacing: '1px',
+    padding: '10px 20px',
+    margin: '10px',
+    fontFamily: 'Quicksand',
+    cursor: 'pointer'
   }
 }
 

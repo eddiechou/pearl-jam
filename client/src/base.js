@@ -6,11 +6,9 @@ import { SET_AVAILABLE_SERVERS, HANDLE_SERVER_UPDATE } from './actions/actionTyp
 
 export const firebaseApp = firebase.initializeApp(baseConfig)
 const base = firebaseApp.database()
-//Export the base
+// Export the base
 
 const auth = firebaseApp.auth()
-
-
 
 export const initServers = () => {
   base.ref('servers').orderByChild('player_count').endAt(10)
@@ -67,9 +65,9 @@ export const getUsers = () => {
   })
 }
 
-export const addFriend = (user) => {
+export const baseAddFriend = (friend) => {
   const baseUser = auth.currentUser
   const { uid } = baseUser
-  const { id, displayName } = user
+  const { id, displayName } = friend
   base.ref(`users/${uid}/friends`).child(id).set({ displayName })
 }

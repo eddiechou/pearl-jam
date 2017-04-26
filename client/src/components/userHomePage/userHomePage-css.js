@@ -18,7 +18,11 @@ const style = {
     padding: '30px 60px',
     margin: '10px',
     fontFamily: 'Quicksand',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6
   },
   buttonHover1: {
     width: '225px',
@@ -30,7 +34,11 @@ const style = {
     padding: '30px 60px',
     margin: '10px',
     fontFamily: 'Quicksand',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6
   },
   button2: {
     width: '225px',
@@ -42,7 +50,11 @@ const style = {
     padding: '30px 60px',
     margin: '10px',
     fontFamily: 'Quicksand',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6
   },
   buttonHover2: {
     width: '225px',
@@ -54,7 +66,11 @@ const style = {
     padding: '30px 60px',
     margin: '10px',
     fontFamily: 'Quicksand',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6
   }
 }
 
