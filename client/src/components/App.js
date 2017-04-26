@@ -47,7 +47,7 @@ class App extends Component {
             <Route path='/setusername' component={SetDisplayNamePage} />
             <Route path='/home' component={UserHomePage} />
             <Route path='/game' component={GamePage} />
-            <Route path='/bet' component={BettingPage} />
+            <Route path='/spectate' component={BettingPage} />
             <Route path='/playerView' component={PlayerView} />
             <Route path='/goodbye' render={() => ::this.handleLogout()} />
             <Route path='/playGame' component={Game} />

@@ -21,9 +21,11 @@ customTheme.palette.accent3Color = colors.purple
 const customMuiTheme = getMuiTheme(customTheme)
 
 
-const wideLetterSpacing = {
-  letterSpacing: '12px'
+const titleStyle = {
+  marginTop: '75px',
+  letterSpacing: '12px',
+  textAlign: 'center'
 }
 
 
-export { customMuiTheme, wideLetterSpacing }
+export { customMuiTheme, titleStyle }

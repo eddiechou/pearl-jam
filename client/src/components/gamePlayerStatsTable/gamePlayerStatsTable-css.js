@@ -1,10 +1,8 @@
 const style = {
   tableStyle: {
-    marginLeft: '50px',
-    marginTop: '40px',
-    width:'40px',
+    marginLeft: '75px',
     align:'center',
-    width:'75%',
+    width:'70%',
     background: 'rgba(0,0,0,0)'
   },
   colStyle: {

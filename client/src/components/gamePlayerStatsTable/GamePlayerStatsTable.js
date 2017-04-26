@@ -12,18 +12,18 @@ class GamePlayerStatsTable extends Component {
     return (
       <Table style={tableStyle} deselectOnClickaway={false} onRowSelection={this.props.onRowSelection}>
         <TableHeader adjustForCheckbox={false}>
-          <TableRow style={{marginTop: '0px'}}>
-            <TableHeaderColumn style={colStyle}>Player</TableHeaderColumn>
-            <TableHeaderColumn style={colStyle}>Rating</TableHeaderColumn>
+          <TableRow>
+            <TableHeaderColumn>Player</TableHeaderColumn>
+            <TableHeaderColumn>Rating</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody deselectOnClickaway={false}>
           {Object.keys(this.props.game.players).map((key, index) => {
             const player = this.props.game.players[key]
             return (
-              <TableRow style={{marginTop: '0px'}} key={index}>
-                <TableRowColumn style={colStyle}>{player.displayName}</TableRowColumn>
-                <TableRowColumn style={colStyle}>{player.rating}</TableRowColumn>
+              <TableRow key={index}>
+                <TableRowColumn>{player.displayName}</TableRowColumn>
+                <TableRowColumn>{player.rating}</TableRowColumn>
               </TableRow>)
           })}
         </TableBody>

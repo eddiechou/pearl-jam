@@ -3,7 +3,7 @@ const style = {
     height: 500,
     width: 500,
     margin: 10,
-    align: 'center',
+
     textAlign: 'center',
     display: 'inline-block',
     verticalAlign: 'top',

@@ -15,7 +15,7 @@ import { updateCurrentActiveGames } from '../../actions/gameActions'
 
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
-import { wideLetterSpacing, customMuiTheme } from './bettingPage-css.js'
+import { titleStyle, customMuiTheme } from './bettingPage-css.js'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -56,9 +56,10 @@ class BettingPage extends Component {
         <div style={{backgroundColor: 'pink'}}>
           <UserNavBar />
           <div>
-            <h1 style={wideLetterSpacing}>WATCH</h1>
-            <div >
-              <p>THERE ARE CURRENTLY <strong>{currentActiveGames && Object.keys(currentActiveGames).length || 0}</strong> ACTIVE GAMES BEING PLAYED!</p>
+            <h1 style={titleStyle}>SPECTATOR PORTAL</h1>
+            <div>
+              <p style={{textAlign: 'center', marginBottom: '75px'}}>SPECTATE YOUR FAVORITE PLAYERS, MAKE BETS, AND WIN BIG!</p>
+              <p style={{textAlign: 'center', marginBottom: '75px'}}>THERE ARE CURRENTLY <strong>{currentActiveGames && Object.keys(currentActiveGames).length || 0}</strong> ACTIVE GAMES BEING PLAYED!</p>
             </div>
             {currentActiveGames ? Object.keys(currentActiveGames).map((key, index) => {
               const game = currentActiveGames[key]
