@@ -129,8 +129,9 @@ class CurrentGameCard extends Component {
   render () {
     const { buttonStyle, paperStyle, modalStyle } = style
     return (
-      <Paper style={paperStyle} zDepth={2}>
-        <h2>Active Game: {this.props.index}</h2>
+      <Paper className='pearl' circle={true} style={paperStyle} zDepth={4}>
+        <span className='shadow' />
+        <h3 style={{marginTop: '50px', color: '#f001f2'}}>Active Game: {this.props.index}</h3>
 
         <GamePlayerStatsTable game={this.props.game} onRowSelection={this._onRowSelection.bind(this)} />
 

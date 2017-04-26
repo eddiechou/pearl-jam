@@ -15,10 +15,10 @@ import { updateCurrentActiveGames } from '../../actions/gameActions'
 
 /* * Styles * */
 import FlatButton from 'material-ui/FlatButton'
+import { wideLetterSpacing, customMuiTheme } from './bettingPage-css.js'
 
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 
 const base = firebaseApp.database()
 
@@ -49,18 +49,22 @@ class BettingPage extends Component {
   render () {
     const { games } = this.props
     const { currentActiveGames } = games
+   
+
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-        <div>
+      <MuiThemeProvider muiTheme={customMuiTheme}>
+        <div style={{backgroundColor: 'pink'}}>
           <UserNavBar />
-          <h1>Bet on your favorite Pearl Jam players and win Pearls!</h1>
           <div>
-            <p>There are currently <strong>{currentActiveGames && Object.keys(currentActiveGames).length || 0}</strong> active games!</p>
+            <h1 style={wideLetterSpacing}>WATCH</h1>
+            <div >
+              <p>THERE ARE CURRENTLY <strong>{currentActiveGames && Object.keys(currentActiveGames).length || 0}</strong> ACTIVE GAMES BEING PLAYED!</p>
+            </div>
+            {currentActiveGames ? Object.keys(currentActiveGames).map((key, index) => {
+              const game = currentActiveGames[key]
+              return <CurrentGameCard game={game} key={index} gameID={key} index={index + 1} />
+            }) : null}
           </div>
-          {currentActiveGames ? Object.keys(currentActiveGames).map((key, index) => {
-            const game = currentActiveGames[key]
-            return <CurrentGameCard game={game} key={index} gameID={key} index={index + 1} />
-          }) : null}
           <TestNavBar />
           </div>
       </MuiThemeProvider>
