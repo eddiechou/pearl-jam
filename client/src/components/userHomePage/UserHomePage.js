@@ -7,8 +7,6 @@ import UserNavBar from '../userNavBar/UserNavBar'
 import TestNavBar from '../testNavBar/TestNavBar'
 import CreateGameModal from '../createGameModal/CreateGameModal'
 
-import FriendSearchBar from '../friendSearchBar/FriendSearchBar'
-
 /* * Styles * */
 import style from './userHomePage-css'
 

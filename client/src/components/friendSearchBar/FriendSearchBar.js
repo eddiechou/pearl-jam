@@ -10,7 +10,7 @@ const getSuggestionValue = (suggestion) => suggestion.displayName
 const getSectionSuggestions = (section) => section.users
 
 const renderSuggestion = (suggestion) => (
-  <div>
+  <div style={{color: suggestion.color}}>
     {suggestion.displayName}
   </div>
 )
@@ -26,25 +26,13 @@ const updateUsersArray = (users, userID) => users.filter(user => user.id !== use
 class FriendsSearchBar extends Component {
   constructor () {
     super()
-    const { container, input, inputFocused, inputMsClear, inputOpen, suggestionsContainer, suggestionsContainerOpen, suggestionsList, suggestion, suggestionHighlighted } = style
 
-    this.theme = {
-      container: container,
-      input: input,
-      inputFocused: inputFocused,
-      inputMsClear: inputMsClear,
-      inputOpen: inputOpen,
-      suggestionsContainer: suggestionsContainer,
-      suggestionsContainerOpen: suggestionsContainerOpen,
-      suggestionsList: suggestionsList,
-      suggestion: suggestion,
-      suggestionHighlighted: suggestionHighlighted
-    }
     this.state = {
       showButton: false,
       value: '',
       id: null,
-      suggestions: []
+      suggestions: [],
+      hover: false
     }
     this.userCategories = [
       {
@@ -61,29 +49,28 @@ class FriendsSearchBar extends Component {
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
     this.onSuggestionSelected = this.onSuggestionSelected.bind(this)
-    this.onClick = this.onClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.toggleHover = this.toggleHover.bind(this)
   }
 
   componentWillMount () {
-    try {
-      const getFriendsPromise = getFriends()
-      const getUsersPromise = getUsers()
+    const getFriendsPromise = getFriends()
+    const getUsersPromise = getUsers()
+    const initFriendsArray = (friends) => {
+      for (let id in friends) {
+        const { displayName } = friends[id]
+        const friend = { id, displayName, color: '#ffffff' }
+        this.userCategories[0].users.push(friend)
 
-      const initFriendsArray = (friends) => {
-        for (let id in friends) {
-          const { displayName } = friends[id]
-          const friend = { id, displayName }
-          this.userCategories[0].users.push(friend)
-        }
       }
 
 
     const initUsersArray = (users, friends) => {
       for (let id in users) {
         const { displayName } = users[id]
-        const nonFriend = { id, displayName }
-        !friends && this.userCategories[1].users.push(nonFriend)
-        friends && !friends[id] && this.userCategories[1].users.push(nonFriend)
+        const user = { id, displayName, color: '#f001f2' }
+        !friends && this.userCategories[1].users.push(user)
+        friends && !friends[id] && this.userCategories[1].users.push(user)
       }
     }
 
@@ -99,8 +86,7 @@ class FriendsSearchBar extends Component {
          initUsersArray(users, friends)
        })
      })
-   } catch (e) {
-    console.log('e', e);
+      .catch(error => console.log(error))
    }
  }
 
@@ -139,7 +125,7 @@ class FriendsSearchBar extends Component {
     this.setState({ showButton: true, id })
   }
 
-  onClick () {
+  handleClick () {
     const { id, value } = this.state
     const user = { id, displayName: value }
     this.userCategories[1].users = updateUsersArray(this.userCategories[1].users, id)
@@ -148,9 +134,13 @@ class FriendsSearchBar extends Component {
     addFriend(user)
   }
 
+  toggleHover () {
+    this.setState({ hover: !this.state.hover })
+  }
+
   render () {
-    const { button } = style
-    const { value, suggestions } = this.state
+    const { button, buttonHover } = style
+    const { value, suggestions, hover } = this.state
     const inputProps = {
       placeholder: 'FIND FRIENDS',
       value,
@@ -160,7 +150,7 @@ class FriendsSearchBar extends Component {
       <div>
         <div>
           <Autosuggest
-            theme={this.theme}
+            theme={style}
             multiSection
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -177,8 +167,10 @@ class FriendsSearchBar extends Component {
           {
         this.state.showButton && (
           <button
-            style={button}
-            onClick={this.onClick}>
+            style={hover ? buttonHover : button}
+            onMouseEnter={() => this.toggleHover()}
+            onMouseLeave={() => this.toggleHover()}
+            onClick={this.handleClick}>
             {`add ${this.state.value}`}
           </button>
         )
