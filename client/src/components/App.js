@@ -16,7 +16,6 @@ import AuthenticationPage from './authenticationPage/AuthenticationPage'
 import SetDisplayNamePage from './setDisplayNamePage/SetDisplayNamePage'
 import UserHomePage from './userHomePage/UserHomePage'
 import BettingPage from './bettingPage/BettingPage'
-import SpectatorPage from './SpectatorPage'
 import GamePage from './GamePage'
 import PlayerView from './playerView/PlayerView'
 import Game from './game/Game'
@@ -47,7 +46,6 @@ class App extends Component {
             <Route path='/join' component={AuthenticationPage} />
             <Route path='/setusername' component={SetDisplayNamePage} />
             <Route path='/home' component={UserHomePage} />
-            <Route path='/spectate' component={SpectatorPage} />
             <Route path='/game' component={GamePage} />
             <Route path='/bet' component={BettingPage} />
             <Route path='/playerView' component={PlayerView} />
