@@ -1,9 +1,7 @@
 const style = {
-  /*
   game: {
-  border: '5px solid black'
-}
-*/
+    border: '5px solid #ffbfda'
+  }
 }
 
 export default style
