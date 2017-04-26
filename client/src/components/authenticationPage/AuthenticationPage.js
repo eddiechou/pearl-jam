@@ -85,14 +85,14 @@ class AuthenticationPage extends Component {
     .then(user => {
       return new Promise((resolve, reject) => {
         const { uid, displayName, email, photoURL } = user
-        return base.ref(`users/${uid}`).once('value').then(snap => {
+        return base.ref(`users/${uid}`).once('value')
+        .then(snap => {
           const { avatar } = snap.val()
           resolve({ uid, displayName, avatar, email, photoURL })
         })
       })
     })
     .then((userObject) => {
-      console.log('about to set user with user object = ', userObject)
       setUser(userObject)
       this.context.router.history.push('/home')
     })

@@ -30,7 +30,6 @@ const user = (state = {}, action) => {
     }
 
     case UPDATE_USER_INFO: {
-      console.log('updating user info')
       const { uid, displayName, avatarColorID } = action.payload
       const baseUser = auth.currentUser
       const newState = Object.assign({}, state)

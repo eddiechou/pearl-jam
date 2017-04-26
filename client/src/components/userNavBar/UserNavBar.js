@@ -27,7 +27,7 @@ class UserNavBar extends Component {
           <Link to='/playerView'>
             <button style={button}>PLAY</button>
           </Link>
-          <NavDropMenu />
+
         </ToolbarGroup>
       </Toolbar>
     )

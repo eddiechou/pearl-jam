@@ -12,7 +12,7 @@ const style = {
     backgroundColor: 'transparent',
     border: 'transparent',
     marginRight: '20px',
-    color: '#ffffff',
+    color: '#ffbfda',
     fontSize: '13px',
     letterSpacing: '12px',
     padding: '10px 20px',
