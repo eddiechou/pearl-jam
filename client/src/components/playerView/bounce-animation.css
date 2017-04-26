@@ -32,16 +32,18 @@
 
 /* styles for the stage and animated elements */
 
-#stage2 {
+#stage {
   position: relative;
+  margin: 1em auto;
   width: 100%;
   height: 100%;
-  margin: 0;
+  border: 2px solid #666;
+  background: #cff;
 }
 
 #traveler {
   position: absolute;
-  width: 10px;
+  width: 20px;
   height: 100%;
 
   -webkit-animation-name: travel;
@@ -59,8 +61,8 @@
 
 #bouncer {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 20px;
   background: red;
   background: radial-gradient(60% 40%, circle, rgba(255,255,255,0.8), red 50%) red;
@@ -73,49 +75,3 @@
   animation-iteration-count: infinite;
   animation-duration: 3s;
 }
-
-
-
-#bouncer2 {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  background: red;
-  background: radial-gradient(60% 40%, circle, rgba(255,255,255,0.8), red 50%) red;
-
-  -webkit-animation-name: bounce, spin;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-duration: 3s;
-
-  animation-name: bounce, spin;
-  animation-iteration-count: infinite;
-  animation-duration: 5s;
-}
-
-#bouncer4 { 
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  background: red;
-  background: radial-gradient(60% 40%, circle, rgba(255,255,255,0.8), red 50%) red;
-
-  -webkit-animation-name: bounce, spin;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-duration: 3s;
-
-  animation-name: bounce, spin;
-  animation-iteration-count: infinite;
-  animation-duration: 7s;
-}
-
-
-
-
-
-
-
-
-
-

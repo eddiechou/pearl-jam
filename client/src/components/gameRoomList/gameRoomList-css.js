@@ -26,8 +26,8 @@ const style = {
 */
 const style = {
   container: {
-    width: '1100px',
-    height: '700px',
+    width: '1000px',
+    height: '500px',
     overflowY: 'scroll',
     display: 'fixed'
   },
