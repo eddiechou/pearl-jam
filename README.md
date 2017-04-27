@@ -64,15 +64,27 @@ Pick your color and a unique username!
 ## Contributing
 
 <a name="setting-up"></a>
-### Setting Up
+### Getting started
+- Ensure you have node >= 6.4.0 and npm | [Guide for Mac Installation](http://treehouse.github.io/installation-guides/mac/node-mac.html)
+- Fork the Pearl Jam repo to your account
+- Clone the forked version to your local machine
+- Run `npm install` to install all the project dependencies
+- Refer to [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on our development flow and how to contribute
 
-For the repo
 <a name="useful-commands"></a>
 ### Useful commands
+- Refer to the scripts property in `package.json` for useful commands
+- `npm build` runs webpack to bundle files
+- `npm start` runs the server at `localhost:3000`
+- `npm run dev-server` runs webpack-dev-server, which serves the application at `localhost:8080` with hot-reloading
 
+<a name="useful-dev-tools"></a>
+### Useful development tools
+- `React Developer Tools`: Chrome Extension: Allows you to inspect the React component hierarchies in Chrome Developer Tools
+- `Redux DevTools`: Chrome Extension: Graphical representation of the Redux state in Chrome Developer Tools
 ### In the works
 
-### Roadmap (TAKE OUT?)
+## Contact
 
-View the project roadmap [here](https://docs.google.com/spreadsheets/d/1K6SgifghO9YU1ZFDZCrbLhsD2Cz2aclzMWTM2eAZZyA/edit#gid=0)
+Feel free to contact us if you have any questions regarding the project.
 
