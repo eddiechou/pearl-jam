@@ -1,6 +1,6 @@
 const style = {
   tableStyle: {
-    marginLeft: '75px',
+    marginLeft: '60px',
     align:'center',
     width:'70%',
     background: 'rgba(0,0,0,0)'

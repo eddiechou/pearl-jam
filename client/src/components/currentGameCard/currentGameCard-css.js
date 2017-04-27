@@ -1,7 +1,7 @@
 const style = {
   paperStyle: {
-    height: 500,
-    width: 500,
+    height: 475,
+    width: 475,
     margin: 10,
 
     textAlign: 'center',

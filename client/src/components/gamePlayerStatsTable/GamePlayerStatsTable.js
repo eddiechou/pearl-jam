@@ -13,8 +13,8 @@ class GamePlayerStatsTable extends Component {
       <Table style={tableStyle} deselectOnClickaway={false} onRowSelection={this.props.onRowSelection}>
         <TableHeader adjustForCheckbox={false}>
           <TableRow>
-            <TableHeaderColumn>Player</TableHeaderColumn>
-            <TableHeaderColumn>Rating</TableHeaderColumn>
+            <TableHeaderColumn style={{width: '130px', fontSize: '22px'}}>Player</TableHeaderColumn>
+            <TableHeaderColumn style={{width: '60px', fontSize: '22px'}}>Rating</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody deselectOnClickaway={false}>
@@ -22,8 +22,8 @@ class GamePlayerStatsTable extends Component {
             const player = this.props.game.players[key]
             return (
               <TableRow key={index}>
-                <TableRowColumn>{player.displayName}</TableRowColumn>
-                <TableRowColumn>{player.rating}</TableRowColumn>
+                <TableRowColumn style={{width: '130px', fontSize: '22px'}}>{player.displayName}</TableRowColumn>
+                <TableRowColumn style={{width: '60px', fontSize: '22px'}}>{player.rating}</TableRowColumn>
               </TableRow>)
           })}
         </TableBody>
