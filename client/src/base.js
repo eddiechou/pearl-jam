@@ -56,14 +56,16 @@ export const checkDisplaynameUnique = (displayName) => {
 
 export const getFriends = () => {
   const baseUser = auth.currentUser
-  const { uid } = baseUser
-  return new Promise((resolve, reject) => {
-    return base.ref(`users/${uid}/friends`)
-    .once('value').then((snap) => {
-      resolve(snap.val())
+  if (baseUser) {
+    const { uid } = baseUser
+    return new Promise((resolve, reject) => {
+      return base.ref(`users/${uid}/friends`)
+      .once('value').then((snap) => {
+        resolve(snap.val())
+      })
+      .catch(error => console.log(error))
     })
-    .catch(error => console.log(error))
-  })
+  }
 }
 
 export const getUsers = () => {

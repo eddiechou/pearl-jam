@@ -4,3 +4,6 @@ html, body {
   font-family: 'Quicksand';
 }
 
+canvas {
+  border: 5px solid #ffbfda;
+}
