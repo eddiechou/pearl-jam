@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { firebaseApp, baseAddFriend, baseAddFriendToGame, listenForInvites } from '../../base'
 
 /* * Actions * */
-import { addFriend } from '../../actions/userActions'
+import { addFriend } from '../../actions/friendsActions'
 
 /* * Components * */
 import FriendSearchBar from '../friendSearchBar/FriendSearchBar'

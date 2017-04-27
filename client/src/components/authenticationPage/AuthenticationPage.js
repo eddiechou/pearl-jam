@@ -37,12 +37,7 @@ class AuthenticationPage extends Component {
     // baseUI.start('#firebaseui-auth-container', baseUIConfig)
   }
   componentDidMount() {
-
-
-
   }
-
-
 
   authenticateWithProvider (provider) {
     const { setUser } = this.props
@@ -84,9 +79,6 @@ class AuthenticationPage extends Component {
     .catch(error => console.log(error.message))
   }
 
-
-
-
   authenticateWithEmail () {
     const { setUser } = this.props
     const { email, password } = this.state
@@ -106,6 +98,22 @@ class AuthenticationPage extends Component {
       this.context.router.history.push('/home')
     })
     .catch(error => console.log(error.message))
+  }
+
+  handleAnonymousLogin () {
+    auth.signInAnonymously()
+    .then(user => {
+      console.log(user)
+      const { uid } = user
+      createNewUser({ uid })
+      // this.context.router.history.push('/home')
+      this.context.router.history.push('/CHALLENGECHALLENGECHALLENGE')
+
+    })
+    .catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    })
   }
 
   toggleHover (btn) {
@@ -129,13 +137,13 @@ class AuthenticationPage extends Component {
             <input
               type='email'
               placeholder='Email'
-              onChange={(event) => ::this.handleChange(event, 'email')} 
+              onChange={(event) => ::this.handleChange(event, 'email')}
               style={emailInput}
               />
 
             <input type='password'
               placeholder='Password'
-              onChange={(event) => ::this.handleChange(event, 'password')} 
+              onChange={(event) => ::this.handleChange(event, 'password')}
               style={passwordInput}
               />
 
@@ -148,7 +156,7 @@ class AuthenticationPage extends Component {
               log in
               </button>
               <span onClick={() => {this.context.router.history.push('/signUp')}}
-                style={{textAlign: 'right'}}> 
+                style={{textAlign: 'right'}}>
               No account? <span style={{cursor: 'pointer', color: 'blue'}}> Sign up </span> </span>
               <hr style={{width: '100%', marginTop: 30}}/>
 

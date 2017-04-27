@@ -28,6 +28,8 @@ class App extends Component {
   constructor (props) {
     super(props)
     listenForServerUpdates()
+
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   handleLogout () {
@@ -48,7 +50,7 @@ class App extends Component {
             <Route path='/home' component={UserHomePage} />
             <Route path='/spectate' component={BettingPage} />
             <Route path='/playerView' component={PlayerView} />
-            <Route path='/goodbye' render={() => ::this.handleLogout()} />
+            <Route path='/goodbye' render={this.handleLogout} />
             <Route path='/playGame' component={Game} />
             <Route path='/signUp' component={SignUp} />
           </div>
