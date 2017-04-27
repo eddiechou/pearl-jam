@@ -2,7 +2,11 @@ const style = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'conter'
+    justifyContent: 'center',
+    backgroundColor: 'pink',
+    height: '100%',
+    width: '100%'
+
   },
   game: {
     flex: '1',
@@ -22,8 +26,15 @@ const style = {
     width: '400px',
     height: '100px',
     marginTop: '40px',
-    fontSize: '30px',
-    borderRadius: '20px'
+    fontSize: '40px',
+    lineHeight: '40px',
+    
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    
+    padding: '30px 60px',
+    border: '4px solid #ffffff',
+    textAlign: 'center'
   },
   modal: {
     width: '950px',
