@@ -52,11 +52,10 @@ const games = (state = {}, action) => {
       const { gameRoom, user } = action.payload
       const challengeAccepted = confirm(`HEY!!  ${user} has challenged you to a game in the ${gameRoom} ... do you accept?`)
       if (challengeAccepted) {
-        console.log('accepted')
         // route to game
         newState.gameInvite = { gameRoom, user }
       } else {
-        console.log('not accepted')
+        // return
       }
       return newState
     }

@@ -47,6 +47,7 @@ class UserNavBar extends Component {
     const { friendName, friendID, categoryID } = this.state
     const { addFriend } = this.props
     const friend = { id: friendID, displayName: friendName }
+
     categoryID === 0 && addFriend(friend) && baseAddFriend(friend)
     categoryID === 1 && this.addFriendToGame(friend)
     this.setState({ id: null, displayName: null, showButton: false })
