@@ -2,7 +2,7 @@ import firebase from 'firebase'
 import { baseConfig } from './baseConfig'
 import store from './store'
 
-import { SET_AVAILABLE_SERVERS, HANDLE_SERVER_UPDATE } from './actions/actionTypes'
+import { SET_AVAILABLE_SERVERS, HANDLE_SERVER_UPDATE, HANDLE_GAME_INVITE } from './actions/actionTypes'
 
 export const firebaseApp = firebase.initializeApp(baseConfig)
 const base = firebaseApp.database()
@@ -29,6 +29,17 @@ export const listenForServerUpdates = () => {
     store.dispatch({
       type: HANDLE_SERVER_UPDATE,
       payload: { server }
+    })
+  })
+}
+
+export const listenForInvites = (uid) => {
+  base.ref(`users/${uid}/game_invites`).on('child_added', (data) => {
+    console.log('child added! ', data.val())
+    const { gameRoom, user } = data.val()
+    store.dispatch({
+      type: HANDLE_GAME_INVITE,
+      payload: { gameRoom, user }
     })
   })
 }
@@ -70,4 +81,15 @@ export const baseAddFriend = (friend) => {
   const { uid } = baseUser
   const { id, displayName } = friend
   base.ref(`users/${uid}/friends`).child(id).set({ displayName })
+}
+
+export const baseAddFriendToGame = (invitedUserID) => {
+  const baseUser = auth.currentUser
+  const { displayName } = baseUser
+  base.ref(`users/${invitedUserID}/game_invites`).set({
+    invitation: {
+      gameRoom: 'room',
+      user: displayName
+    }
+  })
 }

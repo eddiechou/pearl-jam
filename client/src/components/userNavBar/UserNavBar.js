@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 /* * Utils * */
-import { baseAddFriend } from '../../base'
+import { firebaseApp, baseAddFriend, baseAddFriendToGame, listenForInvites } from '../../base'
 
 /* * Actions * */
 import { addFriend } from '../../actions/userActions'
@@ -16,21 +16,27 @@ import FriendSearchBar from '../friendSearchBar/FriendSearchBar'
 import style from './userNavBar-css'
 import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar'
 
+const auth = firebaseApp.auth()
+
 class UserNavBar extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    const baseUser = auth.currentUser
+
+    super(props)
     this.state = {
       hover: false,
       showButton: false,
       friendName: null,
-      friendID: null
+      friendID: null,
+      categoryID: null
     }
     this.getStateThroughProps = this.getStateThroughProps.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    listenForInvites(baseUser.uid)
   }
 
-  getStateThroughProps (showButton, friendName, friendID) {
-    this.setState({ showButton, friendName, friendID })
+  getStateThroughProps (showButton, friendName, friendID, categoryID) {
+    this.setState({ showButton, friendName, friendID, categoryID })
   }
 
   toggleHover () {
@@ -38,33 +44,41 @@ class UserNavBar extends Component {
   }
 
   handleClick () {
-    const { friendName, friendID } = this.state
+    const { friendName, friendID, categoryID } = this.state
     const { addFriend } = this.props
     const friend = { id: friendID, displayName: friendName }
-    addFriend(friend)
-    baseAddFriend(friend)
+    categoryID === 0 && addFriend(friend) && baseAddFriend(friend)
+    categoryID === 1 && this.addFriendToGame(friend)
     this.setState({ id: null, displayName: null, showButton: false })
+  }
+
+  addFriendToGame (friend) {
+    baseAddFriendToGame(friend.id)
   }
 
   render () {
     const { bar, button, searchButton, searchButtonHover } = style
-    const { hover } = this.state
+    const { hover, showButton, categoryID, friendName } = this.state
+    const buttonText = categoryID === 1 ? `invite ${friendName} to play` : `add ${friendName} as a friend`
+
     return (
       <Toolbar
         style={bar}>
-        <FriendSearchBar
-          getStateThroughProps={this.getStateThroughProps} />
-        {
-          this.state.showButton && (
+        <ToolbarGroup style={{position: 'relative', display: 'flex', flexWrap: 'wrap'}}>
+          <FriendSearchBar
+            getStateThroughProps={this.getStateThroughProps} />
+          {
+          showButton && (
             <button
               style={hover ? searchButtonHover : searchButton}
               onMouseEnter={() => this.toggleHover()}
               onMouseLeave={() => this.toggleHover()}
               onClick={() => this.handleClick()}>
-              {`add ${this.state.friendName}`}
+              {buttonText}
             </button>
           )
         }
+        </ToolbarGroup>
         <ToolbarGroup>
           <Link to='/home'>
             <button style={button}>HOME</button>
@@ -86,7 +100,7 @@ UserNavBar.contextTypes = {
   router: PropTypes.object
 }
 
-// const mapStateToProps = ({ user }) => {
-//   return { user }
-// }
-export default connect(null, { addFriend })(UserNavBar)
+const mapStateToProps = ({ user, games }) => {
+  return { user, games }
+}
+export default connect(mapStateToProps, { addFriend })(UserNavBar)

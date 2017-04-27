@@ -1,13 +1,8 @@
 const style = {
   main: {
     position: 'relative',
-    width: '500px'
-
+    width: '200px'
   },
-  // container: {
-  //   position: 'relative',
-  //   display: 'block'
-  // },
   input: {
     backgroundColor: 'transparent',
     color: '#ffffff',
@@ -38,8 +33,6 @@ const style = {
     fontSize: '13px',
     letterSpacing: '1px',
     fontFamily: 'Quicksand',
-    // border: '1px solid #aaa',
-    // backgroundColor: '#fff',
     border: 'transparent',
     backgroundColor: 'transparent',
     borderBottomLeftRadius: 4,
@@ -62,32 +55,8 @@ const style = {
     padding: '10px 20px'
   },
   suggestionHighlighted: {
-    backgroundColor: '#ffbfda'
+    backgroundColor: '#fde4ef'
   }
-  // button: {
-  //   backgroundColor: 'transparent',
-  //   border: '2px solid #ffbfda',
-  //   marginRight: '20px',
-  //   color: '#ffffff',
-  //   fontSize: '13px',
-  //   letterSpacing: '1px',
-  //   padding: '10px 20px',
-  //   margin: '10px',
-  //   fontFamily: 'Quicksand',
-  //   cursor: 'pointer'
-  // },
-  // buttonHover: {
-  //   backgroundColor: '#ffbfda',
-  //   border: '2px solid #ffbfda',
-  //   marginRight: '20px',
-  //   color: '#000000',
-  //   fontSize: '13px',
-  //   letterSpacing: '1px',
-  //   padding: '10px 20px',
-  //   margin: '10px',
-  //   fontFamily: 'Quicksand',
-  //   cursor: 'pointer'
-  // }
 }
 
 export default style

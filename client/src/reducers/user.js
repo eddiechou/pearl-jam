@@ -68,8 +68,9 @@ const user = (state = {}, action) => {
     }
 
     case ADD_FRIEND: {
-      const newFriend = action.payload
       const newState = Object.assign({}, state)
+      const newFriend = action.payload
+      newFriend.categoryID = 1
       /* * accessing users (non-friends) category and filtering out newly added friend * */
       const usersArray = newState.userCategories[0].users
       const newUsersArray = usersArray.filter(user => user.id !== newFriend.id)

@@ -33,8 +33,8 @@ const style = {
     cursor: 'pointer'
   },
   searchButtonHover: {
-    backgroundColor: '#ffbfda',
-    border: '2px solid #ffbfda',
+    backgroundColor: '#fde4ef',
+    border: '2px solid #fde4ef',
     marginRight: '20px',
     color: '#000000',
     fontSize: '13px',

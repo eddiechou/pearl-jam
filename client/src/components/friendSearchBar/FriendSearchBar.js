@@ -43,8 +43,6 @@ const renderSectionTitle = (section) => {
   )
 }
 
-// const updateUsersArray = (users, userID) => users.filter(user => user.id !== userID)
-
 class FriendsSearchBar extends Component {
   constructor () {
     super()
@@ -82,7 +80,7 @@ class FriendsSearchBar extends Component {
     const initFriendsArray = (friends) => {
       for (let id in friends) {
         const { displayName } = friends[id]
-        const friend = { id, displayName, color: '#ffffff' }
+        const friend = { id, displayName, color: '#ffffff', categoryID: 1 }
         friendsArray.push(friend)
       }
     }
@@ -90,7 +88,7 @@ class FriendsSearchBar extends Component {
     const initUsersArray = (users, friends) => {
       for (let id in users) {
         const { displayName } = users[id]
-        const user = { id, displayName, color: '#ffffff' }
+        const user = { id, displayName, color: '#f3b6d0', categoryID: 0 }
         !friends && usersArray.push(user)
         friends && !friends[id] && usersArray.push(user)
       }
@@ -144,9 +142,9 @@ class FriendsSearchBar extends Component {
   }
 
   onSuggestionSelected (event, { suggestion }) {
-    const { id, displayName } = suggestion
+    const { id, displayName, categoryID } = suggestion
     const { getStateThroughProps } = this.props
-    getStateThroughProps(true, displayName, id)
+    getStateThroughProps(true, displayName, id, categoryID)
   }
 
   render () {

@@ -21,6 +21,8 @@ class UserHomePage extends Component {
       hover2: false,
       isShowingModal: false
     }
+    this.handleClick = this.handleClick.bind(this)
+    this.toggleHover = this.toggleHover.bind(this)
   }
 
   componentDidMount () {
@@ -64,17 +66,17 @@ class UserHomePage extends Component {
           <button
             ref='createGame'
             style={hover1 ? buttonHover1 : button1}
-            onMouseEnter={() => ::this.toggleHover(1)}
-            onMouseLeave={() => ::this.toggleHover(1)}
-            onClick={() => ::this.handleClick(1)}>
-            create
+            onMouseEnter={() => this.toggleHover(1)}
+            onMouseLeave={() => this.toggleHover(1)}
+            onClick={() => this.handleClick(1)}>
+            create game
           </button>
           <button
             ref='joinGame'
             style={hover2 ? buttonHover2 : button2}
-            onMouseEnter={() => ::this.toggleHover(2)}
-            onMouseLeave={() => ::this.toggleHover(2)}
-            onClick={() => ::this.handleClick(2)}>
+            onMouseEnter={() => this.toggleHover(2)}
+            onMouseLeave={() => this.toggleHover(2)}
+            onClick={() => this.handleClick(2)}>
             join game
           </button>
           {

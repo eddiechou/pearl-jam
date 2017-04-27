@@ -16,7 +16,6 @@ import AuthenticationPage from './authenticationPage/AuthenticationPage'
 import SetDisplayNamePage from './setDisplayNamePage/SetDisplayNamePage'
 import UserHomePage from './userHomePage/UserHomePage'
 import BettingPage from './bettingPage/BettingPage'
-import GamePage from './GamePage'
 import PlayerView from './playerView/PlayerView'
 import Game from './game/Game'
 import SignUp from './authenticationPage/SignUp'
@@ -47,7 +46,6 @@ class App extends Component {
             <Route path='/join' component={AuthenticationPage} />
             <Route path='/setusername' component={SetDisplayNamePage} />
             <Route path='/home' component={UserHomePage} />
-            <Route path='/game' component={GamePage} />
             <Route path='/spectate' component={BettingPage} />
             <Route path='/playerView' component={PlayerView} />
             <Route path='/goodbye' render={() => ::this.handleLogout()} />
@@ -60,8 +58,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  return { user }
+const mapStateToProps = ({ user, games }) => {
+  return { user, games }
 }
 
 export default connect(mapStateToProps, { setUser })(App)

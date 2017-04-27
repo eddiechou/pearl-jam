@@ -1,4 +1,4 @@
-import { UPDATE_CURRENT_ACTIVE_GAMES, SET_AVAILABLE_SERVERS, HANDLE_SERVER_UPDATE, SET_GAME } from '../actions/actionTypes'
+import { UPDATE_CURRENT_ACTIVE_GAMES, SET_AVAILABLE_SERVERS, HANDLE_SERVER_UPDATE, SET_GAME, HANDLE_GAME_INVITE } from '../actions/actionTypes'
 import { firebaseApp } from '../base'
 
 const auth = firebaseApp.auth()
@@ -26,9 +26,6 @@ const games = (state = {}, action) => {
       return newState
     }
     case SET_GAME: {
-      console.log('in setting game!');
-      console.log('action payload', action.payload);
-
       const newState = Object.assign({}, state)
       const { currentGame, gameID } = action.payload
       try {
@@ -41,13 +38,26 @@ const games = (state = {}, action) => {
           })
           base.ref(`servers/${gameID}/players`).child(uid).set({ displayName })
         } else {
-          console.log('need to set stuff');
+          console.log('need to set stuff')
         }
       } catch (e) {
-        console.log('error in set game reducer', e);
+        console.log('error in set game reducer', e)
       }
       newState.currentGame = currentGame
-      console.log('newSTATE', newState);
+      console.log('newSTATE', newState)
+      return newState
+    }
+    case HANDLE_GAME_INVITE: {
+      const newState = Object.assign({}, state)
+      const { gameRoom, user } = action.payload
+      const challengeAccepted = confirm(`HEY!!  ${user} has challenged you to a game in the ${gameRoom} ... do you accept?`)
+      if (challengeAccepted) {
+        console.log('accepted')
+        // route to game
+        newState.gameInvite = { gameRoom, user }
+      } else {
+        console.log('not accepted')
+      }
       return newState
     }
     default:
