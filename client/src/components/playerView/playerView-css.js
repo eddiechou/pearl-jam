@@ -6,21 +6,20 @@ const style = {
     backgroundColor: 'pink',
     height: '100%',
     width: '100%'
-
   },
   game: {
     flex: '1',
     backgroundColor: 'pink',
     width: '100%',
-    height: '1000px',
+    height: '80%',
     display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
     justifyContent: 'center'
   },
   flexParent: {
     display: 'flex',
     justifyContent: 'center',
-    flexDirection: 'column',
-    alignItems: 'center'
   },
   button: {
     width: '400px',
@@ -35,10 +34,6 @@ const style = {
     padding: '30px 60px',
     border: '4px solid #ffffff',
     textAlign: 'center'
-  },
-  modal: {
-    width: '950px',
-    height: '800px'
   },
   space: {
     flex: '1'

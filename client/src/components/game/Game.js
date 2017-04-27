@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import UserNavBar from '../userNavBar/UserNavBar'
+import Modal from 'boron/OutlineModal'
+
 
 import style from './game-css.js'
 
@@ -36,17 +38,38 @@ class Game extends React.Component {
     script4.src = 'https://s3-us-west-1.amazonaws.com/pearljamhrsf72/deployment.min.js'
     script4.async = false
     scripts.appendChild(script4)
+
+
+    this.showModal();
   }
+
+  componentDidUpdate() {
+    this.showModal();
+  }
+
+  showModal () {
+    this.refs.modal.show()
+  }
+
+  hideModal () {
+    this.refs.modal.hide()
+  }
+
 
   render () {
     const { user } = this.props
     const { games } = this.props
     const { currentGame } = games
+   var modalStyle = {
+      height: '90%',
+      width: '90%',
+    }
     return (
       <div id='scripts'>
-        <UserNavBar />
-        <div>Please Wait, your game will show up momentarily! <br />{user.displayName}, you are the current user<br />, this is the game you are in</div>
-        <div id='game' style={style.game} />
+        <UserNavBar  />
+          <div style={style.container}>
+            <div id='game' />
+          </div>
       </div>
     )
   }
