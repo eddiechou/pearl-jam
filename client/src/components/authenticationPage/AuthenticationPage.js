@@ -162,7 +162,7 @@ class AuthenticationPage extends Component {
 
               <button
                 style={hover2 ? buttonHover2 : button2}
-                onClick={this.handleAnonymousLogin.bind(this)}
+                onClick={() => {this.context.router.history.push('/playerView')}}
                 >
                Or continue as a guest
               </button>

@@ -34,6 +34,7 @@ export const listenForServerUpdates = () => {
 }
 
 export const listenForInvites = (uid) => {
+  
   base.ref(`users/${uid}/game_invites`).on('child_added', (data) => {
     console.log('child added! ', data.val())
     const { gameRoom, user } = data.val()

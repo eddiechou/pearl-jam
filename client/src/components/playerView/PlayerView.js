@@ -10,9 +10,12 @@ import UserNavBar from '../userNavBar/UserNavBar'
 import GameRoomList from '../gameRoomList/GameRoomList'
 import Modal from 'boron/OutlineModal'
 import TestNavBar from '../testNavBar/TestNavBar'
+import Authors from '../Authors/Authors'
 
 /* * Styles * */
 import style from './playerView-css'
+require("./bounce-animation.css")
+
 
 class PlayerView extends React.Component {
   constructor () {
@@ -22,9 +25,15 @@ class PlayerView extends React.Component {
     this.hideModal = this.hideModal.bind(this)
     this.fireMessage = this.fireMessage.bind(this)
   }
-  showModal () {
+  componentDidMount() {
+    this.showModal();
+  }
+  componentDidUpdate() {
+    this.showModal();
+  }
 
-    // this.refs.modal.show()
+  showModal () {
+    this.refs.modal.show()
   }
 
   hideModal () {
@@ -42,16 +51,32 @@ class PlayerView extends React.Component {
     const { games } = this.props
     const { currentGame } = games
     const { container, game, flexParent, button, modal } = style
+
+    var modalStyle = {
+      height: '80%',
+      width: '90%'
+    }
     return (
-      <div style={container}>
-        <UserNavBar />
-        <div style={game}>
-          <div style={flexParent} >
-            <GameRoomList />
-            <Link to='/playGame'> <button style={button}>Join Game!</button> </Link>
+      <div style={{height: '100%', width: '100%' }}>
+      <UserNavBar />
+      <div style={container} id="stage2" >
+          <div id="traveler">
+            <div id="bouncer"></div>
           </div>
-        </div>
-        <TestNavBar />
+         
+        <Modal ref="modal" modalStyle={modalStyle}>
+          <div style={game}>
+            <div style={flexParent} >
+              <h1 style={{fontFamily: 'QuickSand', 
+              'fontSize': '50px', marginTop: '-90px'}}>SELECT A GAME SERVER TO JOIN</h1>
+              <GameRoomList />
+              <Link to='/playGame'> <button style={button}>Join Game!</button> </Link>
+            </div>
+          </div>
+        </Modal>
+
+       </div>
+       <Authors />
       </div>
     )
   }

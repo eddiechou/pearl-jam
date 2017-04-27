@@ -63,7 +63,7 @@ class FriendsSearchBar extends Component {
 
   componentWillMount () {
     const { setBaseUsers } = this.props
-    const getFriendsPromise = getFriends()
+    const getFriendsPromise = getFriends
     const getUsersPromise = getUsers()
     const friendsArray = []
     const usersArray = []
@@ -76,6 +76,7 @@ class FriendsSearchBar extends Component {
       }
     }
 
+    
     const initUsersArray = (users, friends) => {
       for (let id in users) {
         const { displayName } = users[id]
@@ -83,21 +84,30 @@ class FriendsSearchBar extends Component {
         !friends && usersArray.push(user)
         friends && !friends[id] && usersArray.push(user)
       }
-    }
+    
 
-    getFriendsPromise.then(friends => {
-      return new Promise((resolve, reject) => {
-        friends && initFriendsArray(friends)
-        resolve(friends)
+      try {
+      getFriendsPromise.then(friends => {
+        return new Promise((resolve, reject) => {
+          friends && initFriendsArray(friends)
+          resolve(friends)
+        })
       })
-    })
-     .then(friends => {
-       getUsersPromise.then(users => {
-         initUsersArray(users, friends)
-       })
-       setBaseUsers({ usersArray, friendsArray })
-     })
-     .catch(error => console.log(error))
+    .then(friends => {
+        getUsersPromise.then(users => {
+          initUsersArray(users, friends)
+        })
+        setBaseUsers({ usersArray, friendsArray })
+      })
+    .catch(error => console.log(error))
+
+      } catch (e) {
+        console.log('get firneds promise', e);
+      }
+    }
+   
+   
+
   }
 
   onChange (event, { newValue }) {

@@ -30,9 +30,13 @@ class UserNavBar extends Component {
       friendID: null,
       categoryID: null
     }
+    
     this.getStateThroughProps = this.getStateThroughProps.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    listenForInvites(baseUser.uid)
+    if (baseUser) {
+      listenForInvites(baseUser.uid)
+    }
+   
   }
 
   getStateThroughProps (showButton, friendName, friendID, categoryID) {
@@ -54,7 +58,11 @@ class UserNavBar extends Component {
   }
 
   addFriendToGame (friend) {
-    baseAddFriendToGame(friend.id)
+    try {
+      baseAddFriendToGame(friend.id)
+    } catch (e) {
+      console.log('e', e);
+    }
   }
 
   render () {

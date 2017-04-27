@@ -147,8 +147,8 @@ class CurrentGameCard extends Component {
         />
 
         <Modal ref='modal' modalStyle={modalStyle}>
-          <iframe id='spectateView' src={this.props.game.spectateUrl}
-            height='800px' width='950px' />
+          <iframe style={{align: 'center'}} id='spectateView' src={this.props.game.spectateUrl}
+            height={window.innerHeight - 50} width={window.innerWidth - 50} />
           <button onClick={this.hideModal.bind(this)}>Close</button>
         </Modal>
 
