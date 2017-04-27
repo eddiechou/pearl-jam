@@ -14,12 +14,12 @@ Pearl Jam is a real-time multiplayer game. Control your marble to smash your ene
 ## Table of Contents
 1. [Features](#features)
 2. [Architecture Overview](#architecture-overview)
-  1. [Tech Stack](#tech-stack)
-  2. [System Architecture](#system-architecture)
-  3. [Database Design](#database-design)
+	1. [Tech Stack](#tech-stack)
+	2. [System Architecture](#system-architecture)
+	3. [Database Design](#database-design)
 3. [Contributing](#contributing)
-  1. [Setting up ](#setting-up)
-  2. [Useful Commands](#useful-commands)
+	1. [Setting up ](#setting-up)
+	2. [Useful Commands](#useful-commands)
 4. [Contact](#contact)
 
 
@@ -49,11 +49,17 @@ Pearl Jam is a real-time multiplayer game. Control your marble to smash your ene
 ### Tech Stack
 
 1) `React 15`: Front-end framework | [Docs](https://facebook.github.io/react/blog/2016/04/07/react-v15.html) | [v15 Release Blog](https://facebook.github.io/react/blog/2016/04/07/react-v15.html)
-2) `Redux`: State container | [Docs](http://redux.js.org/)
-3) `Firebase`: Realtime NoSQL database + authentication | [Docs](https://firebase.google.com/)
-4) `Socket.io`: Bi-directional realtime communication | [Docs](https://socket.io/)
-5) `Phaser.io`: HTML game framework | [Docs](http://phaser.io/)
-6) `MaterialUI`: A set of React Components that implement Google's Material UI | [Docs](http://www.material-ui.com/#/)
+2) `Redux`: State container | [Docs](http://redux.js.org/) | [Code Academy Tutorial Series](https://www.youtube.com/watch?v=1w-oQ-i1XB8)
+3) `Node`: Server | [Docs](https://nodejs.org/en/docs/)
+4) `Firebase`: Realtime NoSQL database + authentication | [Docs](https://firebase.google.com/)
+5) `Socket.io`: Bi-directional realtime communication | [Docs](https://socket.io/)
+6) `Phaser.io`: HTML5 game framework | [Docs](http://phaser.io/)
+7) `MaterialUI`: A set of React Components that implement Google's Material UI | [Docs](http://www.material-ui.com/#/)
+8) `AWS Cloudfront`: Content Delivery Network (CDN) | [Link](https://aws.amazon.com/cloudfront/)
+9) `Jest`: Facebook's testing framework | [Docs](https://facebook.github.io/jest/)
+10) `Enzyme`: AirBnb's Javascript testing utilities for React | [Docs](http://airbnb.io/enzyme/docs/api/)
+11) `CircleCI`: Continuous integration | [Link](http://circleci.com/)
+12) `Heroku with Pipelines`: Deployment | [Link](https://devcenter.heroku.com/articles/pipelines)
 
 <a name="system-architecture"></a>
 ### System Architecture
@@ -80,7 +86,7 @@ Pearl Jam is a real-time multiplayer game. Control your marble to smash your ene
 - Refer to the scripts property in `package.json` for useful commands.
 - `npm build` runs webpack to bundle files.
 - `npm start` runs the server at `localhost:3000`.
-- `npm run dev-server` runs webpack-dev-server, which serves the application at `localhost:8080` with hot-reloading.
+- `npm run rollout` runs webpack-dev-server, which serves the application at `localhost:8080` with hot-reloading.
 
 <a name="useful-dev-tools"></a>
 ### Useful development tools
