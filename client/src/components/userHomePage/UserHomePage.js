@@ -82,6 +82,7 @@ class UserHomePage extends Component {
           {
             this.state.isShowingModal && <CreateGameModal />
           }
+          <TestNavBar />
         </div>
       </div>
     )

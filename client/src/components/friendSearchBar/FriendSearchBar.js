@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getFriends, getUsers } from '../../base'
 
 /* * Actions * */
-import { setBaseUsers } from '../../actions/userActions'
+import { setBaseUsers } from '../../actions/friendsActions'
 
 /* * Components * */
 import Autosuggest from 'react-autosuggest'
@@ -53,16 +53,7 @@ class FriendsSearchBar extends Component {
       suggestions: [],
       hover: false
     }
-    this.userCategories = [
-      {
-        category: 'Members',
-        users: []
-      },
-      {
-        category: 'Friends',
-        users: []
-      }
-    ]
+
     this.getSuggestions = this.getSuggestions.bind(this)
     this.onChange = this.onChange.bind(this)
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
@@ -126,8 +117,8 @@ class FriendsSearchBar extends Component {
   }
 
   getSuggestions (value) {
-    const { user } = this.props
-    const { userCategories } = user
+    const { friends } = this.props
+    const { userCategories } = friends
     const inputValue = value.trim().toLowerCase()
     const inputLength = inputValue.length
 
@@ -175,8 +166,8 @@ class FriendsSearchBar extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  return { user }
+const mapStateToProps = ({ user, friends }) => {
+  return { user, friends }
 }
 
 export default connect(mapStateToProps, { setBaseUsers })(FriendsSearchBar)
