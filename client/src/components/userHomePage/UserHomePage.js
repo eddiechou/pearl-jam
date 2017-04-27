@@ -82,7 +82,6 @@ class UserHomePage extends Component {
           {
             this.state.isShowingModal && <CreateGameModal />
           }
-          <TestNavBar />
         </div>
       </div>
     )
@@ -98,15 +97,3 @@ const mapStateToProps = ({ user }) => {
 }
 export default connect(mapStateToProps, null)(UserHomePage)
 
-/*
-<ModalContainer onClose={::this.closeModal}>
-  <ModalDialog onClose={::this.closeModal}>
-    <h1>HELLO THIS IS MODAL</h1>
-    <TextField
-      value={gameName}
-      onChange={(event) => this.handleInputChange(event)}
-      />
-  </ModalDialog>
-
-</ModalContainer>
-*/
