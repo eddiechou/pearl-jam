@@ -50,11 +50,13 @@ class PlayerView extends React.Component {
   render () {
     const { games } = this.props
     const { currentGame } = games
-    const { container, game, flexParent, button, modal } = style
+    const { container, game, flexParent, button, modal, space } = style
 
     var modalStyle = {
-      height: '80%',
-      width: '90%'
+      height: '70%',
+      width: '80%',
+      'position': 'fixed',
+      'top': '35%'
     }
     return (
       <div style={{height: '100%', width: '100%' }}>
@@ -66,12 +68,11 @@ class PlayerView extends React.Component {
          
         <Modal ref="modal" modalStyle={modalStyle}>
           <div style={game}>
-            <div style={flexParent} >
-              <h1 style={{fontFamily: 'QuickSand', 
-              'fontSize': '50px', marginTop: '-90px'}}>SELECT A GAME SERVER TO JOIN</h1>
-              <GameRoomList />
-              <Link to='/playGame'> <button style={button}>Join Game!</button> </Link>
-            </div>
+            <h1 style={{fontFamily: 'QuickSand', 
+            'fontSize': '50px'}}>SELECT A GAME SERVER TO JOIN</h1>
+            <GameRoomList />
+            <Link to='/playGame' style={{marginTop: '30px'}}> <button style={button}>Join Game!</button> </Link>
+            <div style={space}></div>
           </div>
         </Modal>
 

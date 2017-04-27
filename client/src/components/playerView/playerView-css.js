@@ -14,25 +14,27 @@ const style = {
     width: '100%',
     height: '1000px',
     display: 'flex',
-    justifyContent: 'center'
+    
+    'alignItems': 'center',
+    justifyContent: 'flexStart',
+    flexDirection: 'column',
+    'alignContent': 'stretch'
+    
   },
   flexParent: {
     display: 'flex',
     justifyContent: 'center',
-    flexDirection: 'column',
     alignItems: 'center'
   },
   button: {
     width: '400px',
-    height: '100px',
-    marginTop: '40px',
+    height: '30%',
     fontSize: '40px',
     lineHeight: '40px',
     
     backgroundColor: '#ffffff',
     color: '#000000',
-    
-    padding: '30px 60px',
+    padding: '20px 40px',
     border: '4px solid #ffffff',
     textAlign: 'center'
   },

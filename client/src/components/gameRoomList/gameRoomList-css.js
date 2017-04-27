@@ -26,8 +26,8 @@ const style = {
 */
 const style = {
   container: {
-    width: '1000px',
-    height: '500px',
+    width: '100%',
+    height: '50%',
     overflowY: 'scroll',
     display: 'fixed'
   },
@@ -46,7 +46,7 @@ const style = {
     backgroundColor: 'transparent',
     color: '#ffffff',
     fontSize: '20px',
-    padding: '30px 60px',
+    padding: '20px 40px',
     margin: '10px',
     fontFamily: 'Quicksand',
     cursor: 'pointer',
@@ -59,7 +59,7 @@ const style = {
     backgroundColor: '#ffffff',
     color: '#000000',
     fontSize: '20px',
-    padding: '30px 60px',
+    padding: '20px 40px',  
     margin: '10px',
     fontFamily: 'Quicksand',
     cursor: 'pointer'
