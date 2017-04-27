@@ -27,7 +27,8 @@ Pearl Jam is a real-time multiplayer game. Control your marble to smash your ene
 
 ### User sign-up
 
-Pick your color and a unique username!
+- On the homepage, click `Sign up` and enter your email address and a password.
+- Pick a color for your Pearl and a username (must be unique).
 
 ### Game mechanics
 
@@ -55,6 +56,7 @@ Pick your color and a unique username!
 
 <a name="system-architecture"></a>
 ### System Architecture
+![System Architecture Diagram](https://github.com/pearlJam-hrsf72/hrsf72-thesis/blob/master/system-architecture.png)
 
 <a name="database-design"></a>
 ### Database Design
@@ -65,23 +67,24 @@ Pick your color and a unique username!
 
 <a name="setting-up"></a>
 ### Getting started
-- Ensure you have node >= 6.4.0 and npm | [Guide for Mac Installation](http://treehouse.github.io/installation-guides/mac/node-mac.html)
-- Fork the Pearl Jam repo to your account
-- Clone the forked version to your local machine
-- Run `npm install` to install all the project dependencies
-- Refer to [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on our development flow and how to contribute
+- Fork the Pearl Jam repo to your account.
+- Clone the forked version to your local machine.
+- Ensure you have node >= 6.4.0 and npm | [Guide for Mac Installation](http://treehouse.github.io/installation-guides/mac/node-mac.html).
+- Run `npm install` to install all the project dependencies.
+- Refer to [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on our development flow and how to contribute.
+- The <strong>Game Server</strong> code is located in another repository [here](https://github.com/pearlJam-hrsf72/gameServer).
 
 <a name="useful-commands"></a>
 ### Useful commands
-- Refer to the scripts property in `package.json` for useful commands
-- `npm build` runs webpack to bundle files
-- `npm start` runs the server at `localhost:3000`
-- `npm run dev-server` runs webpack-dev-server, which serves the application at `localhost:8080` with hot-reloading
+- Refer to the scripts property in `package.json` for useful commands.
+- `npm build` runs webpack to bundle files.
+- `npm start` runs the server at `localhost:3000`.
+- `npm run dev-server` runs webpack-dev-server, which serves the application at `localhost:8080` with hot-reloading.
 
 <a name="useful-dev-tools"></a>
 ### Useful development tools
-- `React Developer Tools`: Chrome Extension: Allows you to inspect the React component hierarchies in Chrome Developer Tools
-- `Redux DevTools`: Chrome Extension: Graphical representation of the Redux state in Chrome Developer Tools
+- [React Developer Tools Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en): Allows you to inspect the React component hierarchies in Chrome Developer Tools.
+- [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en): Graphical representation of the Redux state in Chrome Developer Tools.
 ### In the works
 
 ## Contact
