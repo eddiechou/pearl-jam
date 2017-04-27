@@ -6,10 +6,10 @@ Pearl Jam is a real-time multiplayer game. Control your marble to smash your ene
 
 ## Development Team
 
-  - [Eddie Chou](github.com/eddiechou)
-  - [Jeff Briner](github.com/jdbriner07)
-  - [Mike Liao](github.com/mikeliao97)
-  - [Mycah Anast](github.com/mycahjay)
+  - [Eddie Chou](http://www.github.com/eddiechou)
+  - [Jeff Briner](http://www.github.com/jdbriner07)
+  - [Mike Liao](http://www.github.com/mikeliao97)
+  - [Mycah Anast](http://www.github.com/mycahjay)
 
 ## Table of Contents
 1. [Features](#features)
@@ -17,9 +17,10 @@ Pearl Jam is a real-time multiplayer game. Control your marble to smash your ene
   1. [Tech Stack](#tech-stack)
   2. [System Architecture](#system-architecture)
   3. [Database Design](#database-design)
-1. [Contributing](#contributing)
+3. [Contributing](#contributing)
   1. [Setting up ](#setting-up)
   2. [Useful Commands](#useful-commands)
+4. [Contact](#contact)
 
 
 <a name="features"></a>
@@ -87,6 +88,7 @@ Pearl Jam is a real-time multiplayer game. Control your marble to smash your ene
 - [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en): Graphical representation of the Redux state in Chrome Developer Tools.
 ### In the works
 
+<a name="contact"></a>
 ## Contact
 
 Feel free to contact us if you have any questions regarding the project.
