@@ -57,7 +57,7 @@ Pearl Jam is a real-time multiplayer game. Control your marble to smash your ene
 
 <a name="system-architecture"></a>
 ### System Architecture
-![System Architecture Diagram](https://github.com/pearlJam-hrsf72/hrsf72-thesis/blob/master/system-architecture.png)
+![System Architecture Diagram](system-architecture.png)
 
 <a name="database-design"></a>
 ### Database Design
