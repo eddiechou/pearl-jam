@@ -13,8 +13,8 @@ const style = {
     backgroundImage: '-webkit-linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%)'
   },
   modalStyle: {
-    width: '950px',
-    height: '800px'
+    width: window.innerWidth - 50,
+    height: window.innerHeight - 50
   },
   buttonStyle: {
     margin: 12
