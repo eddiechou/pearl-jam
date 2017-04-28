@@ -9,6 +9,7 @@ import { firebaseApp } from '../../base'
 import TestNavBar from '../testNavBar/TestNavBar'
 import UserNavBar from '../userNavBar/UserNavBar'
 import CurrentGameCard from '../currentGameCard/CurrentGameCard'
+import Author from '../Authors/Authors.js'
 
 /* * Actions * */
 import { updateCurrentActiveGames } from '../../actions/gameActions'
@@ -52,9 +53,9 @@ class BettingPage extends Component {
    
     return (
       <MuiThemeProvider muiTheme={customMuiTheme}>
-        <div style={{backgroundColor: 'pink', height: '100%', width: '100%'}}>
+        <div style={{backgroundColor: 'pink', height: '100%', width: '100%', display: 'flex', flexDirection: 'column'}}>
           <UserNavBar />
-          <div>
+          <div style={{flex: 1}}>
             <h1 style={titleStyle}>SPECTATOR PORTAL</h1>
             <div>
               <p style={{textAlign: 'center', marginBottom: '75px'}}>SPECTATE YOUR FAVORITE PLAYERS, MAKE BETS, AND WIN BIG!</p>
@@ -65,6 +66,7 @@ class BettingPage extends Component {
               return <CurrentGameCard game={game} key={index} gameID={key} index={index + 1} />
             }) : null}
           </div>
+          <Author/>
         </div>
       </MuiThemeProvider>
     )
