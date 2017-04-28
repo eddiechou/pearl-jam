@@ -52,7 +52,7 @@ class BettingPage extends Component {
    
     return (
       <MuiThemeProvider muiTheme={customMuiTheme}>
-        <div style={{backgroundColor: 'pink'}}>
+        <div style={{backgroundColor: 'pink', height: '100%', width: '100%'}}>
           <UserNavBar />
           <div>
             <h1 style={titleStyle}>SPECTATOR PORTAL</h1>
@@ -65,8 +65,7 @@ class BettingPage extends Component {
               return <CurrentGameCard game={game} key={index} gameID={key} index={index + 1} />
             }) : null}
           </div>
-          <TestNavBar />
-          </div>
+        </div>
       </MuiThemeProvider>
     )
   }
